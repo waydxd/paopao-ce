@@ -11,11 +11,11 @@ import (
 
 	"github.com/RoaringBitmap/roaring/roaring64"
 	"github.com/alimy/tryst/event"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/internal/core/ms"
-	"github.com/rocboss/paopao-ce/internal/events"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/core/ms"
+	"github.com/waydxd/paopao-ce/internal/events"
 )
 
 type BaseCacheEvent struct {

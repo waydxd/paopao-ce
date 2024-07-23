@@ -60,7 +60,7 @@ go tool pprof http://localhost:6060/debug/pprof/profile?seconds=30
 * [runtime/pprof](https://pkg.go.dev/runtime/pprof)  
 
 ### 参考实现
-- [#327](https://github.com/rocboss/paopao-ce/pull/327)
+- [#327](https://github.com/waydxd/paopao-ce/pull/327)
 
 ### 更新记录
 #### v1.0(2023-06-20) - 北野

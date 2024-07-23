@@ -9,11 +9,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/internal/core/cs"
-	"github.com/rocboss/paopao-ce/internal/core/ms"
-	"github.com/rocboss/paopao-ce/internal/dao/jinzhu/dbr"
-	"github.com/rocboss/paopao-ce/pkg/debug"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/core/cs"
+	"github.com/waydxd/paopao-ce/internal/core/ms"
+	"github.com/waydxd/paopao-ce/internal/dao/jinzhu/dbr"
+	"github.com/waydxd/paopao-ce/pkg/debug"
 	"gorm.io/gorm"
 )
 

@@ -11,9 +11,9 @@ import (
 	"os"
 
 	"github.com/alimy/tryst/cfg"
-	"github.com/pyroscope-io/client/pyroscope"
-	"github.com/rocboss/paopao-ce/internal/conf"
+	"github.com/grafana/pyroscope-go"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/conf"
 )
 
 func StartPyroscope() {

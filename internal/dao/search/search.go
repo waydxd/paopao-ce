@@ -8,10 +8,10 @@ import (
 	"fmt"
 
 	"github.com/meilisearch/meilisearch-go"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/pkg/zinc"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/pkg/zinc"
 )
 
 func NewMeiliTweetSearchService(ams core.AuthorizationManageService) (core.TweetSearchService, core.VersionInfo) {

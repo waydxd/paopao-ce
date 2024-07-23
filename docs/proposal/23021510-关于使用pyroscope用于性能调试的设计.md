@@ -19,7 +19,7 @@ Pyroscope 是一个开源的持续性能剖析平台。它能够帮你：
 
 #### 设计细节 
 * 参考实现(PR):  
-[add Pyroscope support #199](https://github.com/rocboss/paopao-ce/pull/199) 
+[add Pyroscope support #199](https://github.com/waydxd/paopao-ce/pull/199) 
 
 ### 疑问
 

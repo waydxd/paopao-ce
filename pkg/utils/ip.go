@@ -4,7 +4,7 @@
 
 package utils
 
-import "github.com/rocboss/paopao-ce/pkg/utils/iploc"
+import "github.com/waydxd/paopao-ce/pkg/utils/iploc"
 
 func GetIPLoc(ip string) string {
 	country, _ := iploc.Find(ip)

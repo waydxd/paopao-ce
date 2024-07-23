@@ -8,13 +8,13 @@ import (
 	"sync"
 
 	"github.com/alimy/tryst/cfg"
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/internal/dao/jinzhu"
-	"github.com/rocboss/paopao-ce/internal/dao/sakila"
-	"github.com/rocboss/paopao-ce/internal/dao/search"
-	"github.com/rocboss/paopao-ce/internal/dao/slonik"
-	"github.com/rocboss/paopao-ce/internal/dao/storage"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/dao/jinzhu"
+	"github.com/waydxd/paopao-ce/internal/dao/sakila"
+	"github.com/waydxd/paopao-ce/internal/dao/search"
+	"github.com/waydxd/paopao-ce/internal/dao/slonik"
+	"github.com/waydxd/paopao-ce/internal/dao/storage"
 )
 
 var (

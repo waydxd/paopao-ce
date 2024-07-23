@@ -37,7 +37,7 @@
 
 #### 设计细节 
 * 参考实现(PR):  
-[add Followship feature #355](https://github.com/rocboss/paopao-ce/pull/355)
+[add Followship feature #355](https://github.com/waydxd/paopao-ce/pull/355)
 
 #### 状态：
 内置 Builtin

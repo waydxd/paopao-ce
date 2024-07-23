@@ -13,10 +13,10 @@ import (
 	"time"
 
 	"github.com/Masterminds/semver/v3"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/core"
 	"github.com/sirupsen/logrus"
 	"github.com/tencentyun/cos-go-sdk-v5"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/core"
 )
 
 var (

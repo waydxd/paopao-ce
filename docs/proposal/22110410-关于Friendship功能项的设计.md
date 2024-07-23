@@ -28,7 +28,7 @@ Friendship功能提供好友间分享推文信息的机制，更好的帮助用�
 
 #### 设计细节 
 * 参考实现(PR):  
-[add support Friendship feature #192](https://github.com/rocboss/paopao-ce/pull/192)  
+[add support Friendship feature #192](https://github.com/waydxd/paopao-ce/pull/192)  
 
 #### 状态：
 内置 Builtin

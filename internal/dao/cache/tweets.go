@@ -5,10 +5,10 @@
 package cache
 
 import (
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/internal/core/cs"
-	"github.com/rocboss/paopao-ce/internal/core/ms"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/core/cs"
+	"github.com/waydxd/paopao-ce/internal/core/ms"
 )
 
 type eventCacheIndexSrv struct {

@@ -9,9 +9,9 @@ import (
 
 	"github.com/fatih/color"
 	"github.com/gin-gonic/gin"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	util "github.com/rocboss/paopao-ce/pkg/utils"
 	"github.com/sourcegraph/conc"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	util "github.com/waydxd/paopao-ce/pkg/utils"
 )
 
 var (

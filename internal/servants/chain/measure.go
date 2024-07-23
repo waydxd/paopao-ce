@@ -6,7 +6,7 @@ package chain
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/rocboss/paopao-ce/internal/servants/base"
+	"github.com/waydxd/paopao-ce/internal/servants/base"
 )
 
 func OnlineUserMeasure() gin.HandlerFunc {

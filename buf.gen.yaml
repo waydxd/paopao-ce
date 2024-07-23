@@ -2,7 +2,7 @@ version: v1
 managed:
   enabled: true
   go_package_prefix:
-    default: github.com/rocboss/paopao-ce/auto/rpc
+    default: github.com/waydxd/paopao-ce/auto/rpc
     except:
       - buf.build/googleapis/googleapis
 plugins:

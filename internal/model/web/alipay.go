@@ -9,13 +9,13 @@ import (
 
 	"github.com/alimy/mir/v4"
 	"github.com/gin-gonic/gin"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/servants/base"
-	"github.com/rocboss/paopao-ce/pkg/app"
-	"github.com/rocboss/paopao-ce/pkg/convert"
-	"github.com/rocboss/paopao-ce/pkg/xerror"
 	"github.com/sirupsen/logrus"
 	"github.com/smartwalle/alipay/v3"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/servants/base"
+	"github.com/waydxd/paopao-ce/pkg/app"
+	"github.com/waydxd/paopao-ce/pkg/convert"
+	"github.com/waydxd/paopao-ce/pkg/xerror"
 )
 
 type UserWalletBillsReq struct {

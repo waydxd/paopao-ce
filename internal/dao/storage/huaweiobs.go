@@ -11,8 +11,8 @@ import (
 
 	"github.com/Masterminds/semver/v3"
 	"github.com/huaweicloud/huaweicloud-sdk-go-obs/obs"
-	"github.com/rocboss/paopao-ce/internal/core"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/core"
 )
 
 var (

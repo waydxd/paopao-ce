@@ -41,7 +41,7 @@ fn main() {
             event.window().emit("menu", event_name).unwrap();
             match event_name {
                 "Learn More" => {
-                    let link = "https://github.com/rocboss/paopao-ce".to_string();
+                    let link = "https://github.com/waydxd/paopao-ce".to_string();
                     shell::open(&event.window().shell_scope(), link, None).unwrap();
                 }
                 _ => {}

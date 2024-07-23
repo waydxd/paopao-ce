@@ -7,11 +7,11 @@ package web
 import (
 	"github.com/alimy/mir/v4"
 	"github.com/gin-gonic/gin"
-	"github.com/rocboss/paopao-ce/internal/core/cs"
-	"github.com/rocboss/paopao-ce/internal/model/joint"
-	"github.com/rocboss/paopao-ce/internal/servants/base"
-	"github.com/rocboss/paopao-ce/pkg/convert"
-	"github.com/rocboss/paopao-ce/pkg/xerror"
+	"github.com/waydxd/paopao-ce/internal/core/cs"
+	"github.com/waydxd/paopao-ce/internal/model/joint"
+	"github.com/waydxd/paopao-ce/internal/servants/base"
+	"github.com/waydxd/paopao-ce/pkg/convert"
+	"github.com/waydxd/paopao-ce/pkg/xerror"
 )
 
 type MessageStyle = cs.MessageStyle

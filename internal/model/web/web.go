@@ -7,10 +7,10 @@ package web
 import (
 	"github.com/alimy/mir/v4"
 	"github.com/gin-gonic/gin"
-	"github.com/rocboss/paopao-ce/internal/core/ms"
-	"github.com/rocboss/paopao-ce/internal/servants/base"
-	"github.com/rocboss/paopao-ce/pkg/app"
-	"github.com/rocboss/paopao-ce/pkg/xerror"
+	"github.com/waydxd/paopao-ce/internal/core/ms"
+	"github.com/waydxd/paopao-ce/internal/servants/base"
+	"github.com/waydxd/paopao-ce/pkg/app"
+	"github.com/waydxd/paopao-ce/pkg/xerror"
 )
 
 var (

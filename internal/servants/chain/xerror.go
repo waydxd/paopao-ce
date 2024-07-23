@@ -5,7 +5,7 @@
 package chain
 
 import (
-	"github.com/rocboss/paopao-ce/pkg/xerror"
+	"github.com/waydxd/paopao-ce/pkg/xerror"
 )
 
 // nolint

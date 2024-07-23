@@ -7,7 +7,7 @@
 package ms
 
 import (
-	"github.com/rocboss/paopao-ce/internal/dao/jinzhu/dbr"
+	"github.com/waydxd/paopao-ce/internal/dao/jinzhu/dbr"
 )
 
 const (

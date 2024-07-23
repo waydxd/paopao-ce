@@ -13,12 +13,12 @@ import (
 
 	"github.com/alimy/mir/v4"
 	"github.com/gofrs/uuid/v5"
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/internal/core/ms"
-	"github.com/rocboss/paopao-ce/internal/model/web"
-	"github.com/rocboss/paopao-ce/pkg/utils"
-	"github.com/rocboss/paopao-ce/pkg/xerror"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/core/ms"
+	"github.com/waydxd/paopao-ce/internal/model/web"
+	"github.com/waydxd/paopao-ce/pkg/utils"
+	"github.com/waydxd/paopao-ce/pkg/xerror"
 )
 
 var defaultAvatars = []string{

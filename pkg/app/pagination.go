@@ -6,8 +6,8 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/pkg/convert"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/pkg/convert"
 )
 
 func GetPage(c *gin.Context) int {

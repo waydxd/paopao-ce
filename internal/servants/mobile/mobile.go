@@ -5,7 +5,7 @@
 package mobile
 
 import (
-	api "github.com/rocboss/paopao-ce/auto/rpc/greet/v1"
+	api "github.com/waydxd/paopao-ce/auto/rpc/greet/v1"
 	"google.golang.org/grpc"
 )
 

@@ -6,7 +6,7 @@ package events
 
 import (
 	"github.com/robfig/cron/v3"
-	"github.com/rocboss/paopao-ce/pkg/types"
+	"github.com/waydxd/paopao-ce/pkg/types"
 )
 
 type (

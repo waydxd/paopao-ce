@@ -5,7 +5,7 @@
 package triplet
 
 import (
-	api "github.com/rocboss/paopao-ce/auto/connect/core/v1/corev1connect"
+	api "github.com/waydxd/paopao-ce/auto/connect/core/v1/corev1connect"
 )
 
 var (

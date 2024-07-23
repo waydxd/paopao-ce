@@ -7,9 +7,9 @@ package search
 import (
 	"time"
 
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/internal/core/ms"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/core/ms"
 )
 
 var (

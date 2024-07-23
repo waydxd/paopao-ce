@@ -12,10 +12,10 @@ import (
 	"sync"
 
 	"github.com/Masterminds/semver/v3"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/internal/dao/cache"
-	"github.com/rocboss/paopao-ce/internal/dao/security"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/dao/cache"
+	"github.com/waydxd/paopao-ce/internal/dao/security"
 )
 
 var (

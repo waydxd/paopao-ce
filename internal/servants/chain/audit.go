@@ -6,7 +6,7 @@ package chain
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/rocboss/paopao-ce/internal/model/web"
+	"github.com/waydxd/paopao-ce/internal/model/web"
 )
 
 func AuditHook() gin.HandlerFunc {

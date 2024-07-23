@@ -6,7 +6,7 @@ package web
 
 import (
 	"github.com/alimy/mir/v4"
-	"github.com/rocboss/paopao-ce/pkg/xerror"
+	"github.com/waydxd/paopao-ce/pkg/xerror"
 )
 
 func fileCheck(uploadType string, size int64) mir.Error {

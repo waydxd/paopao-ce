@@ -9,9 +9,9 @@ import (
 	"time"
 
 	"github.com/redis/rueidis"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/pkg/utils"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/pkg/utils"
 )
 
 var (

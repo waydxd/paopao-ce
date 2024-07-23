@@ -5,7 +5,7 @@
 package ms
 
 import (
-	"github.com/rocboss/paopao-ce/pkg/types"
+	"github.com/waydxd/paopao-ce/pkg/types"
 )
 
 const (

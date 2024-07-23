@@ -13,11 +13,11 @@ import (
 	"time"
 
 	"github.com/Masterminds/semver/v3"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/internal/core/ms"
-	"github.com/rocboss/paopao-ce/pkg/types"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/core/ms"
+	"github.com/waydxd/paopao-ce/pkg/types"
 )
 
 const (

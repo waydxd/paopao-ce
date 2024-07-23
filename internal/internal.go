@@ -5,9 +5,9 @@
 package internal
 
 import (
-	"github.com/rocboss/paopao-ce/internal/events"
-	"github.com/rocboss/paopao-ce/internal/metrics"
-	"github.com/rocboss/paopao-ce/internal/migration"
+	"github.com/waydxd/paopao-ce/internal/events"
+	"github.com/waydxd/paopao-ce/internal/metrics"
+	"github.com/waydxd/paopao-ce/internal/migration"
 )
 
 func Initial() {

@@ -5,8 +5,8 @@
 package web
 
 import (
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/pkg/version"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/pkg/version"
 )
 
 type VersionResp struct {

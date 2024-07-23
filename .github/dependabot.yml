@@ -11,7 +11,7 @@ updates:
       interval: "weekly"
     target-branch: "dev"
     reviewers:
-      - "rocboss"
+      - "waydxd"
       - "alimy"
     commit-message:
       prefix: "mod:"

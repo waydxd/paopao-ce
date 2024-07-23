@@ -5,9 +5,9 @@
 package main
 
 import (
-	"github.com/rocboss/paopao-ce/cmd"
-	_ "github.com/rocboss/paopao-ce/cmd/migrate"
-	_ "github.com/rocboss/paopao-ce/cmd/serve"
+	"github.com/waydxd/paopao-ce/cmd"
+	_ "github.com/waydxd/paopao-ce/cmd/migrate"
+	_ "github.com/waydxd/paopao-ce/cmd/serve"
 )
 
 func main() {

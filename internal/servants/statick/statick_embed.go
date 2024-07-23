@@ -11,7 +11,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/rocboss/paopao-ce/web"
+	"github.com/waydxd/paopao-ce/web"
 )
 
 // RegisterWebStatick register web static assets route

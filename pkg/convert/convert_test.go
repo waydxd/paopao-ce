@@ -8,7 +8,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/rocboss/paopao-ce/pkg/convert"
+	"github.com/waydxd/paopao-ce/pkg/convert"
 )
 
 var _ = Describe("Convert", func() {

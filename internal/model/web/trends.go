@@ -5,7 +5,7 @@
 package web
 
 import (
-	"github.com/rocboss/paopao-ce/internal/model/joint"
+	"github.com/waydxd/paopao-ce/internal/model/joint"
 )
 
 type GetIndexTrendsReq struct {

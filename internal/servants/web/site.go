@@ -6,11 +6,11 @@ package web
 
 import (
 	"github.com/alimy/mir/v4"
-	api "github.com/rocboss/paopao-ce/auto/api/v1"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/model/web"
-	"github.com/rocboss/paopao-ce/internal/servants/base"
-	"github.com/rocboss/paopao-ce/pkg/version"
+	api "github.com/waydxd/paopao-ce/auto/api/v1"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/model/web"
+	"github.com/waydxd/paopao-ce/internal/servants/base"
+	"github.com/waydxd/paopao-ce/pkg/version"
 )
 
 var (

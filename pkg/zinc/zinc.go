@@ -11,7 +11,7 @@ import (
 
 	"github.com/cockroachdb/errors"
 	"github.com/go-resty/resty/v2"
-	"github.com/rocboss/paopao-ce/pkg/json"
+	"github.com/waydxd/paopao-ce/pkg/json"
 )
 
 type ZincClient struct {

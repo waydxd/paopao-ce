@@ -8,11 +8,11 @@ import (
 	"strings"
 
 	"github.com/Masterminds/semver/v3"
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/internal/core/ms"
-	"github.com/rocboss/paopao-ce/pkg/json"
-	"github.com/rocboss/paopao-ce/pkg/zinc"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/core/ms"
+	"github.com/waydxd/paopao-ce/pkg/json"
+	"github.com/waydxd/paopao-ce/pkg/zinc"
 )
 
 var (

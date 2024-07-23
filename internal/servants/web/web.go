@@ -9,12 +9,12 @@ import (
 
 	"github.com/alimy/tryst/cfg"
 	"github.com/gin-gonic/gin"
-	api "github.com/rocboss/paopao-ce/auto/api/v1"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/internal/dao"
-	"github.com/rocboss/paopao-ce/internal/dao/cache"
-	"github.com/rocboss/paopao-ce/internal/servants/base"
+	api "github.com/waydxd/paopao-ce/auto/api/v1"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/dao"
+	"github.com/waydxd/paopao-ce/internal/dao/cache"
+	"github.com/waydxd/paopao-ce/internal/servants/base"
 )
 
 var (

@@ -23,8 +23,7 @@ require (
 	github.com/gofrs/uuid/v5 v5.0.0
 	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/golang-migrate/migrate/v4 v4.15.2
-	github.com/grafana/pyroscope-go v0.7.2
-	github.com/grafana/pyroscope-go/godeltaprof v0.1.2
+	github.com/grafana/pyroscope-go v1.1.1
 	github.com/huaweicloud/huaweicloud-sdk-go-obs v3.23.9+incompatible
 	github.com/json-iterator/go v1.1.12
 	github.com/meilisearch/meilisearch-go v0.25.1
@@ -34,6 +33,7 @@ require (
 	github.com/prometheus/client_golang v1.16.0
 	github.com/redis/rueidis v1.0.19
 	github.com/robfig/cron/v3 v3.0.1
+	github.com/rocboss/paopao-ce v0.5.2
 	github.com/sirupsen/logrus v1.9.3
 	github.com/smartwalle/alipay/v3 v3.2.16
 	github.com/sourcegraph/conc v0.3.0
@@ -83,6 +83,7 @@ require (
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/pprof v0.0.0-20230207041349-798e818bf904 // indirect
 	github.com/google/uuid v1.3.0 // indirect
+	github.com/grafana/pyroscope-go/godeltaprof v0.1.6 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/golang-lru/v2 v2.0.6 // indirect
@@ -157,6 +158,3 @@ require (
 	modernc.org/strutil v1.1.3 // indirect
 	modernc.org/token v1.0.1 // indirect
 )
-
-replace github.com/pyroscope-io/client => github.com/grafana/pyroscope-go v0.7.2
-// replace github.com/pyroscope-io/client/godeltaprof => github.com/grafana/pyroscope-go/godeltaprof v0.1.2

@@ -7,9 +7,9 @@ package jinzhu
 import (
 	"time"
 
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/internal/core/cs"
-	"github.com/rocboss/paopao-ce/internal/dao/jinzhu/dbr"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/core/cs"
+	"github.com/waydxd/paopao-ce/internal/dao/jinzhu/dbr"
 	"gorm.io/gorm"
 )
 

@@ -9,7 +9,7 @@ import (
 	"net/http"
 
 	"github.com/bufbuild/connect-go"
-	hx "github.com/rocboss/paopao-ce/pkg/http"
+	hx "github.com/waydxd/paopao-ce/pkg/http"
 )
 
 var (

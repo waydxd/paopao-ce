@@ -7,9 +7,9 @@ package web
 import (
 	"github.com/alimy/tryst/cfg"
 	"github.com/robfig/cron/v3"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/events"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/events"
 )
 
 func onMaxOnlineJob() {

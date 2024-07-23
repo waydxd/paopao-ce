@@ -5,8 +5,8 @@
 package core
 
 import (
-	"github.com/rocboss/paopao-ce/internal/core/cs"
-	"github.com/rocboss/paopao-ce/internal/core/ms"
+	"github.com/waydxd/paopao-ce/internal/core/cs"
+	"github.com/waydxd/paopao-ce/internal/core/ms"
 )
 
 // IndexPostsService 广场首页推文列表服务

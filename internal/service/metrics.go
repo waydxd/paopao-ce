@@ -10,10 +10,10 @@ import (
 
 	"github.com/Masterminds/semver/v3"
 	"github.com/fatih/color"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/dao"
-	"github.com/rocboss/paopao-ce/internal/dao/cache"
-	"github.com/rocboss/paopao-ce/internal/metrics/prometheus"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/dao"
+	"github.com/waydxd/paopao-ce/internal/dao/cache"
+	"github.com/waydxd/paopao-ce/internal/metrics/prometheus"
 )
 
 var (

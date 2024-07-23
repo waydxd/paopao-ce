@@ -22,7 +22,7 @@ Lightship(开放模式)功能提供完全公开的推文分享服务，有别于
 * 推文访问权限只能是 `公开/私密` - 前端/后端  
 
 #### 参考实现(PR):  
-[add Lightship feature support #198](https://github.com/rocboss/paopao-ce/pull/198)  
+[add Lightship feature support #198](https://github.com/waydxd/paopao-ce/pull/198)  
 
 #### 状态：
 弃用 Deprecated

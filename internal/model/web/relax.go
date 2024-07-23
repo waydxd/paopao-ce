@@ -9,7 +9,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/rocboss/paopao-ce/internal/model/joint"
+	"github.com/waydxd/paopao-ce/internal/model/joint"
 )
 
 type GetUnreadMsgCountReq struct {

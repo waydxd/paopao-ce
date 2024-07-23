@@ -8,7 +8,7 @@ import (
 	"fmt"
 
 	"github.com/alimy/tryst/cache"
-	"github.com/rocboss/paopao-ce/pkg/types"
+	"github.com/waydxd/paopao-ce/pkg/types"
 )
 
 const (

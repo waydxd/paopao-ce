@@ -9,8 +9,8 @@ import (
 
 	"github.com/alimy/mir/v4"
 	"github.com/gin-gonic/gin"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/model/web"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/model/web"
 )
 
 type Site interface {

@@ -17,10 +17,10 @@ import (
 	"github.com/huaweicloud/huaweicloud-sdk-go-obs/obs"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/core"
 	"github.com/sirupsen/logrus"
 	"github.com/tencentyun/cos-go-sdk-v5"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/core"
 )
 
 func MustAliossService() (core.ObjectStorageService, core.VersionInfo) {

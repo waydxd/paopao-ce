@@ -7,8 +7,8 @@ package migrate
 import (
 	"fmt"
 
-	"github.com/rocboss/paopao-ce/cmd"
 	"github.com/spf13/cobra"
+	"github.com/waydxd/paopao-ce/cmd"
 )
 
 func init() {

@@ -8,11 +8,11 @@ import (
 	"fmt"
 
 	"github.com/alimy/tryst/event"
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/internal/core/ms"
-	"github.com/rocboss/paopao-ce/internal/events"
-	"github.com/rocboss/paopao-ce/internal/model/joint"
-	"github.com/rocboss/paopao-ce/pkg/json"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/core/ms"
+	"github.com/waydxd/paopao-ce/internal/events"
+	"github.com/waydxd/paopao-ce/internal/model/joint"
+	"github.com/waydxd/paopao-ce/pkg/json"
 )
 
 type CacheRespEvent struct {

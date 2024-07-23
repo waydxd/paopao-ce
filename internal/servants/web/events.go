@@ -9,15 +9,15 @@ import (
 	"fmt"
 
 	"github.com/alimy/tryst/event"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/internal/core/cs"
-	"github.com/rocboss/paopao-ce/internal/core/ms"
-	"github.com/rocboss/paopao-ce/internal/dao/cache"
-	"github.com/rocboss/paopao-ce/internal/events"
-	"github.com/rocboss/paopao-ce/internal/model/joint"
-	"github.com/rocboss/paopao-ce/internal/model/web"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/core/cs"
+	"github.com/waydxd/paopao-ce/internal/core/ms"
+	"github.com/waydxd/paopao-ce/internal/dao/cache"
+	"github.com/waydxd/paopao-ce/internal/events"
+	"github.com/waydxd/paopao-ce/internal/model/joint"
+	"github.com/waydxd/paopao-ce/internal/model/web"
 )
 
 const (

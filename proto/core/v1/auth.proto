@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package core.v1;
 
-option go_package = "github.com/rocboss/paopao-ce/auto/connect/core/v1;corev1";
+option go_package = "github.com/waydxd/paopao-ce/auto/connect/core/v1;corev1";
 
 message User {
     string phone_num = 1;

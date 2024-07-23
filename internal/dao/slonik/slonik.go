@@ -8,8 +8,8 @@
 package slonik
 
 import (
-	"github.com/rocboss/paopao-ce/internal/core"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/core"
 )
 
 func NewDataService() (core.DataService, core.VersionInfo) {

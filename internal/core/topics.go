@@ -5,7 +5,7 @@
 package core
 
 import (
-	"github.com/rocboss/paopao-ce/internal/core/cs"
+	"github.com/waydxd/paopao-ce/internal/core/cs"
 )
 
 // TopicService 话题服务

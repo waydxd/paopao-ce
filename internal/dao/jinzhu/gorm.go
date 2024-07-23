@@ -5,7 +5,7 @@
 package jinzhu
 
 import (
-	"github.com/rocboss/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/conf"
 )
 
 // 数据库表名，统一使用 _<table name>_ 的形式命名， 比如tag表 => _tag_

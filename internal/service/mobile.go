@@ -11,8 +11,8 @@ import (
 
 	"github.com/Masterminds/semver/v3"
 	"github.com/fatih/color"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/servants"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/servants"
 	"google.golang.org/grpc"
 )
 

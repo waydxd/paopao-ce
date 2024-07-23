@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/alimy/tryst/cfg"
-	"github.com/rocboss/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/core"
 )
 
 func NewPhoneVerifyService() core.PhoneVerifyService {

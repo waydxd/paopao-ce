@@ -8,7 +8,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/rocboss/paopao-ce/pkg/utils"
+	"github.com/waydxd/paopao-ce/pkg/utils"
 )
 
 var _ = Describe("Ip", Ordered, func() {

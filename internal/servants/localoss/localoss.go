@@ -8,9 +8,9 @@ import (
 	"path/filepath"
 
 	"github.com/gin-gonic/gin"
-	api "github.com/rocboss/paopao-ce/auto/api/s/v1"
-	"github.com/rocboss/paopao-ce/internal/conf"
 	"github.com/sirupsen/logrus"
+	api "github.com/waydxd/paopao-ce/auto/api/s/v1"
+	"github.com/waydxd/paopao-ce/internal/conf"
 )
 
 // RouteLocalOSS register LocalOSS route if needed

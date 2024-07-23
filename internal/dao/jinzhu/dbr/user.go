@@ -5,7 +5,7 @@
 package dbr
 
 import (
-	"github.com/rocboss/paopao-ce/internal/core/cs"
+	"github.com/waydxd/paopao-ce/internal/core/cs"
 	"gorm.io/gorm"
 )
 

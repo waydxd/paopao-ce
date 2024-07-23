@@ -8,7 +8,7 @@ import (
 	"net/http"
 
 	"github.com/bufbuild/connect-go"
-	api "github.com/rocboss/paopao-ce/auto/connect/core/v1/corev1connect"
+	api "github.com/waydxd/paopao-ce/auto/connect/core/v1/corev1connect"
 )
 
 func RegisterAuthenticateHandler(h func(string, http.Handler), opts ...connect.HandlerOption) {

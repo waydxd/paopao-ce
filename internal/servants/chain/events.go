@@ -6,9 +6,9 @@ package chain
 
 import (
 	"github.com/alimy/tryst/event"
-	"github.com/rocboss/paopao-ce/internal/events"
-	"github.com/rocboss/paopao-ce/internal/model/web"
 	"github.com/sirupsen/logrus"
+	"github.com/waydxd/paopao-ce/internal/events"
+	"github.com/waydxd/paopao-ce/internal/model/web"
 )
 
 type AuditHookEvent struct {

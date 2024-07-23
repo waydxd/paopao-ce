@@ -2,9 +2,9 @@
 name = "paopao"
 version = "0.2.0"
 description = "Paopao App"
-authors = ["Rocboss"]
+authors = ["waydxd"]
 license = "MIT License"
-repository = "https://github.com/rocboss/paopao-ce"
+repository = "https://github.com/waydxd/paopao-ce"
 edition = "2021"
 rust-version = "1.60"
 

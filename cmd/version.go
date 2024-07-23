@@ -5,9 +5,9 @@
 package cmd
 
 import (
-	"github.com/rocboss/paopao-ce/pkg/utils"
-	"github.com/rocboss/paopao-ce/pkg/version"
 	"github.com/spf13/cobra"
+	"github.com/waydxd/paopao-ce/pkg/utils"
+	"github.com/waydxd/paopao-ce/pkg/version"
 )
 
 func init() {

@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/cockroachdb/errors"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/core"
-	"github.com/rocboss/paopao-ce/pkg/json"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/pkg/json"
 	"gopkg.in/resty.v1"
 )
 

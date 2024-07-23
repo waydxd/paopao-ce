@@ -5,7 +5,7 @@
 package core
 
 import (
-	"github.com/rocboss/paopao-ce/internal/core/ms"
+	"github.com/waydxd/paopao-ce/internal/core/ms"
 )
 
 // AuthorizationManageService 授权管理服务

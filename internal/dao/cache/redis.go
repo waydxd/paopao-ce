@@ -12,7 +12,7 @@ import (
 
 	"github.com/Masterminds/semver/v3"
 	"github.com/redis/rueidis"
-	"github.com/rocboss/paopao-ce/internal/core"
+	"github.com/waydxd/paopao-ce/internal/core"
 )
 
 var (

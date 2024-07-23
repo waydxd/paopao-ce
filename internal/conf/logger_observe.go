@@ -9,10 +9,10 @@ import (
 	"net/http"
 	"time"
 
-	hx "github.com/rocboss/paopao-ce/pkg/http"
-	"github.com/rocboss/paopao-ce/pkg/json"
-	"github.com/rocboss/paopao-ce/pkg/obx"
 	"github.com/sirupsen/logrus"
+	hx "github.com/waydxd/paopao-ce/pkg/http"
+	"github.com/waydxd/paopao-ce/pkg/json"
+	"github.com/waydxd/paopao-ce/pkg/obx"
 )
 
 type observeLogData struct {

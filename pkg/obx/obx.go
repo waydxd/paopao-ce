@@ -9,7 +9,7 @@ import (
 	"bytes"
 	"net/http"
 
-	hx "github.com/rocboss/paopao-ce/pkg/http"
+	hx "github.com/waydxd/paopao-ce/pkg/http"
 )
 
 var (

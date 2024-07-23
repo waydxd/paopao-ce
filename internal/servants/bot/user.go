@@ -5,8 +5,8 @@
 package bot
 
 import (
-	api "github.com/rocboss/paopao-ce/auto/api/r/v1"
-	"github.com/rocboss/paopao-ce/internal/servants/base"
+	api "github.com/waydxd/paopao-ce/auto/api/r/v1"
+	"github.com/waydxd/paopao-ce/internal/servants/base"
 )
 
 var (

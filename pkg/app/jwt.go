@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/rocboss/paopao-ce/internal/conf"
-	"github.com/rocboss/paopao-ce/internal/core/ms"
+	"github.com/waydxd/paopao-ce/internal/conf"
+	"github.com/waydxd/paopao-ce/internal/core/ms"
 )
 
 type Claims struct {
