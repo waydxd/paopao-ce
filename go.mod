@@ -158,5 +158,5 @@ require (
 	modernc.org/token v1.0.1 // indirect
 )
 
-// replace github.com/pyroscope-io/client => github.com/grafana/pyroscope-go v0.7.2
+replace github.com/pyroscope-io/client => github.com/grafana/pyroscope-go v0.7.2
 // replace github.com/pyroscope-io/client/godeltaprof => github.com/grafana/pyroscope-go/godeltaprof v0.1.2
