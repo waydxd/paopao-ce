@@ -71,7 +71,7 @@ PaoPao主要由以下优秀的开源项目/工具构建
 * Redis
 * Zinc
 
-> Zinc是一款轻量级全文搜索引擎，可以查阅 <https://zincsearch.com/> 安装
+> Zinc是一款轻量级全文搜索引擎，可以查阅 <https://zincsearch-docs.zinc.dev/installation//> 安装
 
 以上环境版本为PaoPao官方的开发版本，仅供参考，其他版本的环境未进行充分测试
 
