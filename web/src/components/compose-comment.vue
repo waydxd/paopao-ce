@@ -177,6 +177,8 @@ import { createComment } from '@/api/post';
 import { getSuggestUsers } from '@/api/user';
 import { parsePostTag } from '@/utils/content';
 import type { MentionOption, UploadFileInfo, UploadInst } from 'naive-ui';
+import { censoredWords } from '@/assets/censored-words';
+
 
 const emit = defineEmits<{
     (e: 'post-success'): void;
@@ -336,10 +338,17 @@ const cancelComment = () => {
 
 // 发布动态
 const submitPost = () => {
+    const nsfwRegex = new RegExp(`(?:${censoredWords.join('|')})`, 'i');
+
     if (content.value.trim().length === 0) {
         window.$message.warning('请输入内容哦');
         return;
     }
+
+    if (nsfwRegex.test(content.value)) {
+        window.$message.warning('请友善发言');
+        return;
+      }
 
     // 解析用户at
     let { users } = parsePostTag(content.value);

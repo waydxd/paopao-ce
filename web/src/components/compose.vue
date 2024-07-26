@@ -292,6 +292,8 @@ import { parsePostTag } from '@/utils/content';
 import { isZipFile } from '@/utils/isZipFile';
 import type { MentionOption, UploadFileInfo, UploadInst } from 'naive-ui';
 import { VisibilityEnum, PostItemTypeEnum } from '@/utils/IEnum';
+import { censoredWords } from '@/assets/censored-words';
+
 
 const emit = defineEmits<{
     (e: 'post-success', post: Item.PostProps): void;
@@ -535,10 +537,17 @@ const removeUpload = ({ file }: any) => {
 
 // 发布动态
 const submitPost = () => {
+    const nsfwRegex = new RegExp(`(?:${censoredWords.join('|')})`, 'i');
+
     if (content.value.trim().length === 0) {
         window.$message.warning('请输入内容哦');
         return;
     }
+
+    if (nsfwRegex.test(content.value)) {
+        window.$message.warning('请友善发言');
+        return;
+      }
 
     // 解析用户at及tag
     let { tags, users } = parsePostTag(content.value);
