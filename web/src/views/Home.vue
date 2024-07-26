@@ -129,7 +129,7 @@ const user = reactive<Item.UserInfo>({
 });
 const inActionPost = ref<Item.PostProps | null>(null)
 
-const title = ref<string>("泡泡广场")
+const title = ref<string>("VR Panda Forum")
 const loading = ref(false);
 const noMore = ref(false);
 const targetStyle = ref<number>(1)

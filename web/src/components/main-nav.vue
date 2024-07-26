@@ -40,7 +40,7 @@
                 </n-button>
 
                 {{ props.title }}
-
+            <!-- 
                 <n-switch
                     v-if="props.theme"
                     :value="store.state.theme === 'dark'"
@@ -54,7 +54,7 @@
                     <template #unchecked-icon>
                         <n-icon :component="LightModeOutlined" />
                     </template>
-                </n-switch>
+                </n-switch> -->
             </div>
         </template>
     </n-card>
