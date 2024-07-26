@@ -10,8 +10,6 @@ import (
 	"encoding/base64"
 	"image/color"
 	"image/png"
-	"regexp"
-	"unicode/utf8"
 
 	"github.com/afocus/captcha"
 	"github.com/alimy/mir/v4"
@@ -170,14 +168,15 @@ func (s *pubSrv) Version() (*web.VersionResp, mir.Error) {
 
 // validUsername 验证用户
 func (s *pubSrv) validUsername(username string) mir.Error {
+	// Commented because authentication function is partially delegated to the front end
 	// 检测用户是否合规
-	if utf8.RuneCountInString(username) < 3 || utf8.RuneCountInString(username) > 12 {
-		return web.ErrUsernameLengthLimit
-	}
-
-	if !regexp.MustCompile(`^[a-zA-Z0-9]+$`).MatchString(username) {
-		return web.ErrUsernameCharLimit
-	}
+	// if utf8.RuneCountInString(username) < 3 || utf8.RuneCountInString(username) > 12 {
+	// 	return web.ErrUsernameLengthLimit
+	// }
+	//
+	// if !regexp.MustCompile(`^[a-zA-Z0-9]+$`).MatchString(username) {
+	// 	return web.ErrUsernameCharLimit
+	// }
 
 	// 重复检查
 	user, _ := s.Ds.GetUserByUsername(username)
