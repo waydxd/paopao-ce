@@ -72,6 +72,8 @@ import {
 import { Hash } from '@vicons/tabler';
 import { getUnreadMsgCount } from '@/api/user';
 import LOGO from '@/assets/img/logo.png';
+import { VueCookies } from 'vue-cookies';
+import { inject } from 'vue'
 
 const store = useStore();
 const route = useRoute();
@@ -254,7 +256,10 @@ const triggerAuth = (key: string) => {
     store.commit('triggerAuth', true);
     store.commit('triggerAuthKey', key);
 };
+const $cookies = inject<VueCookies>('$cookies'); 
+
 const handleLogout = () => {
+    $cookies?.remove('userinfo');
     store.commit('userLogout');
     store.commit('refresh')
     goHome()
