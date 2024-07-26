@@ -1,7 +1,9 @@
 <template>
     <div class="sidebar-wrap">
         <div class="logo-wrap">
-            <n-image class="logo-img" width="36" :src="LOGO" :preview-disabled="true" @click="goHome" />
+            <a href="https://vrpanda.org" target="_blank">
+                <n-image class="logo-img" width="36" :src="LOGO" :preview-disabled="true"  />
+            </a>
         </div>
         <n-menu :accordion="true" :icon-size="24" :options="menuOptions" :render-label="renderMenuLabel"
             :render-icon="renderMenuIcon" :value="selectedPath" @update:value="goRouter" />
@@ -259,7 +261,7 @@ const triggerAuth = (key: string) => {
 const $cookies = inject<VueCookies>('$cookies'); 
 
 const handleLogout = () => {
-    $cookies?.remove('userinfo');
+    $cookies?.remove('userinfo'); // prevent user refresh page to login again
     store.commit('userLogout');
     store.commit('refresh')
     goHome()

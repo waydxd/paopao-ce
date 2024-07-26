@@ -12,7 +12,7 @@
     >
         <div class="auth-wrap">
             <n-card :bordered="false">
-            <a href="http://localhost:9527">Please go to vrpanda website to login</a>
+            <a :href="loginUrl">Please go to vrpanda website to login</a>
             </n-card>
         </div>
     </n-modal>
@@ -29,7 +29,7 @@ import * as jose from 'jose'
 const store = useStore();
 const loading = ref(false); // Potentially redundant
 const password = 'password';
-
+const loginUrl = import.meta.env.VITE_APP_LOGIN_URL;
 
 
 const handleLogin = async (username: string) => {
