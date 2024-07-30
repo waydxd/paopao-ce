@@ -179,7 +179,7 @@ PaoPao主要由以下优秀的开源项目/工具构建
    的，需要安装tauri的依赖，具体参考[https://tauri.studio/v1/guides/getting-started/prerequisites](https://tauri.studio/v1/guides/getting-started/prerequisites).
 
 
-### 方式二. 使用Docker构建、运行
+### 方式二. 使用Docker构建、运行 (deprecated)
   * 后端:
   ```sh
   # 默认参数构建, 默认内嵌web ui并设置api host为空
@@ -221,7 +221,7 @@ PaoPao主要由以下优秀的开源项目/工具构建
   docker run -d -p 8010:80 your/paopao-ce:web
   ```
 
-### 方式三. 使用 docker-compose 运行
+### 方式三. 使用 docker-compose 运行 (deprecated)
 ```sh
 git clone https://github.com/waydxd/paopao-ce.git
 cd paopao-ce && docker compose up -d
