@@ -65,15 +65,21 @@ PaoPao主要由以下优秀的开源项目/工具构建
 
 ### 环境要求
 
-* Go (1.22+)
-* Node.js (14+)
-* MySQL (5.7+)
+* Go (最低1.22+)
+* Node.js (最低14+) 
+* MySQL (最低5.7+)
 * Redis
 * Zinc
 
 > Zinc是一款轻量级全文搜索引擎，可以查阅 <https://zincsearch-docs.zinc.dev/installation/> 安装
 
-以上环境版本为PaoPao官方的开发版本，仅供参考，其他版本的环境未进行充分测试
+以下為本地開發环境
+Darwin/Arm64
+* Go v1.22.5
+* Node.js v22.4.1 
+* MySQL v8.3.0
+* Redis v7.2.5
+* Zinc v0.4.10
 
 ### 安装说明
 
