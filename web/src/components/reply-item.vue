@@ -260,7 +260,7 @@ const execDelAction = () => {
              }
 
             .show {
-                color: #18a058;
+                color: #ff6600;
                 cursor: pointer;
             }
 

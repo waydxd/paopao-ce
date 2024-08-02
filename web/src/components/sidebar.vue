@@ -2,11 +2,13 @@
     <div class="sidebar-wrap">
         <div class="logo-wrap">
             <a href="https://vrpanda.org" target="_blank">
-                <n-image class="logo-img" width="36" :src="LOGO" :preview-disabled="true"  />
+                <n-image class="logo-img" width="36" :src="LOGO" :preview-disabled="true" />
             </a>
         </div>
-        <n-menu :accordion="true" :icon-size="24" :options="menuOptions" :render-label="renderMenuLabel"
-            :render-icon="renderMenuIcon" :value="selectedPath" @update:value="goRouter" />
+        <!-- menu -->
+        <n-menu class="menu" :accordion="true" :icon-size="24" :options="menuOptions" :render-label="renderMenuLabel"
+            :render-icon="renderMenuIcon" :value="selectedPath" @update:value="goRouter"
+            :theme-overrides="menuThemeOverrides" />
 
         <div class="user-wrap" v-if="store.state.userInfo.id > 0">
             <n-avatar class="user-avatar" round :size="34" :src="store.state.userInfo.avatar" />
@@ -76,6 +78,24 @@ import { getUnreadMsgCount } from '@/api/user';
 import LOGO from '@/assets/img/logo.png';
 import { VueCookies } from 'vue-cookies';
 import { inject } from 'vue'
+
+const menuThemeOverrides = {
+    itemTextColor: '#333333',           // Dark gray for normal text
+    itemTextColorHover: '#ff8c00',      // Dark orange for hover text
+    itemTextColorActive: '#ffffff',     // White for active text
+    itemTextColorActiveHover: '#ffffff', // White for active hover text
+    itemColorHover: '#fff0e0',          // Light orange for hover background
+    itemColorActive: '#ffa500',         // Orange for active item background
+    itemColorActiveHover: '#ff9500',    // Slightly darker orange for active hover
+    itemColorActivePressed: '#ff8000',  // Even darker orange for active pressed
+    itemColorActiveHoverPressed: '#ff7500', // Darkest orange for active hover and pressed
+    itemColorActiveHoverFocus: '#ffb700',   // Brighter orange for active hover focus
+
+    itemIconColor: '#333333',           // Dark gray for normal icon
+    itemIconColorHover: '#ff8c00',      // Dark orange for hover icon
+    itemIconColorActive: '#ffffff',     // White for active icon
+    itemIconColorActiveHover: '#ffffff' // White for active hover icon
+};
 
 const store = useStore();
 const route = useRoute();
@@ -173,7 +193,7 @@ const menuOptions = computed(() => {
             icon: () => h(PeopleOutline),
             href: '/contacts',
         });
-    }   
+    }
     if (store.state.profile.enableWallet) {
         options.push({
             label: '钱包',
@@ -258,7 +278,7 @@ const triggerAuth = (key: string) => {
     store.commit('triggerAuth', true);
     store.commit('triggerAuthKey', key);
 };
-const $cookies = inject<VueCookies>('$cookies'); 
+const $cookies = inject<VueCookies>('$cookies');
 
 const handleLogout = () => {
     $cookies?.remove('userinfo'); // prevent user refresh page to login again
@@ -271,6 +291,17 @@ window.$message = useMessage();
 </script>
 
 <style lang="less">
+:root {
+    // 如果要变更中间栏的大小，修改此处即可
+    --content-main: 620px;
+    --n-item-color-active: #ff9f56;
+    --n-item-text-color: #ff9f56;
+    --n-item-text-color-hover: #ff9f56;
+    --n-item-text-color-active: #ff9f56;
+    --n-item-color-hover: #ff9f56;
+
+}
+
 .sidebar-wrap::-webkit-scrollbar {
     width: 0;
     /* 隐藏滚动条的宽度 */
@@ -416,4 +447,5 @@ window.$message = useMessage();
         //         display: block !important;
         //     }
     }
-}</style>
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-    <n-config-provider :theme="theme">
+    <n-config-provider :theme-overrides="themeOverrides">
         <n-message-provider>
             <n-dialog-provider>
                 <div
@@ -47,7 +47,13 @@ import { onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 import { darkTheme } from 'naive-ui';
 import { getSiteProfile } from '@/api/site';
+import { NConfigProvider, GlobalThemeOverrides } from 'naive-ui'
 
+const themeOverrides: GlobalThemeOverrides = {
+  common: {
+    primaryColor: '#FF8C00'
+  }
+}
 const store = useStore();
 const theme = computed(() => (store.state.theme === 'dark' ? darkTheme : null));
 

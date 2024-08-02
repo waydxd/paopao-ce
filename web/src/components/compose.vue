@@ -20,7 +20,7 @@
                     :options="optionsRef"
                     @search="handleSearch"
                     @update:value="changeContent"
-                    placeholder="我修改了前端 哈哈"
+                    placeholder="说说您的新鲜事..."
                 />
             </div>
 

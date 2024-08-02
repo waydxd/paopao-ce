@@ -201,7 +201,7 @@ defineExpose({ switchReply });
         }
 
         .show {
-            color: #18a058;
+            color: #ff6600;
             cursor: pointer;
             opacity: 0.75;
            

@@ -494,7 +494,7 @@ watch(
 
 .tiny-slide-bar .tiny-slide-bar__list > 
 div.tiny-slide-bar__select .slide-bar-item .slide-bar-item-title {
-    color: #18a058;
+    color: #ff6600;
     opacity: 0.8;
 }
 
@@ -502,11 +502,11 @@ div.tiny-slide-bar__select .slide-bar-item .slide-bar-item-title {
 div:hover .slide-bar-item {
     cursor: pointer;
     .slide-bar-item-avatar {
-        color: #18a058;
+        color: #ff6600;
         opacity: 0.8;
     }
     .slide-bar-item-title {
-        color: #18a058;
+        color: #ff6600;
         opacity: 0.8;
     }
 }
