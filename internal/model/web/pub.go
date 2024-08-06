@@ -33,3 +33,7 @@ type RegisterResp struct {
 	UserId   int64  `json:"id"`
 	Username string `json:"username"`
 }
+
+type CheckCookieReq struct {
+	Token string `json:"token"`
+}

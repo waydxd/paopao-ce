@@ -28,4 +28,7 @@ type Pub struct {
 
 	// SendCaptcha 发送验证码
 	SendCaptcha func(Post, web.SendCaptchaReq) `mir:"/captcha"`
+
+	// CheckCookie
+	CookieLogin func(Post, web.CheckCookieReq) web.LoginResp `mir:"/cookie"`
 }

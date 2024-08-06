@@ -8,11 +8,13 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
+	"fmt"
 	"image/color"
 	"image/png"
 
 	"github.com/afocus/captcha"
 	"github.com/alimy/mir/v4"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gofrs/uuid/v5"
 	"github.com/sirupsen/logrus"
 	api "github.com/waydxd/paopao-ce/auto/api/v1"
@@ -189,5 +191,75 @@ func (s *pubSrv) validUsername(username string) mir.Error {
 func newPubSrv(s *base.DaoServant) api.Pub {
 	return &pubSrv{
 		DaoServant: s,
+	}
+}
+
+func (s *pubSrv) CookieLogin(req *web.CheckCookieReq) (*web.LoginResp, mir.Error) {
+	// JWK
+	jwk := map[string]string{
+		"kty": "oct",
+		"use": "sig",
+		"alg": "HS256",
+		"kid": "595c072f-ad49-4a8b-8df9-85154963bf51",
+		"k":   "LhVU5U8jT-H7QIzp74eEtiACa_fF0Op_h7F2ZmmkmjVUQmJjcmz1fyiXCVmJLEs4AOY8nxxdLDbWiuZFDV1kig",
+	}
+
+	// Decode the base64url encoded key
+	secretKey, err := base64.RawURLEncoding.DecodeString(jwk["k"])
+	if err != nil {
+		return nil, xerror.ServerError
+	}
+
+	// Extract the JWT token from the request
+	tokenString := req.Token
+
+	// Parse and verify the JWT token
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		// Validate the algorithm
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+		// Return the secret key
+		return secretKey, nil
+	})
+
+	if err != nil {
+		return nil, xerror.UnauthorizedAuthFailed
+	}
+
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		// Extract user information from claims
+		username := claims["username"].(string)
+		// Create a LoginReq object
+		loginReq := &web.LoginReq{
+			Username: username,
+			Password: "", // Password is not required for cookie login
+		}
+		// Attempt to login
+		loginResp, loginErr := s.Login(loginReq)
+		if loginErr != nil {
+			// If login fails, attempt to register the user
+			registerReq := &web.RegisterReq{
+				Username: username,
+				Password: "", // Password is not required for cookie login
+			}
+			registerResp, registerErr := s.Register(registerReq)
+			if registerErr != nil {
+				return nil, registerErr
+			}
+			loginReq := &web.LoginReq{
+				Username: registerResp.Username,
+				Password: "password", // Password is not required for cookie login
+			}
+			loginResp, loginErr := s.Login(loginReq)
+			if loginErr != nil {
+				// If registration is successful, return the registration response
+				return loginResp, nil
+			}
+		}
+		// If login is successful, return the login response
+		return loginResp, nil
+	} else {
+		return nil, xerror.UnauthorizedAuthFailed
 	}
 }

@@ -15,6 +15,7 @@ import (
 type Pub interface {
 	_default_
 
+	CookieLogin(*web.CheckCookieReq) (*web.LoginResp, mir.Error)
 	SendCaptcha(*web.SendCaptchaReq) mir.Error
 	GetCaptcha() (*web.GetCaptchaResp, mir.Error)
 	Register(*web.RegisterReq) (*web.RegisterResp, mir.Error)
@@ -29,6 +30,20 @@ func RegisterPubServant(e *gin.Engine, s Pub) {
 	router := e.Group("v1")
 
 	// register routes info to router
+	router.Handle("POST", "/cookie", func(c *gin.Context) {
+		select {
+		case <-c.Request.Context().Done():
+			return
+		default:
+		}
+		req := new(web.CheckCookieReq)
+		if err := s.Bind(c, req); err != nil {
+			s.Render(c, nil, err)
+			return
+		}
+		resp, err := s.CookieLogin(req)
+		s.Render(c, resp, err)
+	})
 	router.Handle("POST", "/captcha", func(c *gin.Context) {
 		select {
 		case <-c.Request.Context().Done():
@@ -94,6 +109,10 @@ func RegisterPubServant(e *gin.Engine, s Pub) {
 
 // UnimplementedPubServant can be embedded to have forward compatible implementations.
 type UnimplementedPubServant struct{}
+
+func (UnimplementedPubServant) CookieLogin(req *web.CheckCookieReq) (*web.LoginResp, mir.Error) {
+	return nil, mir.Errorln(http.StatusNotImplemented, http.StatusText(http.StatusNotImplemented))
+}
 
 func (UnimplementedPubServant) SendCaptcha(req *web.SendCaptchaReq) mir.Error {
 	return mir.Errorln(http.StatusNotImplemented, http.StatusText(http.StatusNotImplemented))
