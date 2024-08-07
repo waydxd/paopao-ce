@@ -13,7 +13,6 @@ require (
 	github.com/bufbuild/connect-go v1.10.0
 	github.com/bytedance/sonic v1.10.1
 	github.com/cockroachdb/errors v1.11.1
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/disintegration/imaging v1.6.2
 	github.com/fatih/color v1.15.0
 	github.com/getsentry/sentry-go v0.24.1
