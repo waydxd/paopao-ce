@@ -282,9 +282,14 @@ const $cookies = inject<VueCookies>('$cookies');
 
 const handleLogout = () => {
     $cookies?.remove('userinfo'); // prevent user refresh page to login again
+    // window.location.reload();
+
     store.commit('userLogout');
     store.commit('refresh')
-    goHome()
+
+    window.location.href = 'http://localhost:9527';
+
+    // goHome()
 };
 window.$store = store;
 window.$message = useMessage();

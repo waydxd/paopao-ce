@@ -13,6 +13,10 @@ declare module NetParams {
     password: string;
   }
 
+  // Cookie Login
+  interface AuthCookieLogin {
+    Token: string;
+  }
   type AuthUserInfo = string;
 
   interface AuthUpdateUserPassword {

@@ -11,11 +11,13 @@ import (
 	"fmt"
 	"image/color"
 	"image/png"
+	"log"
+	"os"
 
 	"github.com/afocus/captcha"
 	"github.com/alimy/mir/v4"
-	"github.com/dgrijalva/jwt-go"
 	"github.com/gofrs/uuid/v5"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/sirupsen/logrus"
 	api "github.com/waydxd/paopao-ce/auto/api/v1"
 	"github.com/waydxd/paopao-ce/internal/core/ms"
@@ -195,45 +197,47 @@ func newPubSrv(s *base.DaoServant) api.Pub {
 }
 
 func (s *pubSrv) CookieLogin(req *web.CheckCookieReq) (*web.LoginResp, mir.Error) {
-	// JWK
-	jwk := map[string]string{
-		"kty": "oct",
-		"use": "sig",
-		"alg": "HS256",
-		"kid": "595c072f-ad49-4a8b-8df9-85154963bf51",
-		"k":   "LhVU5U8jT-H7QIzp74eEtiACa_fF0Op_h7F2ZmmkmjVUQmJjcmz1fyiXCVmJLEs4AOY8nxxdLDbWiuZFDV1kig",
-	}
 
+	KeyPath := "public.pem" // Path to the asymmetric key
+
+	fmt.Printf(req.Token)
 	// Decode the base64url encoded key
-	secretKey, err := base64.RawURLEncoding.DecodeString(jwk["k"])
+	KeyData, err := os.ReadFile(KeyPath)
 	if err != nil {
+		log.Fatalf("Error reading private key: %v", err)
 		return nil, xerror.ServerError
 	}
-
+	fmt.Printf("Decoded secret key: %x\n", KeyData)
+	// Parse the private key
+	Key, err := jwt.ParseECPublicKeyFromPEM(KeyData)
+	if err != nil {
+		log.Fatalf("Error parsing private key: %v", err)
+	}
 	// Extract the JWT token from the request
 	tokenString := req.Token
-
+	fmt.Printf("Token string: %s\n", tokenString)
 	// Parse and verify the JWT token
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		// Validate the algorithm
-		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+		if _, ok := token.Method.(*jwt.SigningMethodECDSA); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
-		// Return the secret key
-		return secretKey, nil
+		// Return the private key
+		return Key, nil
 	})
 
 	if err != nil {
-		return nil, xerror.UnauthorizedAuthFailed
+		fmt.Printf("Error parsing token: %v\n", err)
+		return nil, xerror.BadCookie
 	}
 
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 		// Extract user information from claims
-		username := claims["username"].(string)
-		// Create a LoginReq object
+		fmt.Printf("JWT: %v\n", claims)
+		username := claims["data"].(map[string]interface{})["username"].(string) // Create a LoginReq object
 		loginReq := &web.LoginReq{
 			Username: username,
-			Password: "", // Password is not required for cookie login
+			Password: "password", // Password is not required for cookie login
 		}
 		// Attempt to login
 		loginResp, loginErr := s.Login(loginReq)
@@ -241,7 +245,7 @@ func (s *pubSrv) CookieLogin(req *web.CheckCookieReq) (*web.LoginResp, mir.Error
 			// If login fails, attempt to register the user
 			registerReq := &web.RegisterReq{
 				Username: username,
-				Password: "", // Password is not required for cookie login
+				Password: "password", // Password is not required for cookie login
 			}
 			registerResp, registerErr := s.Register(registerReq)
 			if registerErr != nil {

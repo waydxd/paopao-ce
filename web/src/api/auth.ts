@@ -37,3 +37,12 @@ export const updateUserPassword = (data: NetParams.AuthUpdateUserPassword): Prom
         data,
     });
 };
+
+/* Cookie Login */
+export const cookieLogin = (params: NetParams.AuthCookieLogin): Promise<NetReq.AuthUserLogin> => {
+    return request({
+        method: 'post',
+        url: '/v1/cookie',
+        data: params,
+    });
+};
