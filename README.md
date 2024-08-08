@@ -77,7 +77,7 @@ PaoPao主要由以下优秀的开源项目/工具构建
 Darwin/Arm64
 * Go v1.22.5
 * Node.js v22.4.1 
-* MySQL v8.3.0
+* MySQL v8.4.2
 * Redis v7.2.5
 * Zinc v0.4.10
 
