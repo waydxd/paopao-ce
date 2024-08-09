@@ -41,9 +41,10 @@ type Post struct {
 	AttachmentPrice int64        `json:"attachment_price"`
 	IP              string       `json:"ip"`
 	IPLoc           string       `json:"ip_loc"`
+	CommunityID     uint         `json:"community_id"`
 }
 
-type PostFormated struct {
+type PostFormated struct { // p_post_content table
 	ID              int64                  `json:"id"`
 	UserID          int64                  `json:"user_id"`
 	User            *UserFormated          `json:"user"`

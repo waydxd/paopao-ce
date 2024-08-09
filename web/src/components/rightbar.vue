@@ -1,13 +1,7 @@
 <template>
     <div class="rightbar-wrap" v-if="!store.state.collapsedRight">
         <div class="search-wrap">
-            <n-input
-                round
-                clearable
-                placeholder="搜一搜..."
-                v-model:value="keyword"
-                @keyup.enter.prevent="handleSearch"
-            >
+            <n-input round clearable placeholder="搜一搜..." v-model:value="keyword" @keyup.enter.prevent="handleSearch">
                 <template #prefix>
                     <n-icon :component="Search" />
                 </template>
@@ -16,16 +10,13 @@
         <n-card v-if="showFollowTopics" class="hottopic-wrap" title="关注话题" embedded :bordered="false" size="small">
             <n-spin :show="loading">
                 <div class="hot-tag-item" v-for="tag in followTags" :key="tag.id">
-                    <router-link
-                        class="hash-link"
-                        :to="{
-                            name: 'home',
-                            query: {
-                                q: tag.tag,
-                                t: 'tag',
-                            },
-                        }"
-                    >
+                    <router-link class="hash-link" :to="{
+                        name: 'home',
+                        query: {
+                            q: tag.tag,
+                            t: 'tag',
+                        },
+                    }">
                         #{{ tag.tag }}
                     </router-link>
 
@@ -38,16 +29,13 @@
         <n-card class="hottopic-wrap" title="热门话题" embedded :bordered="false" size="small">
             <n-spin :show="loading">
                 <div class="hot-tag-item" v-for="tag in hotTags" :key="tag.id">
-                    <router-link
-                        class="hash-link"
-                        :to="{
-                            name: 'home',
-                            query: {
-                                q: tag.tag,
-                                t: 'tag',
-                            },
-                        }"
-                    >
+                    <router-link class="hash-link" :to="{
+                        name: 'home',
+                        query: {
+                            q: tag.tag,
+                            t: 'tag',
+                        },
+                    }">
                         #{{ tag.tag }}
                     </router-link>
 
@@ -61,25 +49,19 @@
             <div class="copyright">&copy; {{ store.state.profile.copyrightTop }}</div>
             <div>
                 <n-space>
-                    <a
-                        :href="store.state.profile.copyrightLeftLink"
-                        target="_blank"
-                        class="hash-link"
-                    >
+                    <a :href="store.state.profile.copyrightLeftLink" target="_blank" class="hash-link">
                         {{ store.state.profile.copyrightLeft }}
                     </a>
-                    <a
-                        :href="store.state.profile.copyrightRightLink"
-                        target="_blank"
-                        class="hash-link"
-                    >
+                    <a :href="store.state.profile.copyrightRightLink" target="_blank" class="hash-link">
                         {{ store.state.profile.copyrightRight }}
                     </a>
                 </n-space>
             </div>
         </n-card>
         <div class="site-info" v-if="store.state.userInfo.is_admin" ref="userInfoElement">
-            <span class="site-info-item">{{ registerUserCount }} 注册用户，{{ onlineUserCount }} 人在线，最高在线 {{ historyMaxOnline }} 人，站点上线于 {{ formatRelativeTime(serverUpTime) }}</span>
+            <span class="site-info-item">{{ registerUserCount }} 注册用户，{{ onlineUserCount }} 人在线，最高在线 {{ historyMaxOnline
+                }}
+                人，站点上线于 {{ formatRelativeTime(serverUpTime) }}</span>
         </div>
     </div>
 </template>
@@ -129,7 +111,7 @@ const loadHotTags = () => {
     })
         .then((res) => {
             hotTags.value = res.topics;
-            followTags.value = res.extral_topics??[];
+            followTags.value = res.extral_topics ?? [];
             showFollowTopics.value = true
             loading.value = false;
         })
@@ -151,9 +133,9 @@ const handleSearch = () => {
         },
     });
 };
-const showFollowTopics = computed({  
-    get: () => {     
-        return store.state.userLogined && followTags.value.length !==0;
+const showFollowTopics = computed({
+    get: () => {
+        return store.state.userLogined && followTags.value.length !== 0;
     },
     set: (newVal) => {
         // do nothing
@@ -162,7 +144,7 @@ const showFollowTopics = computed({
 watch(
     () => ({
         refreshTopicFollow: store.state.refreshTopicFollow,
-        userLogined: store.state.userLogined 
+        userLogined: store.state.userLogined
     }),
     (to, from) => {
         if (to.refreshTopicFollow !== from.refreshTopicFollow || to.userLogined) {
@@ -195,19 +177,24 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .rightbar-wrap::-webkit-scrollbar {
-  width: 0; /* 隐藏滚动条的宽度 */
-  height: 0; /* 隐藏滚动条的高度 */
+    width: 0;
+    /* 隐藏滚动条的宽度 */
+    height: 0;
+    /* 隐藏滚动条的高度 */
 }
+
 .rightbar-wrap {
-    width: 240px;
+    width: calc(var(--content-main) / 2);
+    height: 100%;
     position: fixed;
     left: calc(50% + var(--content-main) / 2 + 10px);
-    max-height: calc(100vh); /* 调整高度 */
+    max-height: calc(100vh);
+    /* 调整高度 */
     overflow: auto;
+    
     .search-wrap {
         margin: 12px 0;
     }
-
     .hot-tag-item {
         line-height: 2;
         position: relative;
@@ -231,14 +218,31 @@ onMounted(() => {
         }
     }
 
+    .search-wrap {
+        width: 75%;
+    }
+
     .hottopic-wrap {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
+        width: 75%;
+        background-color: #f2f3f7;
+        border-radius: 0.75em;
+        transition: ease 0.2s;
+        box-shadow: 1em 1em 1em #d8dae0b1, -0.75em -0.75em 1em #ffffff;
+        border: 1.5px solid #f2f3f7;
     }
 
     .site-info {
-        margin-top: 8px;
+        background-color: #f2f3f7;
+        width: 75%;
+        border-radius: 0.75em;
+        transition: ease 0.2s;
+        box-shadow: 1em 1em 1em #d8dae0b1, -0.75em -0.75em 1em #ffffff;
+        border: 1.5px solid #f2f3f7;
+        margin-top: 20px;
         padding-left: 16px;
         padding-right: 16px;
+
         .site-info-item {
             font-size: 10px;
             opacity: 0.75;
@@ -246,6 +250,14 @@ onMounted(() => {
     }
 
     .copyright-wrap {
+        width: 75%;
+
+        background-color: #f2f3f7;
+        border-radius: 0.75em;
+        transition: ease 0.2s;
+        box-shadow: 1em 1em 1em #d8dae0b1, -0.75em -0.75em 1em #ffffff;
+        border: 1.5px solid #f2f3f7;
+
         .copyright {
             font-size: 12px;
             opacity: 0.75;
@@ -256,10 +268,12 @@ onMounted(() => {
         }
     }
 }
+
 .dark {
     .hottopic-wrap {
         background-color: #18181c;
     }
+
     .copyright-wrap {
         background-color: #18181c;
     }

@@ -240,7 +240,7 @@ function postFollowAction(userId:number, isFollowing: boolean) {
 }
 
 const updateTitle = () => {
-    title.value = 'VR Panda Discussion Forum';
+    title.value = '首頁';
     if (route.query && route.query.q) {
         if (route.query.t && route.query.t === 'tag') {
             title.value = '#' + decodeURIComponent(route.query.q as string);

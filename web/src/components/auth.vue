@@ -30,7 +30,6 @@ const handleLogin = async (cookie: string) => {
     }).then((res) => {
         const token = res?.token || '';
         // 写入用户信息
-        console.log("I GOT HERE");
 
         localStorage.setItem('PAOPAO_TOKEN', token);
         return userInfo(token);

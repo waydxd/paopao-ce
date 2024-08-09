@@ -14,3 +14,4 @@ __debug_bin
 /.custom
 /run.sh
 web/dist/*
+public.pem

@@ -1,3 +1,4 @@
+import { Components } from "@vicons/tabler";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
@@ -25,6 +26,14 @@ const routes = [
       title: "话题",
     },
     component: () => import("@/views/Topic.vue"),
+  },
+  {
+    path: "/threads",
+    name: "threads",
+    meta: {
+      title: "泡瓶",
+    },
+    component: () => import("@/views/Threads.vue"),
   },
   {
     path: "/anouncement",

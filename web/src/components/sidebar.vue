@@ -72,6 +72,7 @@ import {
     WalletOutline,
     SettingsOutline,
     LogOutOutline,
+    PeopleCircleOutline,
 } from '@vicons/ionicons5';
 import { Hash } from '@vicons/tabler';
 import { getUnreadMsgCount } from '@/api/user';
@@ -148,7 +149,7 @@ onMounted(() => {
 const menuOptions = computed(() => {
     const options = [
         {
-            label: '广场',
+            label: '首頁',
             key: 'home',
             icon: () => h(HomeOutline),
             href: '/',
@@ -169,10 +170,16 @@ const menuOptions = computed(() => {
         });
     }
     options.push({
-        label: '主页',
+        label: '個人',
         key: 'profile',
         icon: () => h(LeafOutline),
         href: '/profile',
+    });
+    options.push({
+        label: '社群',
+        key: 'threads',
+        icon: () => h(PeopleCircleOutline),
+        href: '/threads',
     });
     options.push({
         label: '消息',
