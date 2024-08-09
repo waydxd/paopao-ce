@@ -1,5 +1,4 @@
 import { request } from "@/utils/request";
-/* CookieLogin  */
   
 /** 获取验证码 */
 export const getCaptcha = (
