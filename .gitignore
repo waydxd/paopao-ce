@@ -13,3 +13,4 @@ __debug_bin
 /custom
 /.custom
 /run.sh
+web/dist/*
