@@ -10,7 +10,8 @@ import (
 
 // Model definitions
 type Community struct {
-	Model              // Assuming you have a base Model struct
+	Model       // Assuming you have a base Model struct
+	ID          uint
 	Name        string `gorm:"uniqueIndex;not null"`
 	Slug        string `gorm:"uniqueIndex;not null"`
 	Description string

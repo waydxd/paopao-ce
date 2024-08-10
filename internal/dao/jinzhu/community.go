@@ -9,9 +9,9 @@ type communityDAO struct {
 	db *gorm.DB
 }
 
-func NewCommunityDAO(db *gorm.DB) ms.CommunityModelService {
-	return &communityDAO{db: db}
-}
+// func NewCommunityDAO(db *gorm.DB) ms.CommunityModelService {
+// 	return &communityDAO{db: db}
+// }
 
 func (d *communityDAO) CreateCommunity(community *ms.Community) error {
 	return d.db.Create(community).Error
@@ -33,7 +33,7 @@ func (d *communityDAO) ListCommunities(offset, limit int) ([]*ms.Community, erro
 	return communities, nil
 }
 
-func (d *communityDAO) AddMember(userID, communityID int64) error {
+func (d *communityDAO) AddMember(userID, communityID uint) error {
 	return d.db.Create(&ms.CommunityMember{UserID: userID, CommunityID: communityID}).Error
 }
 
