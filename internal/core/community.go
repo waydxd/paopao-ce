@@ -7,14 +7,14 @@ import (
 // interface CommunityModelService
 type CommunityManageService interface {
 	CreateCommunity(community *ms.Community) error
-	RemoveCommunity(communityID int64) error
-	AddMember(userID, communityID int64) error
-	RemoveMember(userID, communityID int64) error
-	JoinCommunity(userID, communityID int64) error
-	LeaveCommunity(userID, communityID int64) error
+	RemoveCommunity(communityID uint) error
+	AddMember(userID, communityID uint) error
+	RemoveMember(userID, communityID uint) error
+	JoinCommunity(userID, communityID uint) error
+	LeaveCommunity(userID, communityID uint) error
 }
 type CommunityService interface {
-	GetCommunity(communityID int64) (*ms.Community, error)
+	GetCommunity(communityID uint) (*ms.Community, error)
 	ListCommunities(offset, limit int) ([]*ms.Community, error)
-	ListCommunityMembers(communityID int64, offset, limit int) ([]*ms.User, error)
+	ListCommunityMembers(communityID uint, offset int, limit int) ([]*ms.User, error)
 }

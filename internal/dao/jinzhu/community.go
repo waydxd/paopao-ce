@@ -10,18 +10,29 @@ import (
 type communityDAO struct {
 	db *gorm.DB
 }
+type communityManageDAO struct {
+	db *gorm.DB
+}
 
 // ListCommunityMembers implements core.CommunityService.
 
-func NewCommunityService(db *gorm.DB) core.CommunityService {
+func newCommunityService(db *gorm.DB) core.CommunityService {
 	return &communityDAO{db: db}
 }
 
-func (d *communityDAO) CreateCommunity(community *ms.Community) error {
+func newCommunityManageService(db *gorm.DB) core.CommunityManageService {
+	return &communityManageDAO{db: db}
+}
+
+func (d *communityManageDAO) CreateCommunity(community *ms.Community) error {
 	return d.db.Create(community).Error
 }
 
-func (d *communityDAO) GetCommunity(communityID int64) (*ms.Community, error) {
+func (d *communityManageDAO) RemoveCommunity(communityID uint) error {
+	return d.db.Where("id = ?", communityID).Delete(&ms.Community{}).Error
+}
+
+func (d *communityDAO) GetCommunity(communityID uint) (*ms.Community, error) {
 	var community ms.Community
 	if err := d.db.First(&community, communityID).Error; err != nil {
 		return nil, err
@@ -36,7 +47,8 @@ func (d *communityDAO) ListCommunities(offset, limit int) ([]*ms.Community, erro
 	}
 	return communities, nil
 }
-func (d *communityDAO) ListCommunityMembers(communityID int64, offset int, limit int) ([]*dbr.User, error) {
+
+func (d *communityDAO) ListCommunityMembers(communityID uint, offset int, limit int) ([]*dbr.User, error) {
 	var users []*dbr.User
 
 	err := d.db.Transaction(func(tx *gorm.DB) error {
@@ -75,18 +87,26 @@ func (d *communityDAO) ListCommunityMembers(communityID int64, offset int, limit
 	return users, nil
 }
 
-func (d *communityDAO) AddMember(userID, communityID uint) error {
+func (d *communityManageDAO) AddMember(userID, communityID uint) error {
 	return d.db.Create(&ms.CommunityMember{UserID: userID, CommunityID: communityID}).Error
 }
 
-func (d *communityDAO) RemoveMember(userID, communityID int64) error {
+func (d *communityManageDAO) RemoveMember(userID, communityID uint) error {
 	return d.db.Where("user_id = ? AND community_id = ?", userID, communityID).Delete(&ms.CommunityMember{}).Error
 }
 
-func (d *communityDAO) ListMembers(communityID int64, offset, limit int) ([]*ms.User, error) {
-	var users []*ms.User
-	err := d.db.Joins("JOIN community_members ON users.id = community_members.user_id").
-		Where("community_members.community_id = ?", communityID).
-		Offset(offset).Limit(limit).Find(&users).Error
-	return users, err
+func (d *communityManageDAO) JoinCommunity(userID, communityID uint) error {
+	return d.db.Create(&ms.CommunityMember{UserID: (userID), CommunityID: (communityID)}).Error
 }
+
+func (d *communityManageDAO) LeaveCommunity(userID, communityID uint) error {
+	return d.db.Where("user_id = ? AND community_id = ?", userID, communityID).Delete(&ms.CommunityMember{}).Error
+}
+
+// func (d *communityManageDAO) ListMembers(communityID uint, offset, limit int) ([]*ms.User, error) {
+// 	var users []*ms.User
+// 	err := d.db.Joins("JOIN community_members ON users.id = community_members.user_id").
+// 		Where("community_members.community_id = ?", communityID).
+// 		Offset(offset).Limit(limit).Find(&users).Error
+// 	return users, err
+// }

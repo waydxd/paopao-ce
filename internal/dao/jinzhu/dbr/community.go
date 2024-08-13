@@ -1,6 +1,6 @@
 // community.go
 
-package dbr // Assuming this is your package name
+package dbr
 
 import (
 	"time"
@@ -9,25 +9,27 @@ import (
 )
 
 // Model definitions
-type Community struct {
-	Model       // Assuming you have a base Model struct
-	ID          uint
-	Name        string `gorm:"uniqueIndex;not null"`
-	Slug        string `gorm:"uniqueIndex;not null"`
-	Description string
-	AvatarURL   string
-	BannerURL   string
-}
-
 type CommunityMember struct {
-	Model
-	CommunityID uint
-	UserID      uint
-	Role        string
-	JoinedAt    time.Time
+	ID          uint      `json:"id" gorm:"primaryKey"`
+	CommunityID uint      `json:"community_id"`
+	UserID      uint      `json:"user_id"`
+	Role        string    `json:"role"`
+	JoinedAt    time.Time `json:"joined_at"`
 }
 
-// Repository methods
+type Community struct {
+	ID          uint      `json:"id" gorm:"primaryKey"`
+	Name        string    `json:"name" gorm:"uniqueIndex"`
+	Slug        string    `json:"slug" gorm:"uniqueIndex"`
+	Description string    `json:"description"`
+	AvatarURL   string    `json:"avatar_url"`
+	BannerURL   string    `json:"banner_url"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
+}
+type CommunityTag struct {
+	// TODO
+}
 
 // CRUD Op
 func (c *Community) Create(db *gorm.DB) (*Community, error) {
@@ -65,31 +67,31 @@ func (cm *CommunityMember) Create(db *gorm.DB) (*CommunityMember, error) {
 }
 
 // Service methods (if needed)
-type CommunityService struct {
-	DB *gorm.DB
-}
+// type CommunityService struct {
+// 	DB *gorm.DB
+// }
 
-func (s *CommunityService) CreateCommunity(name, description string, creatorID uint) (*Community, error) {
-	community := &Community{
-		Name:        name,
-		Description: description,
-	}
-	_, err := community.Create(s.DB)
-	if err != nil {
-		return nil, err
-	}
+// func (s *CommunityService) CreateCommunity(name, description string, creatorID uint) (*Community, error) {
+// 	community := &Community{
+// 		Name:        name,
+// 		Description: description,
+// 	}
+// 	_, err := community.Create(s.DB)
+// 	if err != nil {
+// 		return nil, err
+// 	}
 
-	member := &CommunityMember{
-		CommunityID: community.ID,
-		UserID:      creatorID,
-		Role:        "admin",
-		JoinedAt:    time.Now(),
-	}
-	_, err = member.Create(s.DB)
-	if err != nil {
-		// You might want to delete the community if member creation fails
-		return nil, err
-	}
+// 	member := &CommunityMember{
+// 		CommunityID: community.ID,
+// 		UserID:      creatorID,
+// 		Role:        "admin",
+// 		JoinedAt:    time.Now(),
+// 	}
+// 	_, err = member.Create(s.DB)
+// 	if err != nil {
+// 		// You might want to delete the community if member creation fails
+// 		return nil, err
+// 	}
 
-	return community, nil
-}
+// 	return community, nil
+// }
