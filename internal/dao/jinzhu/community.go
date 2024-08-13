@@ -1,7 +1,9 @@
 package jinzhu
 
 import (
+	"github.com/waydxd/paopao-ce/internal/core"
 	"github.com/waydxd/paopao-ce/internal/core/ms"
+	"github.com/waydxd/paopao-ce/internal/dao/jinzhu/dbr"
 	"gorm.io/gorm"
 )
 
@@ -9,9 +11,11 @@ type communityDAO struct {
 	db *gorm.DB
 }
 
-// func NewCommunityDAO(db *gorm.DB) ms.CommunityModelService {
-// 	return &communityDAO{db: db}
-// }
+// ListCommunityMembers implements core.CommunityService.
+
+func NewCommunityService(db *gorm.DB) core.CommunityService {
+	return &communityDAO{db: db}
+}
 
 func (d *communityDAO) CreateCommunity(community *ms.Community) error {
 	return d.db.Create(community).Error
@@ -31,6 +35,44 @@ func (d *communityDAO) ListCommunities(offset, limit int) ([]*ms.Community, erro
 		return nil, err
 	}
 	return communities, nil
+}
+func (d *communityDAO) ListCommunityMembers(communityID int64, offset int, limit int) ([]*dbr.User, error) {
+	var users []*dbr.User
+
+	err := d.db.Transaction(func(tx *gorm.DB) error {
+		// Get the community members
+		var members []*dbr.CommunityMember
+		err := tx.Where("community_id = ?", communityID).
+			Offset(offset).
+			Limit(limit).
+			Order("joined_at DESC").
+			Find(&members).Error
+		if err != nil {
+			return err
+		}
+
+		// Extract user IDs
+		var userIDs []uint
+		for _, member := range members {
+			userIDs = append(userIDs, member.UserID)
+		}
+
+		// Fetch user details
+		if len(userIDs) > 0 {
+			err = tx.Where("id IN ?", userIDs).Find(&users).Error
+			if err != nil {
+				return err
+			}
+		}
+
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return users, nil
 }
 
 func (d *communityDAO) AddMember(userID, communityID uint) error {
