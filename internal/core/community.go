@@ -14,7 +14,6 @@ type CommunityModelService interface {
 	LeaveCommunity(userID, communityID int64) error
 }
 type CommunityService interface {
-	CreateCommunity(name, description string, creatorID int64) (*ms.Community, error)
 	GetCommunity(communityID int64) (*ms.Community, error)
 	ListCommunities(offset, limit int) ([]*ms.Community, error)
 	ListCommunityMembers(communityID int64, offset, limit int) ([]*ms.User, error)

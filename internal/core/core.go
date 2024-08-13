@@ -41,6 +41,10 @@ type DataService interface {
 	// 安全服务
 	SecurityService
 	AttachmentCheckService
+
+	// 社区服务
+	CommunityService
+	CommunityModelService
 }
 
 // WebDataServantA Web数据服务集成(版本A)
