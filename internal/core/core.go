@@ -44,7 +44,7 @@ type DataService interface {
 
 	// 社区服务
 	CommunityService
-	CommunityModelService
+	CommunityManageService
 }
 
 // WebDataServantA Web数据服务集成(版本A)

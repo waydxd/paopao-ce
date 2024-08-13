@@ -5,7 +5,7 @@ import (
 )
 
 // interface CommunityModelService
-type CommunityModelService interface {
+type CommunityManageService interface {
 	CreateCommunity(community *ms.Community) error
 	RemoveCommunity(communityID int64) error
 	AddMember(userID, communityID int64) error
