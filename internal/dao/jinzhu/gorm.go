@@ -36,6 +36,9 @@ var (
 	_userMetric_         string
 	_walletRecharge_     string
 	_walletStatement_    string
+	_community_          string
+	_communityMember_    string
+	_community_tag_      string
 )
 
 func initTableName() {
@@ -66,4 +69,7 @@ func initTableName() {
 	_userMetric_ = m[conf.TableUserMetric]
 	_walletRecharge_ = m[conf.TableWalletRecharge]
 	_walletStatement_ = m[conf.TableWalletStatement]
+	_community_ = m[conf.TableCommunity]
+	_communityMember_ = m[conf.TableCommunityMember]
+	_community_tag_ = m[conf.TableComnunityTag]
 }

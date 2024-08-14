@@ -44,6 +44,9 @@ const (
 	TableUserMetric         = "user_metric"
 	TableWalletRecharge     = "wallet_recharge"
 	TableWalletStatement    = "wallet_statement"
+	TableCommunity          = "community"
+	TableCommunityMember    = "community_members"
+	TableComnunityTag       = "community_tags"
 )
 
 type TableNameMap map[string]string

@@ -25,6 +25,11 @@ type CommentMetric struct {
 	ThumbsUpCount   int32
 	ThumbsDownCount int32
 }
+type CommunityMetric struct {
+	CommunityId int64
+	PostCount   int64
+	MemberCount int64
+}
 
 func (m *TweetMetric) RankScore(motivationFactor int) int64 {
 	if motivationFactor == 0 {

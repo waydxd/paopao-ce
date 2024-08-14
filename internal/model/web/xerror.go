@@ -104,5 +104,11 @@ var (
 	ErrFileInvalidExt   = xerror.NewError(10201, "文件类型不合法")
 	ErrFileInvalidSize  = xerror.NewError(10202, "文件大小超限")
 
+	ErrListCommunity   = xerror.NewError(11000, "獲取列表失敗")
+	ErrLeaveCommunity  = xerror.NewError(11011, "無法離開社群")
+	ErrJoinCommunity   = xerror.NewError(11012, "無法加入社群")
+	ErrGetCommunity    = xerror.NewError(11020, "社群不存在")
+	ErrCreateCommunity = xerror.NewError(11030, "社群創建失敗")
+
 	ErrNotImplemented = xerror.NewError(10501, "功能未实现")
 )

@@ -25,3 +25,10 @@ type UserMetricServantA interface {
 	AddUserMetric(userId int64) error
 	DeleteUserMetric(userId int64) error
 }
+
+// Community Metrics?
+type CommunityMetricServantA interface {
+	UpdateCommunityMetric(metric *cs.CommunityMetric) error
+	AddCommunityMetric(communityId int64) error
+	DeleteCommunityMetric(communityId int64) error
+}

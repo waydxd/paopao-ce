@@ -394,6 +394,9 @@ func (s *databaseConf) TableNames() (res TableNameMap) {
 		TableUserMetric,
 		TableWalletRecharge,
 		TableWalletStatement,
+		TableCommunity,
+		TableCommunityMember,
+		TableComnunityTag,
 	}
 	res = make(TableNameMap, len(tableNames))
 	for _, name := range tableNames {
