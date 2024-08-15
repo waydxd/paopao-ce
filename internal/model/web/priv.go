@@ -59,6 +59,7 @@ type CreateTweetReq struct {
 	AttachmentPrice int64              `json:"attachment_price"`
 	Visibility      TweetVisibleType   `json:"visibility"`
 	ClientIP        string             `json:"-" binding:"-"`
+	CommunityID     uint               `json:"community_id"`
 }
 
 type CreateTweetResp ms.PostFormated

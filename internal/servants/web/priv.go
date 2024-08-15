@@ -254,6 +254,7 @@ func (s *privSrv) CreateTweet(req *web.CreateTweetReq) (_ *web.CreateTweetResp, 
 		IPLoc:           utils.GetIPLoc(req.ClientIP),
 		AttachmentPrice: req.AttachmentPrice,
 		Visibility:      ms.PostVisibleT(req.Visibility.ToVisibleValue()),
+		CommunityID:     req.CommunityID,
 	}
 	post, err = s.Ds.CreatePost(post)
 	if err != nil {
