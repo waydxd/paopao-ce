@@ -63,6 +63,7 @@ type PostFormated struct { // p_post_content table
 	Tags            map[string]int8        `json:"tags"`
 	AttachmentPrice int64                  `json:"attachment_price"`
 	IPLoc           string                 `json:"ip_loc"`
+	CommunityID     uint                   `json:"community_id"`
 }
 
 func (t PostVisibleT) ToOutValue() (res uint8) {
@@ -106,6 +107,7 @@ func (p *Post) Format() *PostFormated {
 			AttachmentPrice: p.AttachmentPrice,
 			Tags:            tagsMap,
 			IPLoc:           p.IPLoc,
+			CommunityID:     p.CommunityID,
 		}
 	}
 
