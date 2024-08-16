@@ -25,4 +25,6 @@ type Community struct {
 	LeaveCommunity func(Post, web.JoinLeaveCommunityReq) `mir:"/community/leave"`
 
 	ListCommunityMembers func(Get, web.ListCommunityMembersReq) web.ListCommunityMembersResp `mir:"/community/members"`
+
+	GetCommunityPost func(Get, web.GetCommunityPostReq) web.GetCommunityPostResp `mir:"/community/posts"`
 }

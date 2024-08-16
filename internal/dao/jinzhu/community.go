@@ -1,6 +1,7 @@
 package jinzhu
 
 import (
+	"github.com/sirupsen/logrus"
 	"github.com/waydxd/paopao-ce/internal/core"
 	"github.com/waydxd/paopao-ce/internal/core/ms"
 	"github.com/waydxd/paopao-ce/internal/dao/jinzhu/dbr"
@@ -10,6 +11,30 @@ import (
 type communityDAO struct {
 	db *gorm.DB
 }
+
+func (d *communityDAO) GetCommunityPost(communityID uint, offset int, limit int) ([]*ms.Post, int64, error) {
+	predicates := dbr.Predicates{
+		"community_id = ?": []any{communityID},
+		"ORDER":            []any{"created_on DESC"},
+	}
+
+	// Fetch posts
+	posts, err := (&dbr.Post{}).Fetch(d.db, predicates, offset, limit)
+	if err != nil {
+		logrus.Debugf("communityManageDAO.GetCommunityPost fetch err: %v", err)
+		return nil, 0, err
+	}
+
+	// Get total count
+	total, err := (&dbr.Post{}).CountBy(d.db, predicates)
+	if err != nil {
+		logrus.Debugf("communityManageDAO.GetCommunityPost count err: %v", err)
+		return nil, 0, err
+	}
+
+	return posts, total, nil
+}
+
 type communityManageDAO struct {
 	db *gorm.DB
 }
@@ -96,7 +121,7 @@ func (d *communityManageDAO) RemoveMember(userID, communityID uint) error {
 }
 
 func (d *communityManageDAO) JoinCommunity(userID, communityID uint) error {
-	return d.db.Create(&ms.CommunityMember{UserID: (userID), CommunityID: (communityID)}).Error
+	return d.db.Create(&ms.CommunityMember{UserID: userID, CommunityID: communityID}).Error
 }
 
 func (d *communityManageDAO) LeaveCommunity(userID, communityID uint) error {

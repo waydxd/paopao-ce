@@ -18,6 +18,7 @@ type Community interface {
 	// Chain provide handlers chain for gin
 	Chain() gin.HandlersChain
 
+	GetCommunityPost(*web.GetCommunityPostReq) (*web.GetCommunityPostResp, mir.Error)
 	ListCommunityMembers(*web.ListCommunityMembersReq) (*web.ListCommunityMembersResp, mir.Error)
 	LeaveCommunity(*web.JoinLeaveCommunityReq) mir.Error
 	JoinCommunity(*web.JoinLeaveCommunityReq) mir.Error
@@ -36,6 +37,20 @@ func RegisterCommunityServant(e *gin.Engine, s Community) {
 	router.Use(middlewares...)
 
 	// register routes info to router
+	router.Handle("GET", "/community/posts", func(c *gin.Context) {
+		select {
+		case <-c.Request.Context().Done():
+			return
+		default:
+		}
+		req := new(web.GetCommunityPostReq)
+		if err := s.Bind(c, req); err != nil {
+			s.Render(c, nil, err)
+			return
+		}
+		resp, err := s.GetCommunityPost(req)
+		s.Render(c, resp, err)
+	})
 	router.Handle("GET", "/community/members", func(c *gin.Context) {
 		select {
 		case <-c.Request.Context().Done():
@@ -125,6 +140,10 @@ type UnimplementedCommunityServant struct{}
 
 func (UnimplementedCommunityServant) Chain() gin.HandlersChain {
 	return nil
+}
+
+func (UnimplementedCommunityServant) GetCommunityPost(req *web.GetCommunityPostReq) (*web.GetCommunityPostResp, mir.Error) {
+	return nil, mir.Errorln(http.StatusNotImplemented, http.StatusText(http.StatusNotImplemented))
 }
 
 func (UnimplementedCommunityServant) ListCommunityMembers(req *web.ListCommunityMembersReq) (*web.ListCommunityMembersResp, mir.Error) {

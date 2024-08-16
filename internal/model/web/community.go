@@ -46,3 +46,13 @@ type GetCommunityReq struct {
 type GetCommunityResp struct {
 	Community *ms.Community `json:"community"`
 }
+
+type GetCommunityPostReq struct {
+	CommunityId int64 `form:"community_id" binding:"required"`
+	Offset      int   `form:"offset,default=0"`
+	Limit       int   `form:"limit,default=20"`
+}
+
+type GetCommunityPostResp struct {
+	Posts []*ms.Post `json:"posts"`
+}
