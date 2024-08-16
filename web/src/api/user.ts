@@ -1,5 +1,7 @@
 import { request } from "@/utils/request";
-  
+import { NetReq } from "@/types/NetReq";
+import { NetParams } from "@/types/NetParams";
+
 /** 获取验证码 */
 export const getCaptcha = (
   params: NetParams.UserGetCaptcha = {}
@@ -438,3 +440,42 @@ export const getSiteInfo = (): Promise<NetReq.SiteInfoResp> => {
     url: "/v1/admin/site/status",
   });
 };
+
+/**
+ *  Get community list
+ */
+export const getCommunityList = (
+    params: NetReq.CommunityListReq
+): Promise<NetReq.CommunityListResp> => {
+  return request({
+    method: "get",
+    url: "/v1/community/list",
+    params
+  })
+}
+
+/**
+ *  Get community by id
+ */
+export const getCommunityByID = (
+    params: NetReq.getCommunityByIdReq
+): Promise<NetReq.getCommunityByIdResp> => {
+  return request({
+    method: "get",
+    url: "/v1/community/get",
+    params
+  })
+}
+
+/**
+ *  Get community posts
+ */
+export const getCommunityPosts = (
+    params: NetReq.getCommunityPostsReq
+): Promise<NetReq.getCommunityPostsResp> => {
+  return request({
+    method: "get",
+    url: "/v1/community/posts",
+    params
+  })
+}

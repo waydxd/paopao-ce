@@ -119,6 +119,12 @@ const routes = [
     path: "/:pathMatch(.*)",
     redirect: "/404",
   },
+  {
+    path: '/community/:id',
+    name: 'CommunityPosts',
+    props: true,
+    component: () => import("@/views/Community-Posts.vue"),
+  },
 ];
 
 const router = createRouter({

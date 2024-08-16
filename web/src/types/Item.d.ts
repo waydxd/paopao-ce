@@ -1,3 +1,5 @@
+import * as url from "node:url";
+
 declare module Item {
   interface UserInfo {
     /** 用户UID */
@@ -227,6 +229,8 @@ declare module Item {
     is_essence: number;
     /** 是否删除：0为未删除，1为已删除 */
     is_del?: 0 | 1;
+
+    community_id: number;
   }
 
   /** 组件用帖子 */
@@ -363,5 +367,16 @@ declare module Item {
     reason: string;
     change_amount: number;
     created_on: number;
+  }
+
+  interface Community {
+    id: number,
+    name: string,
+    slug: string,
+    description: string,
+    avatar_url: string,
+    banner_url: string,
+    created_at: string,
+    updated_at: string
   }
 }

@@ -86,12 +86,12 @@ func (c *communitySrv) CreateCommunity(req *web.CreateCommunityReq) (*web.Create
 }
 
 func (c *communitySrv) GetCommunityPost(req *web.GetCommunityPostReq) (*web.GetCommunityPostResp, mir.Error) {
-	posts, totalCount, err := c.Ds.GetCommunityPost(uint(req.CommunityId), req.Offset, req.Limit)
+	posts, err := c.Ds.GetCommunityPost(uint(req.CommunityId), req.Offset, req.Limit)
 	if err != nil {
 		return nil, web.ErrListCommunity
 	}
-	if totalCount == 0 {
-		return nil, web.ErrGetCommunity
-	}
+	//if totalCount == 0 {
+	//	return nil, web.ErrGetCommunity
+	//}
 	return &web.GetCommunityPostResp{Posts: posts}, nil
 }

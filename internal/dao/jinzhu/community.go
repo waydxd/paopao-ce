@@ -9,30 +9,8 @@ import (
 )
 
 type communityDAO struct {
-	db *gorm.DB
-}
-
-func (d *communityDAO) GetCommunityPost(communityID uint, offset int, limit int) ([]*ms.Post, int64, error) {
-	predicates := dbr.Predicates{
-		"community_id = ?": []any{communityID},
-		"ORDER":            []any{"created_on DESC"},
-	}
-
-	// Fetch posts
-	posts, err := (&dbr.Post{}).Fetch(d.db, predicates, offset, limit)
-	if err != nil {
-		logrus.Debugf("communityManageDAO.GetCommunityPost fetch err: %v", err)
-		return nil, 0, err
-	}
-
-	// Get total count
-	total, err := (&dbr.Post{}).CountBy(d.db, predicates)
-	if err != nil {
-		logrus.Debugf("communityManageDAO.GetCommunityPost count err: %v", err)
-		return nil, 0, err
-	}
-
-	return posts, total, nil
+	ths core.TweetHelpService
+	db  *gorm.DB
 }
 
 type communityManageDAO struct {
@@ -41,12 +19,46 @@ type communityManageDAO struct {
 
 // ListCommunityMembers implements core.CommunityService.
 
-func newCommunityService(db *gorm.DB) core.CommunityService {
-	return &communityDAO{db: db}
+func newCommunityService(db *gorm.DB, ths core.TweetHelpService) core.CommunityService {
+	return &communityDAO{
+		db:  db,
+		ths: ths,
+	}
 }
 
 func newCommunityManageService(db *gorm.DB) core.CommunityManageService {
 	return &communityManageDAO{db: db}
+}
+
+func (d *communityDAO) GetCommunityPost(communityID uint, offset int, limit int) (*ms.IndexTweetList, error) {
+	predicates := dbr.Predicates{
+		"community_id = ?": []any{communityID},
+		"is_del = ?":       []any{0},
+		"ORDER":            []any{"is_top DESC, created_on DESC"},
+	}
+
+	posts, err := (&ms.Post{}).Fetch(d.db, predicates, offset, limit)
+	if err != nil {
+		logrus.Debugf("communityManageDAO.GetCommunityPost fetch err: %v", err)
+		return nil, err
+	}
+
+	formatPosts, err := d.ths.MergePosts(posts)
+	if err != nil {
+		logrus.Debugf("communityManageDAO.GetCommunityPost merge posts err: %v", err)
+		return nil, err
+	}
+
+	total, err := (&ms.Post{}).CountBy(d.db, predicates)
+	if err != nil {
+		logrus.Debugf("communityManageDAO.GetCommunityPost count err: %v", err)
+		return nil, err
+	}
+
+	return &ms.IndexTweetList{
+		Tweets: formatPosts,
+		Total:  total,
+	}, nil
 }
 
 func (d *communityManageDAO) CreateCommunity(community *ms.Community) error {

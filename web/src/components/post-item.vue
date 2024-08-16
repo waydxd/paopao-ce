@@ -49,6 +49,7 @@
             <template #header-extra>
                 <div class="item-header-extra">
                     <span class="timestamp">
+                      {{communityName? communityName+ ' · '  : communityName}}
                         {{ post.ip_loc ? post.ip_loc + ' · ' : post.ip_loc }}
                         {{ formatPrettyDate(post.created_on) }}
                     </span>
@@ -125,7 +126,7 @@
 </template>
 
 <script setup lang="ts">
-import { h, ref, computed } from 'vue';
+import { h, ref, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { NIcon } from 'naive-ui'
@@ -150,6 +151,8 @@ import {
 } from '@vicons/ionicons5';
 import { MoreHorizFilled } from '@vicons/material';
 import copy from "copy-to-clipboard";
+import { getCommunityByID } from "@/api/user";
+import NetReq from '@/types/NetReq';
 
 const router = useRouter();
 const store = useStore();
@@ -365,6 +368,32 @@ const doClickText = (e: MouseEvent, id: number) => {
         goPostDetail(id);
     }
 };
+const idToName = async (id: number) => {
+  if (!id) {
+    return '';
+  }
+  const req: NetReq.NetReq.getCommunityByIdReq = {
+    community_id: id,
+  };
+  try {
+    const resp = await getCommunityByID(req);
+    return resp.community.name;
+  } catch (error) {
+    console.error('Error fetching community name:', error);
+    return '';
+  }
+};
+
+const communityName = ref<string>('');
+
+onMounted(async () => {
+  try {
+    communityName.value = await idToName(post.value.community_id);
+    console.log('communityName', communityName.value);
+  } catch (error) {
+    console.error('Error in onMounted:', error);
+  }
+});
 </script>
 
 <style lang="less">

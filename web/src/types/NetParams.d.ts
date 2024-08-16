@@ -1,3 +1,5 @@
+import {Item} from "@/types/Item";
+
 declare module NetParams {
   interface AuthUserLogin {
     /** 用户名 */

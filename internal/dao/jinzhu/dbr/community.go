@@ -3,12 +3,12 @@
 package dbr
 
 import (
-	"time"
-
 	"gorm.io/gorm"
+	"time"
 )
 
 // Model definitions
+
 type CommunityMember struct {
 	ID          uint      `json:"id" gorm:"primaryKey"`
 	CommunityID uint      `json:"community_id"`

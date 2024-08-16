@@ -55,7 +55,10 @@
                         <n-icon :component="LightModeOutlined" />
                     </template>
                 </n-switch> -->
+              <slot class="community-icon"></slot>
+
             </div>
+
         </template>
     </n-card>
 </template>

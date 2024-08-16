@@ -54,5 +54,5 @@ type GetCommunityPostReq struct {
 }
 
 type GetCommunityPostResp struct {
-	Posts []*ms.Post `json:"posts"`
+	Posts *ms.IndexTweetList `json:"posts"`
 }

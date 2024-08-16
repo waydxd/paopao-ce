@@ -1,3 +1,5 @@
+import {Item} from "@/types/Item";
+
 declare module NetReq {
   interface AuthUserLogin {
     token: string;
@@ -10,6 +12,35 @@ declare module NetReq {
     username: string;
   }
 
+  interface getCommunityPostsReq{
+    offset: number;
+    limit: number;
+    community_id: number;
+  }
+  interface Tweets {
+    Tweets: Item.PostProps[];
+  }
+  interface getCommunityPostsResp{
+    posts: Tweets;
+    Total: number;
+    // pager: Item.PagerProps;
+  }
+  
+   interface getCommunityByIdReq{
+    community_id: number;
+  }
+  interface getCommunityByIdResp{
+    community: Item.Community;
+  }
+  interface CommunityListReq {
+    // default value = (0,20)
+    // defined in backend
+    offset: number;
+    limit: number;
+  }
+  interface CommunityListResp {
+    communities: Item.Community[];
+  }
   type AuthUserInfo = Item.UserInfo;
 
   interface AuthUpdateUserPassword {}

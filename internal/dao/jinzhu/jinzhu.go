@@ -66,6 +66,7 @@ func NewDataService() (core.DataService, core.VersionInfo) {
 	ums := newUserMetricServentA(db)
 	cms := newCommentMetricServentA(db)
 	cis := cache.NewEventCacheIndexSrv(tms)
+	ths := newTweetHelpService(db)
 	ds := &dataSrv{
 		TweetMetricServantA:    tms,
 		CommentMetricServantA:  cms,
@@ -85,7 +86,7 @@ func NewDataService() (core.DataService, core.VersionInfo) {
 		UserRelationService:    newUserRelationService(db),
 		SecurityService:        newSecurityService(db, pvs),
 		AttachmentCheckService: security.NewAttachmentCheckService(),
-		CommunityService:       newCommunityService(db),
+		CommunityService:       newCommunityService(db, ths),
 		CommunityManageService: newCommunityManageService(db),
 	}
 	return cache.NewCacheDataService(ds), ds
