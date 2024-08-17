@@ -17,6 +17,14 @@
 /*M!100616 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;
 
 --
+-- Current Database: `paopao`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `paopao` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+
+USE `paopao`;
+
+--
 -- Table structure for table `p_attachment`
 --
 
@@ -971,6 +979,12 @@ INSERT INTO `schema_migrations` VALUES
 UNLOCK TABLES;
 
 --
+-- Current Database: `paopao`
+--
+
+USE `paopao`;
+
+--
 -- Final view structure for view `p_post_by_comment`
 --
 
@@ -1033,4 +1047,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2024-08-17 15:25:13
+-- Dump completed on 2024-08-17 15:41:13
