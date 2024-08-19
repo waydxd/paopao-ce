@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed } from 'vue';
+import { onMounted, computed, watch } from 'vue';
 import { useStore } from 'vuex';
 import { darkTheme } from 'naive-ui';
 import { getSiteProfile } from '@/api/site';
@@ -67,7 +67,10 @@ function loadSiteProfile() {
         });
     }
 }
-
+watch(() => store.state.language, (newLang) => {
+      document.documentElement.lang = newLang;
+      // Add any other global language change logic here
+    }, { immediate: true });
 onMounted(() => {
    loadSiteProfile();
 });

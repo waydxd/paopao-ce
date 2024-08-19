@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
+    language: "en",
     refresh: Date.now(),
     refreshTopicFollow: Date.now(),
     theme: localStorage.getItem("PAOPAO_THEME"),
@@ -45,6 +46,9 @@ export default createStore({
     },
   },
   mutations: {
+    setLanguage(state, language) {
+      state.language = language;
+    },
     refresh(state, refresh) {
       state.refresh = refresh || Date.now();
     },

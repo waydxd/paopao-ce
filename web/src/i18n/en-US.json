@@ -1,0 +1,23 @@
+{
+  "sidebar": {
+    "home": "Home",
+    "anouncement": "Anouncement",
+    "topic": "Topic",
+    "profile": "Profile",
+    "community": "Community",
+    "message": "Message",
+    "archive": "Archive",
+    "friend": "Friend",
+    "wallet": "Wallet",
+    "setting": "Setting",
+    "login": "Login",
+    "register": "Register"
+  },
+  "topic": {
+    "hot": "Hot",
+    "new": "New",
+    "follow": "Follow",
+    "edit": "Edit",
+    "save": "Save"
+  }
+}

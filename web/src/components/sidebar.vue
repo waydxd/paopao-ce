@@ -42,15 +42,15 @@
         <div class="user-wrap" v-else>
             <div v-if="!store.state.profile.allowUserRegister" class="login-only-wrap">
                 <n-button strong secondary round type="primary" @click="triggerAuth('signin')">
-                    登录
+                    {{ t('sidebar.login') }}
                 </n-button>
             </div>
             <div v-if="store.state.profile.allowUserRegister" class="login-wrap">
                 <n-button strong secondary round type="primary" @click="triggerAuth('signin')">
-                    登录
+                    {{ t('sidebar.login') }}
                 </n-button>
                 <n-button strong secondary round type="info" @click="triggerAuth('signup')">
-                    注册
+                    {{ t('sidebar.register') }}
                 </n-button>
             </div>
         </div>
@@ -79,6 +79,9 @@ import { getUnreadMsgCount } from '@/api/user';
 import LOGO from '@/assets/img/logo.png';
 import { VueCookies } from 'vue-cookies';
 import { inject } from 'vue'
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const menuThemeOverrides = {
     itemTextColor: '#333333',           // Dark gray for normal text
@@ -149,13 +152,13 @@ onMounted(() => {
 const menuOptions = computed(() => {
     const options = [
         {
-            label: '首頁',
+            label: t('sidebar.home'),
             key: 'home',
             icon: () => h(HomeOutline),
             href: '/',
         },
         {
-            label: '话题',
+            label: t('sidebar.topic'),
             key: 'topic',
             icon: () => h(Hash),
             href: '/topic',
@@ -163,39 +166,39 @@ const menuOptions = computed(() => {
     ];
     if (enableAnnoucement) {
         options.push({
-            label: '公告',
+            label: t('sidebar.anouncement'),
             key: 'anouncement',
             icon: () => h(MegaphoneOutline),
             href: '/anouncement',
         });
     }
     options.push({
-        label: '個人',
+        label: t('sidebar.topic'),
         key: 'profile',
         icon: () => h(LeafOutline),
         href: '/profile',
     });
     options.push({
-        label: '社群',
+        label: t('sidebar.community'),
         key: 'threads',
         icon: () => h(PeopleCircleOutline),
         href: '/threads',
     });
     options.push({
-        label: '消息',
+        label: t('sidebar.message'),
         key: 'messages',
         icon: () => h(ChatbubblesOutline),
         href: '/messages',
     })
     options.push({
-        label: '收藏',
+        label: t('sidebar.archive'),
         key: 'collection',
         icon: () => h(BookmarksOutline),
         href: '/collection',
     });
     if (store.state.profile.useFriendship) {
         options.push({
-            label: '好友',
+            label: t('sidebar.friend'),
             key: 'contacts',
             icon: () => h(PeopleOutline),
             href: '/contacts',
@@ -203,14 +206,14 @@ const menuOptions = computed(() => {
     }
     if (store.state.profile.enableWallet) {
         options.push({
-            label: '钱包',
+            label: t('sidebar.wallet'),
             key: 'wallet',
             icon: () => h(WalletOutline),
             href: '/wallet',
         });
     }
     options.push({
-        label: '设置',
+        label: t('sidebar.setting'),
         key: 'setting',
         icon: () => h(SettingsOutline),
         href: '/setting',
@@ -220,13 +223,13 @@ const menuOptions = computed(() => {
         ? options
         : [
             {
-                label: '广场',
+                label: t('sidebar.home'),
                 key: 'home',
                 icon: () => h(HomeOutline),
                 href: '/',
             },
             {
-                label: '话题',
+                label: t('sidebar.topic'),
                 key: 'topic',
                 icon: () => h(Hash),
                 href: '/topic',
@@ -275,12 +278,7 @@ const goRouter = (name: string, item: any = {}) => {
         }
     });
 };
-const goHome = () => {
-    if (route.path === '/') {
-        store.commit('refresh');
-    }
-    goRouter('home');
-};
+
 const triggerAuth = (key: string) => {
     store.commit('triggerAuth', true);
     store.commit('triggerAuthKey', key);
@@ -289,14 +287,11 @@ const $cookies = inject<VueCookies>('$cookies');
 
 const handleLogout = () => {
     $cookies?.remove('userinfo'); // prevent user refresh page to login again
-    // window.location.reload();
-
     store.commit('userLogout');
     store.commit('refresh')
 
     window.location.href = 'http://localhost:9527';
 
-    // goHome()
 };
 window.$store = store;
 window.$message = useMessage();

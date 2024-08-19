@@ -90,7 +90,9 @@ import SlideBar from '@opentiny/vue-slide-bar';
 import allTweets from '@/assets/img/fresh-tweets.png';
 import discoverTweets from '@/assets/img/discover-tweets.jpeg';
 import followingTweets from '@/assets/img/following-tweets.jpeg';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const store = useStore();
 const route = useRoute();
 const router = useRouter();
@@ -238,9 +240,8 @@ function postFollowAction(userId:number, isFollowing: boolean) {
         }
     }
 }
-
 const updateTitle = () => {
-    title.value = '首頁';
+    title.value = t('sidebar.home');
     if (route.query && route.query.q) {
         if (route.query.t && route.query.t === 'tag') {
             title.value = '#' + decodeURIComponent(route.query.q as string);

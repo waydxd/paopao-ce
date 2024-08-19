@@ -31,7 +31,7 @@ const routes = [
     path: "/threads",
     name: "threads",
     meta: {
-      title: "泡瓶",
+      title: "社群",
     },
     component: () => import("@/views/Threads.vue"),
   },
@@ -122,6 +122,9 @@ const routes = [
   {
     path: '/community/:id',
     name: 'CommunityPosts',
+    meta: {
+      title: "社群",
+    },
     props: true,
     component: () => import("@/views/Community-Posts.vue"),
   },

@@ -336,6 +336,12 @@
                 </n-form>
             </div>
         </n-card>
+        <n-card title="語言" size="small" class="setting-card">
+            <n-select 
+            v-model:value="store.state.profile.language" 
+            :options="languageOptions" 
+            @update:value="store.commit('setLanguage', $event)" />
+        </n-card>
     </div>
 </template>
 
@@ -392,6 +398,11 @@ const modelData = reactive({
     reenteredPassword: '',
 });
 
+const languageOptions = [
+  { label: 'English', value: 'en' },
+  { label: '繁體中文', value: 'zh-hk' },
+  { label: '简体中文', value: 'zh-cn' },
+];
 const activateData = reactive({
     id: '',
     b64s: '',

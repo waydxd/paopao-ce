@@ -37,7 +37,7 @@ const handleLogin = async (cookie: string) => {
         window.$message.success('登录成功');
         loading.value = false;
         store.commit('updateUserinfo', res);
-        console.log(res);
+        console.log("40",res);
 
         store.commit('triggerAuth', false);
         store.commit('refresh');
