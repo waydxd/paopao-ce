@@ -233,6 +233,8 @@ declare module NetParams {
     attachment_price: number;
     /** 可见性：0为公开，1为私密，2为好友可见 */
     visibility: import("@/utils/IEnum").VisibilityEnum;
+
+    community_id: number;
   }
 
   interface PostDeletePost {

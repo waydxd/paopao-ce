@@ -1,4 +1,6 @@
 import { request } from "@/utils/request";
+import { NetParams } from "@/types/NetParams";
+import { NetReq } from "@/types/NetReq";
 
 /** 获取动态列表 */
 export const getPosts = (

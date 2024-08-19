@@ -279,7 +279,7 @@ import { ref, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { debounce } from 'lodash';
 import { getSuggestUsers, getSuggestTags } from '@/api/user';
-
+import { Item } from "@/types/Item"
 import {
     ImageOutline,
     VideocamOutline,
@@ -322,6 +322,12 @@ const defaultVisitType = ref<VisibilityEnum>(VisibilityEnum.PUBLIC)
 const allowTweetVisibility = ref(import.meta.env.VITE_ALLOW_TWEET_VISIBILITY.toLowerCase() === 'true')
 const uploadGateway = import.meta.env.VITE_HOST + '/v1/attachment';
 
+const props = defineProps({
+  communityId:{
+    type: Number,
+    default: 0,
+  }
+})
 const uploadToken = computed(() => {
     return 'Bearer ' + localStorage.getItem('PAOPAO_TOKEN');
 });
@@ -537,8 +543,7 @@ const removeUpload = ({ file }: any) => {
 
 // 发布动态
 const submitPost = () => {
-    const nsfwRegex = new RegExp(`(?:${censoredWords.join('|')})`, 'i');
-
+    const nsfwRegex = new RegExp(`\\b(?:${censoredWords.join('|')})\\b`, 'i');
     if (content.value.trim().length === 0) {
         window.$message.warning('请输入内容哦');
         return;
@@ -602,13 +607,13 @@ const submitPost = () => {
         tags: Array.from(new Set(tags)),
         users: Array.from(new Set(users)),
         attachment_price: +attachmentPrice.value * 100,
-        visibility: visitType.value
+        visibility: visitType.value,
+        community_id: props.communityId,
     })
         .then((res) => {
             window.$message.success('发布成功');
             submitting.value = false;
             emit('post-success', res);
-
             // 置空
             showLinkSet.value = false;
             showEyeSet.value = false;
@@ -620,6 +625,7 @@ const submitPost = () => {
             videoContents.value = [];
             attachmentContents.value = [];
             visitType.value = defaultVisitType.value;
+
         })
         .catch((err) => {
             submitting.value = false;
