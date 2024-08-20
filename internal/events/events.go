@@ -89,21 +89,21 @@ func initEventManager() {
 	var opts []pool.Option
 	s := conf.EventManagerSetting
 	if s.MinWorker > 5 {
-		opts = append(opts, pool.MinWorkerOpt(s.MinWorker))
+		opts = append(opts, pool.WithMinWorker(s.MinWorker))
 	} else {
-		opts = append(opts, pool.MinWorkerOpt(5))
+		opts = append(opts, pool.WithMinWorker(5))
 	}
 	if s.MaxEventBuf > 10 {
-		opts = append(opts, pool.MaxRequestBufOpt(s.MaxEventBuf))
+		opts = append(opts, pool.WithMaxRequestBuf(s.MaxEventBuf))
 	} else {
-		opts = append(opts, pool.MaxRequestBufOpt(10))
+		opts = append(opts, pool.WithMaxRequestBuf(10))
 	}
 	if s.MaxTempEventBuf > 10 {
-		opts = append(opts, pool.MaxRequestTempBufOpt(s.MaxTempEventBuf))
+		opts = append(opts, pool.WithMaxRequestTempBuf(s.MaxTempEventBuf))
 	} else {
-		opts = append(opts, pool.MaxRequestTempBufOpt(10))
+		opts = append(opts, pool.WithMaxRequestTempBuf(10))
 	}
-	opts = append(opts, pool.MaxTickCountOpt(s.MaxTickCount), pool.TickWaitTimeOpt(s.TickWaitTime))
+	// opts = append(opts, pool.WithMaxIdelTime(time.Duration(s.MaxTickCount)*time.Second), pool.WithTickWaitTime(s.TickWaitTime))
 	_defaultEventManager = NewEventManager(func(req Event, err error) {
 		if err != nil {
 			logrus.Errorf("handle event[%s] occurs error: %s", req.Name(), err)

@@ -64,11 +64,11 @@ func NewAsyncClient(client *http.Client, conf *AsyncClientConf) AsyncClient {
 		pool: gp.NewGoroutinePool(func(req *http.Request) (*http.Response, error) {
 			return client.Do(req)
 		},
-			gp.MinWorkerOpt(minWorker),
-			gp.MaxRequestBufOpt(maxRequestBuf),
-			gp.MaxRequestTempBufOpt(maxRequestTempBuf),
-			gp.MaxTickCountOpt(conf.MaxTickCount),
-			gp.TickWaitTimeOpt(conf.TickWaitTime),
+			gp.WithMinWorker(minWorker),
+			gp.WithMaxRequestBuf(maxRequestBuf),
+			gp.WithMaxRequestTempBuf(maxRequestTempBuf),
+			// gp.MaxTickCount(conf.MaxTickCount),
+			// gp.WithTickWaitTime(conf.TickWaitTime),
 		),
 	}
 }

@@ -27,6 +27,7 @@ type UserWalletBillsReq struct {
 type UserWalletBillsResp base.PageResp
 
 type UserRechargeLinkReq struct {
+	Ctx      context.Context
 	BaseInfo `json:"-" form:"-" binding:"-"`
 	Host     string `json:"-" form:"-" binding:"-"`
 	Amount   int64  `json:"amount" form:"amount" binding:"required"`
