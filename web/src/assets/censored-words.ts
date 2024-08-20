@@ -1,5 +1,8 @@
 export const censoredWords: string[] = [
     '2g1c',
+    'fu ck',
+    'f uck',
+    'fuc k',
     '2 girls 1 cup',
     'acrotomophilia',
     'alabama hot pocket',
