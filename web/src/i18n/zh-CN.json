@@ -45,7 +45,11 @@
   "home": {
     "feed": "最新动态",
     "discover": "热门推荐",
-    "following": "正在关注"
+    "following": "正在关注",
+    "deleteFriend": "删除好友",
+    "deleteFriendConfirm": "将好友 “{nickname}” 删除，将同时删除 点赞/收藏 列表中关于该朋友的 “好友可见” 推文",
+    "confirmFollow": "确定",
+    "search": "搜索"
   },
   "compose": {
     "placeholder": "説説您的新鲜事...",
@@ -54,7 +58,10 @@
     "comment": {
       "locked": "此贴文已存档，禁止回复。",
       "unlocked": "发表评论..."
-    }
+    },
+    "createLink": "创建链接",
+    "nsfw": "检测到不适当的内容，请选择其他图片",
+    "nsfwCheckFailed": "无法验证图片内容，请稍后重试"
   },
   "post": {
     "title": "贴文详情",
@@ -67,7 +74,7 @@
     "private": "私人",
     "friendOnly": "仅限朋友",
     "followOnly": "仅限追踪者",
-    "expand": "扩张",
+    "expand": "展开",
     "fold": "折叠",
     "follow": "跟随",
     "unfollow": "取消追踪",
@@ -159,5 +166,17 @@
     "phoneBindTipInfo": "成功绑定电话号码后，您可以进行换头像、发文、回复等互动。",
     "bindPhone": "绑定手机号码",
     "language": "语言"
+  },
+  "comment": {
+    "highlight": "精选",
+    "cancel": "取消",
+    "confirm": "确认",
+    "delete": "您确定要删除这个评论吗？",
+    "highlightConfirm": "您确定要精选这个评论吗？",
+    "cancelHighlightConfirm": "您确定要取消精选这个评论吗？",
+    "invalidTopic": "评论中的无效话题",
+    "deleteSuccess": "删除成功",
+    "reply": "回复",
+    "replyPlaceholder": "请输入回复内容.."
   }
 }

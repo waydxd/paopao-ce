@@ -43,16 +43,18 @@
                         <post-item :post="post" 
                             :isOwner="store.state.userInfo.id == post.user_id" 
                             :addFollowAction="true"
+                            :addFriendAction="false"
                             @send-whisper="onSendWhisper"
                             @handle-follow-action="onHandleFollowAction"
                             @handle-friend-action="onHandleFriendAction" />
-                    </n-list-item>
+                    </n-list-item> <!-- 不知道為什麼原repo addFriendAction沒開 我set成false了 -->
                 </div>
                 <div v-else>
                     <n-list-item v-for="post in list" :key="post.id">
                         <mobile-post-item :post="post"
                             :isOwner="store.state.userInfo.id == post.user_id" 
                             :addFollowAction="true"
+                            :addFriendAction="false"
                             @send-whisper="onSendWhisper"
                             @handle-follow-action="onHandleFollowAction"
                             @handle-friend-action="onHandleFriendAction" />
@@ -172,15 +174,15 @@ const openAddFriendWhisper = () => {
 
 const openDeleteFriend = (post: Item.PostProps) => {
     dialog.warning({
-        title: '删除好友',
-        content: '将好友 “' + post.user.nickname + '” 删除，将同时删除 点赞/收藏 列表中关于该朋友的 “好友可见” 推文',
-        positiveText: '确定',
-        negativeText: '取消',
+        title: t('home.deleteFriend'),
+        content: t('home.deleteFriendConfirm', { nickname: post.user.nickname }),
+        positiveText: t('post.confirm'),
+        negativeText: t('post.cancel'),
         onPositiveClick: () => {
             deleteFriend({
                 user_id: user.id,
             }).then((res) => {
-                window.$message.success('操作成功');
+                window.$message.success(t('operationSuccess'));
                 post.user.is_friend = false;
             })
             .catch((_err) => {});
@@ -207,17 +209,17 @@ const onHandleFriendAction = (post: Item.PostProps) => {
 
 const onHandleFollowAction = (post: Item.PostProps) => {
     dialog.success({
-        title: '提示',
+        title: t('post.dialog'),
         content:
-            '确定' + (post.user.is_following ? '取消关注 @' : '关注 @') + post.user.username + ' 吗？',
-        positiveText: '确定',
-        negativeText: '取消',
+            t('home.confirmFollow') + (post.user.is_following ? t('profile.unfollow') : t('profile.follow')) + '@' + post.user.username + '？',
+        positiveText: t('profile.confirm'),
+        negativeText: t('profile.cancel'),
         onPositiveClick: () => {
             if (post.user.is_following) {
                 unfollowUser({
                     user_id: post.user.id,
                 }).then((_res) => {
-                    window.$message.success('操作成功');
+                    window.$message.success(t('operationSuccess'));
                     postFollowAction(post.user_id, false);
                 })
                 .catch((_err) => {});
@@ -225,7 +227,7 @@ const onHandleFollowAction = (post: Item.PostProps) => {
                 followUser({
                     user_id: post.user.id,
                 }).then((_res) => {
-                    window.$message.success('关注成功');
+                    window.$message.success(t('profile.followSuccess'));
                     postFollowAction(post.user_id, true);
                 })
                 .catch((_err) => {});
@@ -247,7 +249,7 @@ const updateTitle = () => {
         if (route.query.t && route.query.t === 'tag') {
             title.value = '#' + decodeURIComponent(route.query.q as string);
         } else {
-            title.value = '搜索: ' + decodeURIComponent(route.query.q as string);
+            title.value = t('home.search') + ': ' + decodeURIComponent(route.query.q as string);
         }
     }
 };

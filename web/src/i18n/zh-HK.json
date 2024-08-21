@@ -45,7 +45,11 @@
   "home": {
     "feed": "最新動態",
     "discover": "熱門推薦",
-    "following": "正在關注"
+    "following": "正在關注",
+    "deleteFriend": "刪除好友",
+    "deleteFriendConfirm": "將好友 “{nickname}” 刪除，將同時刪除 點贊/收藏 列表中關於該朋友的 “好友可見” 推文",
+    "confirmFollow": "確定",
+    "search": "搜尋"
   },
   "compose": {
     "placeholder": "説説您的新鮮事...",
@@ -54,7 +58,10 @@
     "comment": {
       "locked": "此貼文已存檔，禁止回覆。",
       "unlocked": "發表評論..."
-    }
+    },
+      "createLink": "創建鏈接",
+      "nsfw": "檢測到不適當的內容，請選擇其他圖片",
+      "nsfwCheckFailed": "無法驗證圖片內容，請稍後重試"
   },
   "post": {
     "title": "貼文詳情",
@@ -67,7 +74,7 @@
     "private": "私人",
     "friendOnly": "僅限朋友",
     "followOnly": "僅限追蹤者",
-    "expand": "擴張",
+    "expand": "展開",
     "fold": "折疊",
     "follow": "跟隨",
     "unfollow": "取消追蹤",
@@ -159,5 +166,17 @@
     "phoneBindTipInfo": "成功綁定電話號碼後，您可以進行換頭像、發文、回覆等互動。",
     "bindPhone": "綁定手機號碼",
     "language": "語言"
+  },
+  "comment": {
+    "highlight": "精選",
+    "cancel": "取消",
+    "confirm": "確認",
+    "delete": "您确定要删除這個評論嗎？",
+    "highlightConfirm": "您确定要精選這個評論嗎？",
+    "cancelHighlightConfirm": "您确定要取消精選這個評論嗎？",
+    "invalidTopic": "評論中的無效話題",
+    "deleteSuccess": "刪除成功",
+    "reply": "回覆",
+    "replyPlaceholder": "請輸入回覆內容.."
   }
 }

@@ -392,7 +392,7 @@ const communityName = ref<string>('');
 onMounted(async () => {
   try {
     communityName.value = await idToName(post.value.community_id);
-    console.log('communityName', communityName.value);
+    // console.log('communityName', communityName.value);
   } catch (error) {
     console.error('Error in onMounted:', error);
   }

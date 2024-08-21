@@ -25,7 +25,7 @@
                     @before-upload="beforeUpload"
                     @finish="finishUpload"
                 >
-                    <n-button size="small">{{ t('ChangeAvatar') }}</n-button>
+                    <n-button size="small">{{ t('setting.ChangeAvatar') }}</n-button>
                 </n-upload>
             </div>
             <div class="base-line">

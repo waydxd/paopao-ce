@@ -27,7 +27,7 @@
                     size="small"
                     round
                 >
-                    精选
+                    {{ t('comment.highlight') }}
                 </n-tag>
             </template>
             <template #header-extra>
@@ -37,8 +37,8 @@
                     </span>
                     <n-popconfirm
                         v-if="store.state.userInfo.id === postUserId"
-                        negative-text="取消"
-                        positive-text="确认"
+                        :negative-text="t('comment.cancel')"
+                        :positive-text="t('comment.confirm')"
                         @positive-click="execHightlightAction"
                     >
                         <template #trigger>
@@ -58,15 +58,15 @@
                                 </template>
                             </n-button>
                         </template>
-                        {{ comment.is_essence == YesNoEnum.NO ? "是否精选这条评论" : "是否取消精选"}}
+                        {{ comment.is_essence == YesNoEnum.NO ? t('comment.highlightConfirm') : t('comment.cancelHighlightConfirm') }}
                     </n-popconfirm>
                     <n-popconfirm
                         v-if="
                             store.state.userInfo.is_admin ||
                             store.state.userInfo.id === comment.user.id
                         "
-                        negative-text="取消"
-                        positive-text="确认"
+                        :negative-text="t('comment.cancel')"
+                        :positive-text="t('comment.confirm')"
                         @positive-click="execDelAction"
                     >
                         <template #trigger>
@@ -83,7 +83,7 @@
                                 </template>
                             </n-button>
                         </template>
-                        是否删除这条评论？
+                        {{ t('comment.delete') }}
                     </n-popconfirm>
                 </div>
             </template>
@@ -134,7 +134,10 @@ import { parsePostTag } from '@/utils/content';
 import { Trash, ArrowBarToUp, ArrowBarDown } from '@vicons/tabler';
 import { deleteComment, highlightComment } from '@/api/post';
 import { YesNoEnum } from '@/utils/IEnum';
+import type { Item } from '@/types/Item';
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const store = useStore();
 const router = useRouter();
 const replyAtUserID = ref(0);
@@ -175,7 +178,7 @@ const doClickText = (e: MouseEvent, id: number | string) => {
         if (d.length === 2) {
             store.commit('refresh');
             if (d[0] === 'tag') {
-                window.$message.warning('评论内的无效话题');
+                window.$message.warning(t('comment.invalidTopic'));
             } else {
                 router.push({
                     name: 'user',
@@ -206,7 +209,7 @@ const execDelAction = () => {
         id: comment.value.id,
     })
         .then((_res) => {
-            window.$message.success('删除成功');
+            window.$message.success(t('comment.deleteSuccess'));
             setTimeout(() => {
                 reload();
             }, 50);
@@ -220,7 +223,7 @@ const execHightlightAction = () => {
     })
         .then((res) => {
             comment.value.is_essence = res.highlight_status;
-            window.$message.success("操作成功");
+            window.$message.success(t('operationSuccess'));
             setTimeout(() => {
                 reload();
             }, 50);

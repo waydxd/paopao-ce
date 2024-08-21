@@ -45,7 +45,11 @@
   "home": {
     "feed": "Feeds",
     "discover": "Discover",
-    "following": "Following"
+    "following": "Following",
+    "deleteFriend": "Delete friend",
+    "deleteFriendConfirm": "Are you sure to delete friend “{nickname}”, this action will also delete all posts that are visible to this friend in your likes/collections",
+    "confirmFollow": "Confirm",
+    "search": "Search"
   },
   "compose": {
     "placeholder": "What is happening?!",
@@ -54,7 +58,10 @@
     "comment": {
       "locked": "This post has been archived, replies are disabled.",
       "unlocked": "Leave a comment..."
-    }
+    },
+    "createLink": "Create link",
+    "nsfw": "Detected inappropriate content, please select other images",
+    "nsfwCheckFailed": "Failed to verify image content, please try again later"
   },
   "post": {
     "title": "Post detail",
@@ -159,6 +166,17 @@
     "phoneBindTipInfo": "After successfully binding the phone number, you can perform interactions such as changing the avatar, posting, and replying.",
     "bindPhone": "Bind phone number",
     "language": "Language"
-
+  },
+  "comment": {
+    "highlight": "Highlight",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Are you sure to delete this comment?",
+    "highlightConfirm": "Are you sure to highlight this comment",
+    "cancelHighlightConfirm": "Are you sure to cancel highlight this comment",
+    "invalidTopic": "Invalid topic in comment",
+    "deleteSuccess": "Delete successful",
+    "reply": "Reply",
+    "replyPlaceholder": "Please enter reply content.."
   }
 }
