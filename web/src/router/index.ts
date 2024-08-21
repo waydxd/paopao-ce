@@ -1,12 +1,13 @@
-import { Components } from "@vicons/tabler";
+import i18n from '@/i18n';
 import { createRouter, createWebHashHistory } from "vue-router";
 
+const { t } = i18n.global;
 const routes = [
   {
     path: "/",
     name: "home",
     meta: {
-      title: "广场",
+      title: t('sidebar.home'),
       keepAlive: true,
     },
     component: () => import("@/views/Home.vue"),
@@ -15,7 +16,7 @@ const routes = [
     path: "/post",
     name: "post",
     meta: {
-      title: "泡泡详情",
+      title: t('router.post'),
     },
     component: () => import("@/views/Post.vue"),
   },
@@ -23,31 +24,31 @@ const routes = [
     path: "/topic",
     name: "topic",
     meta: {
-      title: "话题",
+      title: t('sidebar.topic'),
     },
     component: () => import("@/views/Topic.vue"),
   },
   {
-    path: "/threads",
-    name: "threads",
+    path: "/community",
+    name: "community",
     meta: {
-      title: "社群",
+      title: t('sidebar.community'),
     },
-    component: () => import("@/views/Threads.vue"),
+    component: () => import("@/views/Community.vue"),
   },
   {
-    path: "/anouncement",
-    name: "anouncement",
+    path: "/announcement",
+    name: "announcement",
     meta: {
-      title: "公告",
+      title: t('sidebar.announcement'),
     },
-    component: () => import("@/views/Anouncement.vue"),
+    component: () => import("@/views/Announcement.vue"),
   },
   {
     path: "/profile",
     name: "profile",
     meta: {
-      title: "主页",
+      title: t('sidebar.profile'),
     },
     component: () => import("@/views/Profile.vue"),
   },
@@ -55,7 +56,7 @@ const routes = [
     path: "/u",
     name: "user",
     meta: {
-      title: "用户详情",
+      title: t('router.user'),
     },
     component: () => import("@/views/User.vue"),
   },
@@ -63,7 +64,7 @@ const routes = [
     path: "/messages",
     name: "messages",
     meta: {
-      title: "消息",
+      title: t('sidebar.message'),
     },
     component: () => import("@/views/Messages.vue"),
   },
@@ -71,7 +72,7 @@ const routes = [
     path: "/collection",
     name: "collection",
     meta: {
-      title: "收藏",
+      title: t('sidebar.archive'),
     },
     component: () => import("@/views/Collection.vue"),
   },
@@ -79,7 +80,7 @@ const routes = [
     path: "/contacts",
     name: "contacts",
     meta: {
-      title: "好友",
+      title: t('sidebar.friend'),
     },
     component: () => import("@/views/Contacts.vue"),
   },
@@ -87,7 +88,7 @@ const routes = [
     path: "/following",
     name: "following",
     meta: {
-      title: "关注",
+      title: t('router.following'),
     },
     component: () => import("@/views/Following.vue"),
   },
@@ -95,7 +96,7 @@ const routes = [
     path: "/wallet",
     name: "wallet",
     meta: {
-      title: "钱包",
+      title: t('sidebar.wallet'),
     },
     component: () => import("@/views/Wallet.vue"),
   },
@@ -103,7 +104,7 @@ const routes = [
     path: "/setting",
     name: "setting",
     meta: {
-      title: "设置",
+      title: t("sidebar.setting"),
     },
     component: () => import("@/views/Setting.vue"),
   },
@@ -123,7 +124,7 @@ const routes = [
     path: '/community/:id',
     name: 'CommunityPosts',
     meta: {
-      title: "社群",
+      title: t('sidebar.community'),
     },
     props: true,
     component: () => import("@/views/Community-Posts.vue"),
@@ -136,7 +137,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title} | 泡泡 - 一个清新文艺的微社区`;
+
+  document.title = `${to.meta.title} | ${t('router.siteTitle')}`;
   next();
 });
 

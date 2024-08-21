@@ -36,7 +36,7 @@
 
             <div>
                 <div class="empty-wrap" v-if="list.length === 0">
-                    <n-empty size="large" description="暂无数据" />
+                    <n-empty size="large" :description="t('NoData')" />
                 </div>
                 <div v-if="store.state.desktopModelShow">
                     <n-list-item v-for="post in list" :key="post.id">
@@ -66,11 +66,11 @@
         </n-list>
 
         <n-space v-if="totalPage > 0" justify="center">
-            <InfiniteLoading class="load-more" :slots="{ complete: '没有更多泡泡了', error: '加载出错' }" @infinite="nextPage()">
+            <InfiniteLoading class="load-more" :slots="{ complete: t('NoMoreThreads'), error: t('error.loading') }" @infinite="nextPage()">
                 <template #spinner>
                     <div class="load-more-wrap">
                         <n-spin :size="14" v-if="!noMore" />
-                        <span class="load-more-spinner">{{ noMore ? '没有更多泡泡了' : '加载更多' }}</span>
+                        <span class="load-more-spinner">{{ noMore ? t('NoMoreThreads') : t('LoadMore') }}</span>
                     </div>
                 </template>
             </InfiniteLoading>
@@ -91,6 +91,7 @@ import allTweets from '@/assets/img/fresh-tweets.png';
 import discoverTweets from '@/assets/img/discover-tweets.jpeg';
 import followingTweets from '@/assets/img/following-tweets.jpeg';
 import { useI18n } from 'vue-i18n';
+import { Item } from '@/types/Item';
 
 const { t } = useI18n();
 const store = useStore();
@@ -101,9 +102,9 @@ const dialog = useDialog();
 const initBlocks = ref(9)
 const wheelBlocks = ref(8)
 const slideBarList = ref<Item.SlideBarItem[]>([
-    { title: '最新动态', style: 1, username: '', avatar: allTweets, show: true },
-    { title: '热门推荐', style: 2, username: '', avatar: discoverTweets, show: false },
-    { title: '正在关注', style: 3, username: '', avatar: followingTweets, show: false },
+    { title: t('home.feed'), style: 1, username: '', avatar: allTweets, show: true },
+    { title: t('home.discover'), style: 2, username: '', avatar: discoverTweets, show: false },
+    { title: t('home.following'), style: 3, username: '', avatar: followingTweets, show: false },
     // TODO: 不知道SlideBar抽什么疯，如果没有填充下面这些伪数据的话，直接设置initBlocks为9而给的数据又不足，后面动态添加数据后，吖的竟然不能后划了，
     // f*k，不知道哪姿势不对，总之先凑合着用吧，后期再优化。
     { title: '', style: 1, username: '', avatar: '', show: true },
@@ -131,7 +132,7 @@ const user = reactive<Item.UserInfo>({
 });
 const inActionPost = ref<Item.PostProps | null>(null)
 
-const title = ref<string>("VR Panda Forum")
+const title = ref<string>("Homepage")
 const loading = ref(false);
 const noMore = ref(false);
 const targetStyle = ref<number>(1)

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <main-nav title="收藏" />
+        <main-nav :title="t('sidebar.archive')" />
 
         <n-list class="main-content-wrap" bordered>
             <div v-if="loading && list.length === 0" class="skeleton-wrap">
@@ -8,7 +8,7 @@
             </div>
             <div v-else>
                 <div class="empty-wrap" v-if="list.length === 0">
-                    <n-empty size="large" description="暂无数据" />
+                    <n-empty size="large" :description="t('NoData')" />
                 </div>
 
                 <div v-if="store.state.desktopModelShow">
@@ -34,11 +34,11 @@
             <whisper :show="showWhisper" :user="whisperReceiver" @success="whisperSuccess" />
         </n-list>
         <n-space v-if="totalPage > 0" justify="center">
-            <InfiniteLoading class="load-more" :slots="{ complete: '没有更多收藏了', error: '加载出错' }" @infinite="nextPage">
+            <InfiniteLoading class="load-more" :slots="{ complete: t('NoMoreData'), error: t('error.loading') }" @infinite="nextPage">
                 <template #spinner>
                     <div class="load-more-wrap">
                         <n-spin :size="14" v-if="!noMore" />
-                        <span class="load-more-spinner">{{ noMore ? '没有更多收藏了' : '加载更多' }}</span>
+                        <span class="load-more-spinner">{{ noMore ? t('NoMoreData') : t('LoadMore') }}</span>
                     </div>
                 </template>
             </InfiniteLoading>
@@ -52,7 +52,11 @@ import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import { useDialog } from 'naive-ui';
 import InfiniteLoading from "v3-infinite-loading";
+import type { Item } from '@/types/Item';
 import { getCollections, followUser, unfollowUser } from '@/api/user';
+import { useI18n } from 'vue-i18n';
+
+const {t} = useI18n();
 
 const store = useStore();
 const route = useRoute();

@@ -1,7 +1,7 @@
 <template>
     <div>
-        <main-nav title="设置" theme />
-        <n-card title="基本信息" size="small" class="setting-card">
+        <main-nav :title="t('sidebar.setting')" theme />
+        <n-card :title="t('setting.basicInfo')" size="small" class="setting-card">
             <div class="base-line avatar">
                 <n-avatar
                     class="avatar-img"
@@ -25,11 +25,11 @@
                     @before-upload="beforeUpload"
                     @finish="finishUpload"
                 >
-                    <n-button size="small">更改头像</n-button>
+                    <n-button size="small">{{ t('ChangeAvatar') }}</n-button>
                 </n-upload>
             </div>
             <div class="base-line">
-                <span class="base-label">昵称</span>
+                <span class="base-label">{{ t('setting.nickname') }}</span>
                 <div v-if="!showNicknameEdit">
                     {{ store.state.userInfo.nickname }}
                 </div>
@@ -40,7 +40,7 @@
                     v-model:value="store.state.userInfo.nickname"
                     type="text"
                     size="small"
-                    placeholder="请输入昵称"
+                    :placeholder="t('setting.nicknamePlaceholder')"
                     @blur="handleNicknameChange"
                     :maxlength="16"
                 />
@@ -66,13 +66,13 @@
                 </n-button>
             </div>
             <div class="base-line">
-                <span class="base-label">用户名</span> @{{
+                <span class="base-label">{{ t('setting.username') }}</span> @{{
                     store.state.userInfo.username
                 }}
             </div>
         </n-card>
 
-        <n-card v-if="store.state.profile.allowPhoneBind" title="手机号" size="small" class="setting-card">
+        <n-card v-if="store.state.profile.allowPhoneBind" :title="t('setting.phone')" size="small" class="setting-card">
             <div
                 v-if="
                     store.state.userInfo.phone &&
@@ -88,18 +88,17 @@
                     v-if="!showPhoneBind && store.state.userInfo.status == 1"
                     @click="showPhoneBind = true"
                 >
-                    换绑手机
+                    {{ t('setting.changePhone') }}
                 </n-button>
             </div>
             <div v-else>
-                <n-alert title="手机绑定提示" type="warning">
-                    成功绑定手机后，才能进行换头像、发动态、回复等交互~<br />
+                <n-alert :title="t('setting.phoneBindTip')" type="warning">
+                    {{ t('setting.phoneBindTipInfo') }}<br />
                     <a
                         class="hash-link"
                         @click="showPhoneBind = true"
                         v-if="!showPhoneBind"
-                    >
-                        立即绑定
+                    >{{ t('setting.bindPhone') }}
                     </a>
                 </n-alert>
             </div>
@@ -267,8 +266,8 @@
             </div>
         </n-card>
 
-        <n-card title="账户安全" size="small" class="setting-card">
-            您已设置密码
+        <!-- <n-card title="账户安全" size="small" class="setting-card">
+            {{ t('setting.password') }}
             <n-button
                 quaternary
                 round
@@ -276,7 +275,7 @@
                 v-if="!showPasswordSetting"
                 @click="showPasswordSetting = true"
             >
-                重置密码
+                {{ t('setting.resetPassword') }}
             </n-button>
             <div class="phone-bind-wrap" v-if="showPasswordSetting">
                 <n-form ref="formRef" :model="modelData" :rules="passwordRules">
@@ -335,13 +334,14 @@
                     </n-row>
                 </n-form>
             </div>
-        </n-card>
-        <n-card title="語言" size="small" class="setting-card">
-            <n-select 
-            v-model:value="store.state.profile.language" 
-            :options="languageOptions" 
-            @update:value="store.commit('setLanguage', $event)" />
-        </n-card>
+        </n-card> -->
+        <n-card :title="t('setting.language')" size="small" class="setting-card">
+    <n-select 
+      v-model:value="store.state.profile.language" 
+      :options="languageOptions" 
+      @update:value="store.commit('setLanguage', $event)"
+    />
+  </n-card>
     </div>
 </template>
 
@@ -365,6 +365,9 @@ import type {
     FormInst,
     InputInst,
 } from 'naive-ui';
+import { useI18n } from 'vue-i18n';
+
+const {t} = useI18n();  
 
 const uploadGateway = import.meta.env.VITE_HOST + '/v1/attachment';
 const uploadToken = 'Bearer ' + localStorage.getItem('PAOPAO_TOKEN');
@@ -399,9 +402,9 @@ const modelData = reactive({
 });
 
 const languageOptions = [
-  { label: 'English', value: 'en' },
-  { label: '繁體中文', value: 'zh-hk' },
-  { label: '简体中文', value: 'zh-cn' },
+  { label: 'English', value: 'en-US' },
+  { label: '繁體中文', value: 'zh-HK' },
+  { label: '简体中文', value: 'zh-CN' },
 ];
 const activateData = reactive({
     id: '',

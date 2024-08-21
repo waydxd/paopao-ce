@@ -28,7 +28,7 @@
                         UID. {{ contact.user_id }}
                     </span>
                      <span class="info-item">
-                        {{ formatDate(contact.created_on) }}&nbsp;加入
+                        {{ formatDate(contact.created_on) }}&nbsp;{{ t('profile.joined') }}
                     </span>
                 </div>
             </template>
@@ -65,7 +65,10 @@ import { MoreHorizFilled } from '@vicons/material';
 import {
     PaperPlaneOutline,
 } from '@vicons/ionicons5';
+import type { Item } from '@/types/Item';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const emit = defineEmits<{
     (e: 'send-whisper', user: Item.UserInfo): void;
 }>();
@@ -85,7 +88,7 @@ const props = withDefaults(defineProps<{
 const actionOpts = computed(() => {
     let options: DropdownOption[] = [
         {
-            label: '私信 @' + props.contact.username,
+            label: t('message.whisper') + ' @' + props.contact.username,
             key: 'whisper',
             icon: renderIcon(PaperPlaneOutline)
         },

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <main-nav title="泡泡详情" :back="true" />
+        <main-nav :title="t('post.title')" :back="true" />
 
         <n-list class="main-content-wrap" bordered>
             <n-list-item>
@@ -9,18 +9,18 @@
                         <post-detail :post="post" @reload="reloadPost" />
                     </div>
                     <div class="empty-wrap" v-else>
-                        <n-empty size="large" description="暂无数据" />
+                        <n-empty size="large" :description="t('NoData')" />
                     </div>
                 </n-spin>
             </n-list-item>
             <div class="comment-opts-wrap" v-if="post.id > 0">
                 <n-tabs type="bar" justify-content="end" size="small" tab-style="margin-left: -24px;" animated @update:value="commentTab">
                     <template #prefix>
-                        <span class="comment-title-item">评论</span>
+                        <span class="comment-title-item">{{t('post.comment')}}</span>
                     </template>
-                    <n-tab-pane name="default" tab="推荐" />
-                    <n-tab-pane name="hots" tab="热门" />
-                    <n-tab-pane name="newest" tab="最新" />
+                    <n-tab-pane name="default" :tab="t('post.suggest')" />
+                    <n-tab-pane name="hots" :tab="t('post.hit')" />
+                    <n-tab-pane name="newest" :tab="t('post.new')" />
                 </n-tabs>
             </div>
             <n-list-item v-if="post.id > 0">
@@ -33,7 +33,7 @@
                 </div>
                 <div v-else>
                     <div class="empty-wrap" v-if="comments.length === 0">
-                        <n-empty size="large" description="暂无评论，快来抢沙发" />
+                        <n-empty size="large" :description="t('post.noComments')" />
                     </div>
 
                     <n-list-item v-for="comment in comments" :key="comment.id">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <n-space v-if="comments.length >= pageSize" justify="center">
-                <InfiniteLoading class="load-more" :slots="{complete: '没有更多数据了', error: '加载出错'}" @infinite="loadComments">
+                <InfiniteLoading class="load-more" :slots="{complete: t('noMoreData'), error: '加载出错'}" @infinite="loadComments">
                     <template #spinner>
                         <span v-if="defaultCommentsSort && defaultNoMore" class="load-more-spinner" ><!-- 注意一定要保留这里 --></span>
                         <span v-if="!defaultCommentsSort && hotsNoMore" class="load-more-spinner" ><!-- 注意一定要保留这里 --></span>
@@ -63,7 +63,10 @@ import { useRoute } from 'vue-router';
 import { getPost, getPostComments } from '@/api/post';
 import InfiniteLoading from "v3-infinite-loading";
 import "v3-infinite-loading/lib/style.css";
+import { useI18n } from "vue-i18n";
+import { Item } from '@/types/Item';
 
+const { t } = useI18n();
 const route = useRoute();
 const post = ref<Item.PostProps>({} as Item.PostProps);
 const loading = ref(false);

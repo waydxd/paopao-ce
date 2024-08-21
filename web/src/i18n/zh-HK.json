@@ -1,6 +1,163 @@
 {
+  "cancel": "取消",
+  "LoadMore": "加載更多",
+  "NoData": "數據不可用",
+  "NoMoreThreads": "您已查看所有帖子",
+  "NoMoreData": "您已查看所有數據",
+  "operationSuccess": "操作成功",
+  "operationFailed": "操作失敗",
+  "deleteSuccess": "刪除成功",
+  "auth": {
+    "login": "登入",
+    "Register": "登記",
+    "loginPrompt": "登入解鎖更多精彩內容！"
+  },
+  "sidebar": {
+    "home": "主頁",
+    "announcement": "公告",
+    "topic": "話題",
+    "profile": "個人",
+    "community": "社群",
+    "message": "訊息",
+    "archive": "收藏",
+    "friend": "朋友",
+    "wallet": "錢包",
+    "setting": "設置",
+    "login": "登入",
+    "register": "註冊"
+  },
+  "topic": {
+    "hot": "熱門",
+    "new": "最新",
+    "follow": "追蹤",
+    "edit": "編輯",
+    "save": "收藏"
+  },
+  "error": {
+    "loading": "載入時出現異常"
+  },
+  "router": {
+    "post": "郵政",
+    "user": "使用者資訊",
+    "following": "下列的",
+    "siteTitle": "Paopao－文藝簡約風社區"
+  },
+  "home": {
+    "feed": "最新動態",
+    "discover": "熱門推薦",
+    "following": "正在關注"
+  },
+  "compose": {
+    "placeholder": "説説您的新鮮事...",
+    "publish": "發布",
+    "words": "輸入了 {words} 個字",
+    "comment": {
+      "locked": "此貼文已存檔，禁止回覆。",
+      "unlocked": "發表評論..."
+    }
+  },
+  "post": {
+    "title": "貼文詳情",
+    "comment": "評論",
+    "suggest": "推薦",
+    "hit": "熱門",
+    "new": "最新",
+    "noComments": "還沒有評論，成為第一個分享您想法的人！",
+    "pin": "已固定",
+    "private": "私人",
+    "friendOnly": "僅限朋友",
+    "followOnly": "僅限追蹤者",
+    "expand": "擴張",
+    "fold": "折疊",
+    "follow": "跟隨",
+    "unfollow": "取消追蹤",
+    "whisper": "悄悄話",
+    "deleteFriend": "刪除好友",
+    "addFriend": "新增好友",
+    "copyTweetLink": "複製貼文連結",
+    "linkCopied": "連結已複製到剪貼簿",
+    "dialog": "對話",
+    "confirmDelete": "確認刪除",
+    "confirm": "確認",
+    "cancel": "取消",
+    "confirm1": "您確定要",
+    "confirm2": "這個帖子？",
+    "unpin": "取消置頂",
+    "pinning": "置頂",
+    "highlight": "亮點",
+    "unhighlight": "取消亮點顯示",
+    "changeVisibility": "您確定將此帖子的可見性更改為",
+    "public": "公開",
+    "publishAt": "發表於",
+    "lastReplyAt": "最後回覆於",
+    "lockSuccess": "鎖定成功",
+    "unlockSuccess": "解鎖成功",
+    "stickSuccess": "固定成功",
+    "unstickSuccess": "取消固定成功",
+    "highlightSuccess": "突出顯示成功",
+    "unhighlightSuccess": "取消突出顯示成功",
+    "visibilitySuccess": "可見性更改成功",
+    "delete": "刪除貼文",
+    "lock": "鎖定"
+  },
+  "rightbar": {
+    "search": "搜尋...",
+    "followTopics": "跟蹤主題",
+    "hotTopics": "熱門話題"
+  },
+  "profile": {
+    "admin": "管理員",
+    "joined": "加入於",
+    "following": "關注",
+    "followers": "粉絲",
+    "posts": "帖子",
+    "post": "帖子",
+    "comment": "評論",
+    "highlight": "亮點",
+    "media": "媒體",
+    "star": "收藏",
+    "tip": "提示",
+    "confirm": "確認",
+    "cancel": "取消",
+    "confirmPrompt": "你確定要 ",
+    "unfollow": "取消追蹤",
+    "follow": "跟隨",
+    "followSuccess": "關注成功"
+  },
   "message": {
-    "hello": "你好",
-    "settings": "设置"
+    "all": "所有訊息",
+    "system": "系統訊息",
+    "whisper": "悄悄話",
+    "requesting": "好友請求",
+    "unread": "未讀訊息",
+    "notRead": "訊息未讀",
+    "readAll": "全部標記為已讀",
+    "noMoreMessages": "沒有更多消息了",
+    "item": {
+      "whisper": "悄悄話已發送",
+      "received": "悄悄話已收到",
+      "requesting": "好友請求",
+      "viewDetail": "看詳情",
+      "system": "系統",
+      "agree": "同意",
+      "reject": "拒絕",
+      "agreed": "已同意",
+      "rejected": "已拒絕",
+      "agreeAddFriend": "同意添加好友",
+      "rejectAddFriend": "拒絕添加好友"
+    }
+  },
+  "setting": {
+    "basicInfo": "基本訊息",
+    "ChangeAvatar": "更改頭像",
+    "nickname": "暱稱",
+    "nicknamePlaceholder": "請輸入暱稱",
+    "username": "使用者名稱",
+    "phone": "電話號碼",
+    "changePhone": "更改電話號碼",
+    "phoneBindTip": "手機綁定提示",
+    "phoneBindTipInfo": "成功綁定電話號碼後，您可以進行換頭像、發文、回覆等互動。",
+    "bindPhone": "綁定手機號碼",
+    "language": "語言"
   }
 }

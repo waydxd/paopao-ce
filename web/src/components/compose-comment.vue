@@ -24,8 +24,8 @@
                     @focus="focusComment"
                     :placeholder="
                         props.lock === 1
-                            ? '泡泡已被锁定，回复功能已关闭'
-                            : '快来评论两句吧...'
+                            ? t('compose.comment.locked')
+                            : t('compose.comment.unlocked')
                     "
                 />
             </div>
@@ -105,7 +105,7 @@
                             size="small"
                             @click="cancelComment"
                         >
-                            取消
+                            {{t('cancel')}}
                         </n-button>
                         <n-button
                             :loading="submitting"
@@ -115,7 +115,7 @@
                             size="small"
                             round
                         >
-                            发布
+                            {{t('compose.publish')}}
                         </n-button>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
 
         <div class="compose-wrap" v-else>
             <div class="login-wrap">
-                <span class="login-banner"> 登录后，精彩更多</span>
+                <span class="login-banner"> {{t('auth.loginPrompt')}}</span>
             </div>
             <div v-if="!allowUserRegister" class="login-only-wrap">
                 <n-button
@@ -138,7 +138,7 @@
                     type="primary"
                     @click="triggerAuth('signin')"
                 >
-                    登录
+                    {{t('auth.login')}}
                 </n-button>
             </div>
             <div v-if="allowUserRegister" class="login-wrap">
@@ -149,7 +149,7 @@
                     type="primary"
                     @click="triggerAuth('signin')"
                 >
-                    登录
+                  {{t('auth.login')}}
                 </n-button>
                 <n-button
                     strong
@@ -158,7 +158,7 @@
                     type="info"
                     @click="triggerAuth('signup')"
                 >
-                    注册
+                  {{t('auth.register')}}
                 </n-button>
             </div>
         </div>
@@ -167,19 +167,21 @@
 
 
 <script setup lang="ts">
-import { onMounted, computed, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { debounce } from 'lodash';
 import {
     ImageOutline,
 } from '@vicons/ionicons5';
+import { Item } from '@/types/Item'
 import { createComment } from '@/api/post';
 import { getSuggestUsers } from '@/api/user';
 import { parsePostTag } from '@/utils/content';
 import type { MentionOption, UploadFileInfo, UploadInst } from 'naive-ui';
 import { censoredWords } from '@/assets/censored-words';
+import { useI18n } from "vue-i18n";
 
-
+const { t } = useI18n();
 const emit = defineEmits<{
     (e: 'post-success'): void;
 }>();

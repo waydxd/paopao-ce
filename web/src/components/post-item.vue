@@ -25,7 +25,7 @@
                         size="small"
                         round
                     >
-                        置顶
+                        {{ t('post.pin') }}
                     </n-tag>
                     <n-tag
                         v-if="post.visibility == 1"
@@ -34,7 +34,7 @@
                         size="small"
                         round
                     >
-                        私密
+                        {{ t('post.private') }}
                     </n-tag>
                     <n-tag
                         v-if="post.visibility == 2"
@@ -43,7 +43,7 @@
                         size="small"
                         round
                     >
-                        好友可见
+                        {{ t('post.friendOnly') }}
                     </n-tag>
             </template>
             <template #header-extra>
@@ -76,7 +76,7 @@
                     :key="content.id"
                     class="post-text hover"
                     @click.stop="doClickText($event, post.id)"
-                    v-html="preparePost(content.content, '展开', '收起', store.state.profile.tweetWebEllipsisSize, inFoldStyle)"
+                    v-html="preparePost(content.content, t('post.expand'), t('post.fold'), store.state.profile.tweetWebEllipsisSize, inFoldStyle)"
                 ></span>
             </template>
 
@@ -153,7 +153,10 @@ import { MoreHorizFilled } from '@vicons/material';
 import copy from "copy-to-clipboard";
 import { getCommunityByID } from "@/api/user";
 import NetReq from '@/types/NetReq';
+import { useI18n } from 'vue-i18n';
+import { Item } from '@/types/Item';
 
+const { t } = useI18n();
 const router = useRouter();
 const store = useStore();
 const inFoldStyle = ref<boolean>(true)
@@ -182,7 +185,7 @@ const tweetOptions = computed(() => {
     let options: DropdownOption[] = [];
     if (!props.isOwner) {
         options.push({
-            label: '私信 @' + props.post.user.username,
+            label: t('post.whisper') + ' @' + props.post.user.username,
             key: 'whisper',
             icon: renderIcon(PaperPlaneOutline)
         });
@@ -190,13 +193,13 @@ const tweetOptions = computed(() => {
     if (!props.isOwner && props.addFollowAction) {
         if (props.post.user.is_following) {
             options.push({
-                label: '取消关注 @' + props.post.user.username,
+                label: t('post.unfollow') + ' @' + props.post.user.username,
                 key: 'unfollow',
                 icon: renderIcon(WalkOutline)
             })
         } else {
             options.push({
-                label: '关注 @' + props.post.user.username,
+                label: t('post.follow') + ' @' + props.post.user.username,
                 key: 'follow',
                 icon: renderIcon(BodyOutline)
             })
@@ -205,20 +208,20 @@ const tweetOptions = computed(() => {
     if (!props.isOwner && props.addFriendAction) {
         if (props.post.user.is_friend) {
             options.push({
-                label: '删除好友 @' + props.post.user.username,
+                label: t('post.deleteFriend') + ' @' + props.post.user.username,
                 key: 'delete',
                 icon: renderIcon(PersonRemoveOutline)
             });
         } else {
             options.push({
-                label: '添加朋友 @' + props.post.user.username,
+                label: t('post.addFriend') + ' @' + props.post.user.username,
                 key: 'requesting',
                 icon: renderIcon(PersonAddOutline)
             });
         }
     }
     options.push({
-        label: '复制链接',
+        label: t('post.copyTweetLink'),
         key: 'copyTweetLink',
         icon: renderIcon(ShareSocialOutline),
     });
@@ -231,7 +234,7 @@ const handleTweetAction = async (
     switch (item) {
         case 'copyTweetLink':
             copy(`${window.location.origin}/#/post?id=${post.value.id}&share=copy_link&t=${new Date().getTime()}`);
-            window.$message.success('链接已复制到剪贴板');
+            window.$message.success(t('post.linkCopied'));
             break;
         case 'whisper':
             emit('send-whisper', props.post.user);

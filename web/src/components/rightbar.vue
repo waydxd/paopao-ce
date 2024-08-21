@@ -1,13 +1,13 @@
 <template>
     <div class="rightbar-wrap" v-if="!store.state.collapsedRight">
         <div class="search-wrap">
-            <n-input round clearable placeholder="搜一搜..." v-model:value="keyword" @keyup.enter.prevent="handleSearch">
+            <n-input round clearable :placeholder="t('rightbar.search')" v-model:value="keyword" @keyup.enter.prevent="handleSearch">
                 <template #prefix>
                     <n-icon :component="Search" />
                 </template>
             </n-input>
         </div>
-        <n-card v-if="showFollowTopics" class="hottopic-wrap" title="关注话题" embedded :bordered="false" size="small">
+        <n-card v-if="showFollowTopics" class="hottopic-wrap" :title="t('rightbar.followTopics')" embedded :bordered="false" size="small">
             <n-spin :show="loading">
                 <div class="hot-tag-item" v-for="tag in followTags" :key="tag.id">
                     <router-link class="hash-link" :to="{
@@ -26,7 +26,7 @@
                 </div>
             </n-spin>
         </n-card>
-        <n-card class="hottopic-wrap" title="热门话题" embedded :bordered="false" size="small">
+        <n-card class="hottopic-wrap" :title="t('rightbar.hotTopics')" embedded :bordered="false" size="small">
             <n-spin :show="loading">
                 <div class="hot-tag-item" v-for="tag in hotTags" :key="tag.id">
                     <router-link class="hash-link" :to="{
@@ -74,7 +74,10 @@ import { getTags } from '@/api/post';
 import { getSiteInfo } from '@/api/user';
 import { Search } from '@vicons/ionicons5';
 import { formatRelativeTime } from '@/utils/formatTime';
+import { useI18n } from 'vue-i18n';
+import { Item } from '@/types/Item';
 
+const { t } = useI18n();
 const hotTags = ref<Item.TagProps[]>([]);
 const followTags = ref<Item.TagProps[]>([]);
 const loading = ref(false);

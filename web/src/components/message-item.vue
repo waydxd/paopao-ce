@@ -39,7 +39,7 @@
                             @{{ message.receiver_user.username }}
                         </span>
                     </span>
-                    <span class="nickname" v-else> 系统 </span>
+                    <span class="nickname" v-else> {{ t('message.item.system') }} </span>
                     <n-tag
                         v-if="isWhisperSender"
                         class="top-tag"
@@ -47,7 +47,7 @@
                         size="small"
                         round
                     >
-                        私信已发送
+                        {{ t('message.item.whisper') }}
                         <template #icon>
                              <n-icon :component="CheckmarkCircle" />
                         </template>
@@ -59,7 +59,7 @@
                         size="small"
                         round
                     >
-                        私信已接收
+                        {{ t('message.item.received') }}
                         <template #icon>
                              <n-icon :component="CheckmarkCircle" />
                         </template>
@@ -97,7 +97,7 @@
                             @click.stop="viewDetail(message)" class="hash-link view-link">
                             <n-icon>
                                 <share-outline />
-                            </n-icon> 查看详情
+                            </n-icon> {{ t('message.item.viewDetail') }}
                         </span>
                     </div>
 
@@ -111,23 +111,23 @@
                             class="hash-link view-link">
                             <n-icon>
                                 <checkmark-outline />
-                            </n-icon> 同意
+                            </n-icon> {{ t('message.item.agree') }}
                         </span>
                         <span v-if="message.reply_id === 1" @click.stop="rejectAddFriend(message)"
                             class="hash-link view-link">
                             <n-icon>
                                 <close-outline />
-                            </n-icon> 拒绝
+                            </n-icon> {{ t('message.item.reject') }}
                         </span>
                         <span v-if="message.reply_id === 2" class="status-info">
                             <n-icon>
                                 <checkmark-done-outline />
-                            </n-icon> 已同意
+                            </n-icon> {{ t('message.item.agreed') }}
                         </span>
                         <span v-if="message.reply_id === 3" class="status-info">
                             <n-icon>
                                 <close-outline />
-                            </n-icon> 已拒绝
+                            </n-icon> {{ t('message.item.rejected') }}
                         </span>
                     </div>
                 </n-alert>
@@ -152,7 +152,11 @@ import {
     CheckmarkCircle,
     BodyOutline,
     WalkOutline,
-} from '@vicons/ionicons5'
+} from '@vicons/ionicons5';
+import type { Item } from '@/types/Item';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const defaultavatar = 'https://assets.paopao.info/public/avatar/default/admin.png';
 
@@ -180,7 +184,7 @@ const actionOpts = computed(() => {
                     : props.message.sender_user;
     let options: DropdownOption[] = [
         {
-            label: '私信 @' + user.username,
+            label: t('message.whisper') + ' @' + user.username,
             key: 'whisper',
             icon: renderIcon(PaperPlaneOutline)
         },
@@ -188,13 +192,13 @@ const actionOpts = computed(() => {
     if (store.state.userInfo.id != user.id) {
         if (user.is_following) {
             options.push({
-                label: '取消关注 @' + user.username,
+                label: t('post.unfollow') + ' @' + user.username,
                 key: 'unfollow',
                 icon: renderIcon(WalkOutline)
             })
         } else {
             options.push({
-                label: '关注 @' + user.username,
+                label: t('post.follow') + ' @' + user.username,
                 key: 'follow',
                 icon: renderIcon(BodyOutline)
             })
@@ -213,17 +217,17 @@ const onHandleFollowAction = (message: Item.MessageProps) => {
                     ?  message.receiver_user
                     : message.sender_user;
     dialog.success({
-        title: '提示',
+        title: t('post.dialog'),
         content:
-            '确定' + (user.is_following ? '取消关注 @' : '关注 @') + user.username + ' 吗？',
-        positiveText: '确定',
-        negativeText: '取消',
+            t('post.confirm1') + (user.is_following ? t('post.unfollow') : t('post.follow')) + "@" + user.username + t('post.confirm2'),
+        positiveText: t('post.confirm'),
+        negativeText: t('post.cancel'),
         onPositiveClick: () => {
             if (user.is_following) {
                 unfollowUser({
                     user_id: user.id,
                 }).then((_res) => {
-                    window.$message.success('操作成功');
+                    window.$message.success(t('operationSuccess'));
                     user.is_following = false;
                     // TODO: 这里暴力处理，简单重新加载，更好的做法是遍历所有message，如果是对应user就更新到新状态
                     setTimeout(() => {
@@ -235,7 +239,7 @@ const onHandleFollowAction = (message: Item.MessageProps) => {
                 followUser({
                     user_id: user.id,
                 }).then((_res) => {
-                    window.$message.success('关注成功');
+                    window.$message.success(t('profile.followSuccess'));
                     user.is_following = true;
                     // TODO: 这里暴力处理，简单重新加载，更好的做法是遍历所有message，如果是对应user就更新到新状态
                     setTimeout(() => {
@@ -293,7 +297,7 @@ const viewDetail = (message: Item.MessageProps) => {
                 },
             });
         } else {
-            window.$message.error('该动态已被删除');
+            window.$message.error(t('post.deleted'));
         }
     }
 };
@@ -305,7 +309,7 @@ const agreeAddFriend = (message: Item.MessageProps) => {
     })
         .then((res) => {
             message.reply_id = 2;
-            window.$message.success('已同意添加好友');
+            window.$message.success(t('message.item.agreeAddFriend'));
         })
         .catch((err) => {
             console.log(err);
@@ -319,7 +323,7 @@ const rejectAddFriend = (message: Item.MessageProps) => {
     })
         .then((res) => {
             message.reply_id = 3;
-            window.$message.success('已拒绝添加好友');
+            window.$message.success(t('message.item.rejectAddFriend'));
         })
         .catch((err) => {
             console.log(err);

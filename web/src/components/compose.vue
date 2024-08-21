@@ -20,7 +20,7 @@
                     :options="optionsRef"
                     @search="handleSearch"
                     @update:value="changeContent"
-                    placeholder="说说您的新鲜事..."
+                    :placeholder="t('compose.placeholder')"
                 />
             </div>
 
@@ -174,7 +174,7 @@
                                     :percentage="(content.length / store.state.profile.defaultTweetMaxLength) * 100"
                                 />
                             </template>
-                            已输入{{ content.length }}字
+                            {{ t('compose.words', { words: content.length }) }}
                         </n-tooltip>
 
                         <n-button
@@ -184,7 +184,7 @@
                             secondary
                             round
                         >
-                            发布
+                          {{t('compose.publish')}}
                         </n-button>
                     </div>
                 </div>
@@ -293,8 +293,9 @@ import { isZipFile } from '@/utils/isZipFile';
 import type { MentionOption, UploadFileInfo, UploadInst } from 'naive-ui';
 import { VisibilityEnum, PostItemTypeEnum } from '@/utils/IEnum';
 import { censoredWords } from '@/assets/censored-words';
+import { useI18n } from 'vue-i18n';
 
-
+const { t } = useI18n();
 const emit = defineEmits<{
     (e: 'post-success', post: Item.PostProps): void;
 }>();

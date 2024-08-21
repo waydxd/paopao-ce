@@ -4,15 +4,15 @@
 
         <n-list class="main-content-wrap" bordered>
             <n-tabs type="line" animated :default-value="tabler" @update:value="changeTab">
-                <n-tab-pane name="follows" tab="正在关注" />
-                <n-tab-pane name="followings" tab="我的粉丝" />
+                <n-tab-pane name="follows" :tab="t('profile.following')" />
+                <n-tab-pane name="followings" :tab="t('profile.followers')" />
             </n-tabs>
             <div v-if="loading && list.length === 0" class="skeleton-wrap">
                 <post-skeleton :num="pageSize" />
             </div>
             <div v-else>
                 <div class="empty-wrap" v-if="list.length === 0">
-                    <n-empty size="large" description="暂无数据" />
+                    <n-empty size="large" :description="t('NoData')" />
                 </div>
 
                 <n-list-item v-for="contact in list" :key="contact.user_id">
@@ -24,11 +24,11 @@
         </n-list>
     </div>
     <n-space v-if="totalPage > 0" justify="center">
-            <InfiniteLoading class="load-more" :slots="{ complete: completeStr, error: '加载出错' }" @infinite="nextPage">
+            <InfiniteLoading class="load-more" :slots="{ complete: t('NoMoreData'), error: t('error.loading') }" @infinite="nextPage">
                 <template #spinner>
                     <div class="load-more-wrap">
                         <n-spin :size="14" v-if="!noMore" />
-                        <span class="load-more-spinner">{{ noMore ? completeStr : '加载更多' }}</span>
+                        <span class="load-more-spinner">{{ noMore ? t('NoMoreData') : t('LoadMore') }}</span>
                     </div>
                 </template>
             </InfiniteLoading>
@@ -40,6 +40,10 @@ import { ref, onMounted, computed } from 'vue';
 import { getUserFollows, getUserFollowings } from '@/api/user';
 import InfiniteLoading from "v3-infinite-loading";
 import { useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import type { Item } from '@/types/Item';
+
+const {t} = useI18n();
 
 const route = useRoute();
 const loading = ref(false);

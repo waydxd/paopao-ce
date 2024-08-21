@@ -1,8 +1,8 @@
 <template>
     <div>
-        <main-nav title="消息" />
+            <main-nav :title="t('sidebar.message')" />
 
-        <n-list class="main-content-wrap messages-wrap" bordered>
+            <n-list class="main-content-wrap messages-wrap" bordered>
              <!-- 私信组件 -->
             <whisper :show="showWhisper" :user="whisperReceiver" @success="whisperSuccess" />
             <n-space justify="space-between">
@@ -13,10 +13,10 @@
                                         <UnreadIcon />
                                     </n-icon>
                                 </template>
-                                {{ store.state.unreadMsgCount }} 条未读
+                                {{ store.state.unreadMsgCount }} {{ t('message.notRead') }}
                             </n-button>
                             <n-divider vertical />
-                            <n-button text size="small" :focusable="false" @click="handleReadAll">全标已读</n-button>
+                            <n-button text size="small" :focusable="false" @click="handleReadAll">{{ t('message.readAll') }}</n-button>
                         </div>
                         <div class="title title-filter">
                             <n-dropdown 
@@ -41,7 +41,7 @@
             </div>
             <div v-else>
                 <div class="empty-wrap" v-if="list.length === 0">
-                    <n-empty size="large" description="暂无数据" />
+                    <n-empty size="large" :description="t('message.noMoreMessages')" />
                 </div>
                 <div v-else>
                     <n-list-item v-for="m in list" :key="m.id">
@@ -51,11 +51,11 @@
             </div>
         </n-list>
         <n-space v-if="totalPage > 0" justify="center">
-            <InfiniteLoading class="load-more" :slots="{ complete: '没有更多消息了', error: '加载出错' }" @infinite="nextPage">
+            <InfiniteLoading class="load-more" :slots="{ complete: t('NoMoreData'), error: t('error.loading') }" @infinite="nextPage">
                 <template #spinner>
                     <div class="load-more-wrap">
                         <n-spin :size="14" v-if="!noMore" />
-                        <span class="load-more-spinner">{{ noMore ? '没有更多消息了' : '加载更多' }}</span>
+                        <span class="load-more-spinner">{{ noMore ? t('NoMoreData') : t('LoadMore') }}</span>
                     </div>
                 </template>
             </InfiniteLoading>
@@ -79,7 +79,10 @@ import {
     ChatbubbleEllipsesOutline as UnreadIcon,
     OptionsOutline as OptionsIcon, 
  } from '@vicons/ionicons5'
+import { Item } from '@/types/Item';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const store = useStore();
 const route = useRoute();
 const loading = ref(false);
@@ -88,7 +91,7 @@ const page = ref(+(route.query.p as string) || 1);
 const pageSize = ref(20);
 const totalPage = ref(0);
 const list = ref<Item.MessageProps[]>([]);
-const messageStyle = ref<'所有消息' | '系统消息' | '我的私信' | '好友申请' | '未读消息'>('所有消息')
+const messageStyle = ref<string>(t('message.all'))
 const messageStyleVal = ref<'all' | 'system' | 'whisper' | 'requesting' | 'unread'>('all')
 const showWhisper = ref(false);
 const whisperReceiver = ref<Item.UserInfo>({
@@ -123,121 +126,121 @@ const renderIcon = (icon: Component) => {
 const options = computed(() => {
     let opts: DropdownOption[];
     switch (messageStyle.value) {
-    case '所有消息':
+    case t('message.all'):
         opts = [
             {
-                label: '系统消息',
+                label: t('message.system'),
                 key: 'system',
                 icon: renderIcon(SystemIcon)
             },
             {
-                label: '我的私信',
+                label: t('message.whisper'),
                 key: 'whisper',
                 icon: renderIcon(WhisperIcon)
             },
             {
-                label: '好友申请',
+                label: t('message.requesting'),
                 key: 'requesting',
                 icon: renderIcon(RequestingIcon)
             },
             {
-                label: '未读消息',
+                label: t('message.unread'),
                 key: 'unread',
                 icon: renderIcon(UnreadIcon)
             }
         ]
         break;
-    case '系统消息':
+    case t('message.system'):
         opts = [
             {
-                label: '所有消息',
+                label: t('message.all'),
                 key: 'all',
                 icon: renderIcon(AllIcon)
             },
             {
-                label: '我的私信',
+                label: t('message.whisper'),
                 key: 'whisper',
                 icon: renderIcon(WhisperIcon)
             },
             {
-                label: '好友申请',
+                label: t('message.requesting'),
                 key: 'requesting',
                 icon: renderIcon(RequestingIcon)
             },
             {
-                label: '未读消息',
+                label: t('message.unread'),
                 key: 'unread',
                 icon: renderIcon(UnreadIcon)
             }
         ]
         break;
-    case '我的私信':
+    case t('message.whisper'):
         opts = [
             {
-                label: '所有消息',
+                label: t('message.all'),
                 key: 'all',
                 icon: renderIcon(AllIcon)
             },
             {
-                label: '系统消息',
+                label: t('message.system'),
                 key: 'system',
                 icon: renderIcon(SystemIcon)
             },
             {
-                label: '好友申请',
+                label: t('message.requesting'),
                 key: 'requesting',
                 icon: renderIcon(RequestingIcon)
             },
             {
-                label: '未读消息',
+                label: t('message.unread'),
                 key: 'unread',
                 icon: renderIcon(UnreadIcon)
             }
         ]
         break;
-    case '好友申请':
+    case t('message.requesting'):
             opts = [
             {
-                label: '所有消息',
+                label: t('message.all'),
                 key: 'all',
                 icon: renderIcon(AllIcon)
             },
             {
-                label: '系统消息',
+                label: t('message.system'),
                 key: 'system',
                 icon: renderIcon(SystemIcon)
             },
             {
-                label: '我的私信',
+                label: t('message.whisper'),
                 key: 'whisper',
                 icon: renderIcon(WhisperIcon)
             },
             {
-                label: '未读消息',
+                label: t('message.unread'),
                 key: 'unread',
                 icon: renderIcon(UnreadIcon)
             }
         ]
         break;
-    case '未读消息':
+    case t('message.unread'):
             opts = [
             {
-                label: '所有消息',
+                label: t('message.all'),
                 key: 'all',
                 icon: renderIcon(AllIcon)
             },
             {
-                label: '系统消息',
+                label: t('message.system'),
                 key: 'system',
                 icon: renderIcon(SystemIcon)
             },
             {
-                label: '我的私信',
+                label: t('message.whisper'),
                 key: 'whisper',
                 icon: renderIcon(WhisperIcon)
             },
             {
-                label: '好友申请',
+                label: t('message.requesting'),
                 key: 'requesting',
                 icon: renderIcon(RequestingIcon)
             }
@@ -255,19 +258,19 @@ const handleAction = (
 ) => {
     switch (item) {
     case 'all':
-        messageStyle.value = '所有消息';
+        messageStyle.value = t('message.all');
         break;
     case 'system':
-        messageStyle.value = '系统消息';
+        messageStyle.value = t('message.system');
         break;
     case 'whisper':
-        messageStyle.value = '我的私信';
+        messageStyle.value = t('message.whisper');
         break;
     case 'requesting':
-        messageStyle.value = '好友申请';
+        messageStyle.value = t('message.requesting');
         break;
     case 'unread':
-        messageStyle.value = '未读消息';
+        messageStyle.value = t('message.unread');
         break;
     }
     messageStyleVal.value = item

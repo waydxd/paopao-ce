@@ -167,29 +167,29 @@ const menuOptions = computed(() => {
     if (enableAnnoucement) {
         options.push({
             label: t('sidebar.anouncement'),
-            key: 'anouncement',
+            key: 'announcement',
             icon: () => h(MegaphoneOutline),
-            href: '/anouncement',
+            href: '/announcement',
         });
     }
     options.push({
-        label: t('sidebar.topic'),
+        label: t('sidebar.profile'),
         key: 'profile',
         icon: () => h(LeafOutline),
         href: '/profile',
-    });
-    options.push({
-        label: t('sidebar.community'),
-        key: 'threads',
-        icon: () => h(PeopleCircleOutline),
-        href: '/threads',
     });
     options.push({
         label: t('sidebar.message'),
         key: 'messages',
         icon: () => h(ChatbubblesOutline),
         href: '/messages',
-    })
+    });
+    options.push({
+      label: t('sidebar.community'),
+      key: 'community',
+      icon: () => h(PeopleCircleOutline),
+      href: '/community',
+    });
     options.push({
         label: t('sidebar.archive'),
         key: 'collection',

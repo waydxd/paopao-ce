@@ -1,8 +1,9 @@
 import { createStore } from "vuex";
+import i18n from "@/i18n";
 
 export default createStore({
   state: {
-    language: "en",
+    language: localStorage.getItem("language") || "en",
     refresh: Date.now(),
     refreshTopicFollow: Date.now(),
     theme: localStorage.getItem("PAOPAO_THEME"),
@@ -48,6 +49,8 @@ export default createStore({
   mutations: {
     setLanguage(state, language) {
       state.language = language;
+      localStorage.setItem('language', language);
+      i18n.global.locale = language;
     },
     refresh(state, refresh) {
       state.refresh = refresh || Date.now();

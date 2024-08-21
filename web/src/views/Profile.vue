@@ -1,6 +1,6 @@
 <template>
     <div>
-        <main-nav title="主页" />
+        <main-nav :title="t('sidebar.profile')" />
 
         <n-list
             class="main-content-wrap profile-wrap"
@@ -18,12 +18,12 @@
                         <strong>{{ store.state.userInfo.nickname }}</strong>
                         <span> @{{ store.state.userInfo.username }} </span>
                         <n-tag v-if="store.state.userInfo.is_admin" class="top-tag" type="error" size="small" round>
-                            管理员
+                            {{ t('profile.admin') }}
                         </n-tag>
                     </div>
                     <div class="userinfo">
                         <span class="info-item">UID. {{ store.state.userInfo.id }} </span>
-                        <span class="info-item">{{ formatDate(store.state.userInfo.created_on) }}&nbsp;加入</span>
+                        <span class="info-item">{{ t('profile.joined') }}&nbsp;{{ formatDate(store.state.userInfo.created_on) }}</span>
                     </div>
                     <div class="userinfo">
                         <span class="info-item">
@@ -39,7 +39,7 @@
                                     },
                                 }"
                             >
-                                关注&nbsp;&nbsp;{{ prettyQuoteNum(store.state.userInfo.follows) }}
+                                {{ t('profile.following') }}&nbsp;&nbsp;{{ prettyQuoteNum(store.state.userInfo.follows) }}
                             </router-link>
                         </span>
                         <span class="info-item">
@@ -55,11 +55,11 @@
                                     },
                                 }"
                             >
-                                粉丝&nbsp;&nbsp;{{ prettyQuoteNum(store.state.userInfo.followings) }}
+                                {{ t('profile.followers') }}&nbsp;&nbsp;{{ prettyQuoteNum(store.state.userInfo.followings) }}
                             </router-link>
                         </span>
                         <span class="info-item">
-                            泡泡&nbsp;&nbsp;{{ prettyQuoteNum(store.state.userInfo.tweets_count) }}
+                            {{ t('profile.posts') }}&nbsp;&nbsp;{{ prettyQuoteNum(store.state.userInfo.tweets_count) }}
                         </span>
                     </div>
                 </div>
@@ -79,18 +79,18 @@
             </div>
             <!-- </n-spin> -->
             <n-tabs class="profile-tabs-wrap" type="line" animated @update:value="changeTab">
-                <n-tab-pane name="post" tab="泡泡"></n-tab-pane>
-                <n-tab-pane name="comment" tab="评论"></n-tab-pane>
-                <n-tab-pane name="highlight" tab="亮点"></n-tab-pane>
-                <n-tab-pane name="media" tab="图文"></n-tab-pane>
-                <n-tab-pane name="star" tab="喜欢"></n-tab-pane>
+                <n-tab-pane name="post" :tab=" t('profile.post') "></n-tab-pane>
+                <n-tab-pane name="comment" :tab=" t('profile.comment') "></n-tab-pane>
+                <n-tab-pane name="highlight" :tab=" t('profile.highlight') "></n-tab-pane>
+                <n-tab-pane name="media" :tab=" t('profile.media') "></n-tab-pane>
+                <n-tab-pane name="star" :tab=" t('profile.star') "></n-tab-pane>
             </n-tabs>
             <div v-if="loading && list.length === 0" class="skeleton-wrap">
                 <post-skeleton :num="pageSize" />
             </div>
             <div v-else>
                 <div class="empty-wrap" v-if="list.length === 0">
-                    <n-empty size="large" description="暂无数据" />
+                    <n-empty size="large" :description="t('NoData')" />
                 </div>
                 <div v-if="store.state.desktopModelShow">
                     <div v-if="pageType === 'post'">
@@ -192,11 +192,11 @@
         </n-list>
 
         <n-space v-if="totalPage > 0" justify="center">
-            <InfiniteLoading class="load-more" :slots="{ complete: '没有更多泡泡了', error: '加载出错' }" @infinite="nextPage()">
+            <InfiniteLoading class="load-more" :slots="{ complete: t('NoMoreData'), error: t('error.loading') }" @infinite="nextPage()">
                 <template #spinner>
                     <div class="load-more-wrap">
                         <n-spin :size="14" v-if="!noMore" />
-                        <span class="load-more-spinner">{{ noMore ? '没有更多泡泡了' : '加载更多' }}</span>
+                        <span class="load-more-spinner">{{ noMore ? t('NoMoreData') : t('LoadMore') }}</span>
                     </div>
                 </template>
             </InfiniteLoading>
@@ -218,7 +218,10 @@ import {
     SettingsOutline,
 } from '@vicons/ionicons5';
 import { MoreHorizFilled } from '@vicons/material';
+import { Item } from '@/types/Item';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const store = useStore();
 const route = useRoute();
 const router = useRouter();
@@ -270,7 +273,7 @@ const renderIcon = (icon: Component) => {
 
 const userOptions = computed(() => {
     let options: DropdownOption[] = [{
-        label: '设置',
+        label: t('sidebar.setting'),
         key: 'setting',
         icon: renderIcon(SettingsOutline)
     }];
@@ -305,17 +308,17 @@ const whisperSuccess = () => {
 
 const onHandleFollowAction = (post: Item.PostProps) => {
     dialog.success({
-        title: '提示',
+        title: t('profile.tip'),
         content:
-            '确定' + (post.user.is_following ? '取消关注 @' : '关注 @') + post.user.username + ' 吗？',
-        positiveText: '确定',
-        negativeText: '取消',
+            t('profile.confirmPrompt') + (post.user.is_following ? t('profile.unfollow') : t('profile.follow')) + ' @' + post.user.username + ' ?',
+        positiveText: t('profile.confirm'),
+        negativeText: t('profile.cancel'),
         onPositiveClick: () => {
             if (post.user.is_following) {
                 unfollowUser({
                     user_id: post.user.id,
                 }).then((_res) => {
-                    window.$message.success('操作成功');
+                    window.$message.success(t('operationSuccess'));
                     postFollowAction(post.user_id, false);
                 })
                 .catch((_err) => {});
@@ -323,7 +326,7 @@ const onHandleFollowAction = (post: Item.PostProps) => {
                 followUser({
                     user_id: post.user.id,
                 }).then((_res) => {
-                    window.$message.success('关注成功');
+                    window.$message.success(t('profile.followSuccess'));
                     postFollowAction(post.user_id, true);
                 })
                 .catch((_err) => {});

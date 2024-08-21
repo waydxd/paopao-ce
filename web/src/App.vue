@@ -48,6 +48,7 @@ import { useStore } from 'vuex';
 import { darkTheme } from 'naive-ui';
 import { getSiteProfile } from '@/api/site';
 import { NConfigProvider, GlobalThemeOverrides } from 'naive-ui'
+import { useI18n } from 'vue-i18n';
 
 const themeOverrides: GlobalThemeOverrides = {
   common: {
@@ -55,6 +56,7 @@ const themeOverrides: GlobalThemeOverrides = {
   }
 }
 const store = useStore();
+const { locale } = useI18n();
 const theme = computed(() => (store.state.theme === 'dark' ? darkTheme : null));
 
 function loadSiteProfile() {
@@ -68,9 +70,9 @@ function loadSiteProfile() {
     }
 }
 watch(() => store.state.language, (newLang) => {
-      document.documentElement.lang = newLang;
-      // Add any other global language change logic here
-    }, { immediate: true });
+  locale.value = newLang;
+  document.documentElement.lang = newLang;
+}, { immediate: true });
 onMounted(() => {
    loadSiteProfile();
 });

@@ -1,6 +1,6 @@
 <template xmlns:max-width="http://www.w3.org/1999/xhtml">
   <div>
-    <main-nav title="社群">
+    <main-nav :title="t('sidebar.community')">
       <div class="nav-buttons">
         <button class="nav-button">
           <search-outline class="nav-icon" />
@@ -10,7 +10,6 @@
         </button>
       </div>
     </main-nav>
-
     <BottomDrawer v-if="isDrawerOpen" />
 
     <div class="forum">
@@ -48,12 +47,14 @@
 <script lang="ts" setup>
 import { PersonAddOutline, SearchOutline } from '@vicons/ionicons5'
 import { ref, onMounted } from 'vue';
-import { useStore } from 'vuex';
 import { getCommunityList } from "@/api/user";
 import { NetReq } from "@/types/NetReq";
 import MainNav from "@/components/main-nav.vue";
 import BottomDrawer from "@/components/drawer.vue";
-const store = useStore();
+import { useI18n } from 'vue-i18n';
+
+const {t} = useI18n();
+
 
 const isDrawerOpen = ref<boolean>(false);
 const forums = ref<NetReq.CommunityListResp | null>(null);

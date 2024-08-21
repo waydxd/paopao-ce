@@ -23,7 +23,7 @@
                     size="small"
                     round
                 >
-                    置顶
+                    {{t('post.pin')}}
                 </n-tag>
                 <n-tag
                     v-if="post.visibility == VisibilityEnum.PRIVATE"
@@ -32,7 +32,7 @@
                     size="small"
                     round
                 >
-                    私密
+                    {{t('post.private')}}
                 </n-tag>
                 <n-tag
                     v-if="post.visibility == VisibilityEnum.FRIEND"
@@ -41,7 +41,7 @@
                     size="small"
                     round
                 >
-                    好友可见
+                    {{t('post.friendOnly')}}
                 </n-tag>
             </template>
             <template #header-extra>
@@ -68,10 +68,10 @@
                     v-model:show="showDelModal"
                     :mask-closable="false"
                     preset="dialog"
-                    title="提示"
-                    content="确定删除该泡泡动态吗？"
-                    positive-text="确认"
-                    negative-text="取消"
+                    :title="t('post.dialog')"
+                    :content="t('post.confirmDelete')+'?' "
+                    :positive-text="t('post.confirm')"
+                    :negative-text="t('post.cancel')"
                     @positive-click="execDelAction"
                 />
                 <!-- 锁定确认 -->
@@ -79,14 +79,14 @@
                     v-model:show="showLockModal"
                     :mask-closable="false"
                     preset="dialog"
-                    title="提示"
+                    :title="t('post.dialog')"
                     :content="
-                        '确定' +
-                        (post.is_lock ? '解锁' : '锁定') +
-                        '该泡泡动态吗？'
+                        t('post.confirm1') +
+                        (post.is_lock ? t('post.unlock') : t('post.lock')) +
+                        t('post.confirm2')
                     "
-                    positive-text="确认"
-                    negative-text="取消"
+                    :positive-text="t('post.confirm')"
+                    :negative-text="t('post.cancel')"
                     @positive-click="execLockAction"
                 />
                 <!-- 置顶确认 -->
@@ -94,14 +94,14 @@
                     v-model:show="showStickModal"
                     :mask-closable="false"
                     preset="dialog"
-                    title="提示"
+                    :title="t('post.dialog')"
                     :content="
-                        '确定' +
-                        (post.is_top ? '取消置顶' : '置顶') +
-                        '该泡泡动态吗？'
+                        t('post.confirm1') +
+                        (post.is_top ? t('post.unpin') : t('post.pinning')) +
+                        t('post.confirm2')
                     "
-                    positive-text="确认"
-                    negative-text="取消"
+                    :positive-text="t('post.confirm')"
+                    :negative-text="t('post.cancel')"
                     @positive-click="execStickAction"
                 />
                 <!-- 亮点确认 -->
@@ -109,14 +109,14 @@
                     v-model:show="showHighlightModal"
                     :mask-closable="false"
                     preset="dialog"
-                    title="提示"
+                    :title="t('post.dialog')"
                     :content="
-                        '确定将该泡泡动态' +
-                        (post.is_essence ? '取消亮点' : '设为亮点') +
-                        '吗？'
+                        t('post.confirm1') +
+                        (post.is_essence ? t('post.unhighlight') : t('post.highlight')) +
+                        t('post.confirm2')
                     "
-                    positive-text="确认"
-                    negative-text="取消"
+                    :positive-text="t('post.confirm')"
+                    :negative-text="t('post.cancel')"
                     @positive-click="execHighlightAction"
                 />
                 <!-- 修改可见度确认 -->
@@ -124,14 +124,14 @@
                     v-model:show="showVisibilityModal"
                     :mask-closable="false"
                     preset="dialog"
-                    title="提示"
+                    :title="t('post.dialog')"
                     :content="
-                        '确定将该泡泡动态可见度修改为' +
-                        (tempVisibility == 0 ? '公开' : (tempVisibility == 1 ? '私密' : (tempVisibility == 2 ? '好友可见' : '关注可见'))) +
-                        '吗？'
+                        t('post.changeVisibility') +
+                        (tempVisibility == 0 ? t('post.public') : (tempVisibility == 1 ? t('post.private') : (tempVisibility == 2 ? t('post.friendOnly') : t('post.followOnly')))) +
+                        t('post.confirm2')
                     "
-                    positive-text="确认"
-                    negative-text="取消"
+                    :positive-text="t('post.confirm')"
+                    :negative-text="t('post.cancel')"
                     @positive-click="execVisibilityAction"
                 />
                   <!-- 私信组件 -->
@@ -158,14 +158,13 @@
                 <post-video :videos="post.videos" :full="true" />
                 <post-link :links="post.links" />
                 <div class="timestamp">
-                    发布于 {{ formatPrettyTime(post.created_on) }}
+                    {{t('post.publishAt')}} {{ formatPrettyTime(post.created_on) }}
                     <span v-if="post.ip_loc">
                         <n-divider vertical />
                         {{ post.ip_loc }}
                     </span>
                     <span v-if="!store.state.collapsedLeft && post.created_on != post.latest_replied_on">
-                        <n-divider vertical /> 最后回复
-                        {{ formatPrettyTime(post.latest_replied_on) }}
+                        <n-divider vertical /> {{t('post.lastReplyAt')}} {{ formatPrettyTime(post.latest_replied_on) }}
                     </span>
                 </div>
             </template>
@@ -257,7 +256,10 @@ import { followUser, unfollowUser } from '@/api/user';
 import type { DropdownOption } from 'naive-ui';
 import { VisibilityEnum } from '@/utils/IEnum';
 import copy from "copy-to-clipboard";
+import { Item } from '@/types/Item';
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const useFriendship = (import.meta.env.VITE_USE_FRIENDSHIP.toLowerCase() === 'true')
 
 const store = useStore();
@@ -361,19 +363,19 @@ const adminOptions = computed(() => {
     let options: DropdownOption[] = [];
     if (!store.state.userInfo.is_admin && store.state.userInfo.id != props.post.user.id) {
        options.push({
-            label: '私信 @' + props.post.user.username,
+            label: t('post.whisper') + ' @' + props.post.user.username,
             key: 'whisper',
             icon: renderIcon(PaperPlaneOutline)
         });
         if (props.post.user.is_following) {
             options.push({
-                label: '取消关注 @' + props.post.user.username,
+                label: t('post.unfollow') + ' @' + props.post.user.username,
                 key: 'unfollow',
                 icon: renderIcon(WalkOutline)
             })
         } else {
             options.push({
-                label: '关注 @' + props.post.user.username,
+                label: t('post.follow') + ' @' + props.post.user.username,
                 key: 'follow',
                 icon: renderIcon(BodyOutline)
             })
@@ -381,19 +383,19 @@ const adminOptions = computed(() => {
         return options;
     }
     options.push({
-        label: '删除',
+        label: t('post.delete'),
         key: 'delete',
         icon: renderIcon(TrashOutline)
     })
     if (post.value.is_lock === 0) {
         options.push({
-            label: '锁定',
+            label: t('post.lock'),
             key: 'lock',
             icon: renderIcon(LockClosedOutline)
         });
     } else {
         options.push({
-            label: '解锁',
+            label: t('post.unlock'),
             key: 'unlock',
             icon: renderIcon(LockOpenOutline)
         });
@@ -401,13 +403,13 @@ const adminOptions = computed(() => {
     if (store.state.userInfo.is_admin) {
         if (post.value.is_top === 0) {
             options.push({
-                label: '置顶',
+                label: t('post.pinning'),
                 key: 'stick',
                 icon: renderIcon(PushOutline)
             });
         } else {
             options.push({
-                label: '取消置顶',
+                label: t('post.unpin'),
                 key: 'unstick',
                 icon: renderIcon(PushOutline)
             });
@@ -415,13 +417,13 @@ const adminOptions = computed(() => {
     }
     if (post.value.is_essence === 0) {
         options.push({
-            label: '设为亮点',
+            label: t('post.highlight'),
             key: 'highlight',
             icon: renderIcon(FlameOutline)
         });
     } else {
         options.push({
-            label: '取消亮点',
+            label: t('post.unhighlight'),
             key: 'unhighlight',
             icon: renderIcon(FlameOutline)
         });
@@ -429,48 +431,48 @@ const adminOptions = computed(() => {
     let visitMenu: DropdownOption
     if (post.value.visibility === VisibilityEnum.PUBLIC) {
         visitMenu = {
-            label: '公开',
+            label: t('post.public'),
             key: 'vpublic',
             icon: renderIcon(EyeOutline),
             children: [
-                { label: '私密', key: 'vprivate', icon: renderIcon(EyeOffOutline) },
-                { label: '关注可见', key: 'vfollowing', icon: renderIcon(BodyOutline) }
+                { label: t('post.private'), key: 'vprivate', icon: renderIcon(EyeOffOutline) },
+                { label: t('post.followOnly'), key: 'vfollowing', icon: renderIcon(BodyOutline) }
             ]
         };
     } else if (post.value.visibility === VisibilityEnum.PRIVATE) {
         visitMenu = {
-            label: '私密',
+            label: t('post.private'),
             key: 'vprivate',
             icon: renderIcon(EyeOffOutline),
             children: [
-                { label: '公开', key: 'vpublic', icon: renderIcon(EyeOutline) },
-                { label: '关注可见', key: 'vfollowing', icon: renderIcon(BodyOutline) }
+                { label: t('post.public'), key: 'vpublic', icon: renderIcon(EyeOutline) },
+                { label: t('post.followOnly'), key: 'vfollowing', icon: renderIcon(BodyOutline) }
             ]
         };
     } else if (useFriendship && post.value.visibility === VisibilityEnum.FRIEND) {
         visitMenu = {
-            label: '好友可见',
+            label: t('post.friendOnly'),
             key: 'vfriend',
             icon: renderIcon(PersonOutline),
             children: [
-                { label: '公开', key: 'vpublic', icon: renderIcon(EyeOutline) },
-                { label: '私密', key: 'vprivate', icon: renderIcon(EyeOffOutline) },
-                { label: '关注可见', key: 'vfollowing', icon: renderIcon(BodyOutline) }
+                { label: t('post.public'), key: 'vpublic', icon: renderIcon(EyeOutline) },
+                { label: t('post.private'), key: 'vprivate', icon: renderIcon(EyeOffOutline) },
+                { label: t('post.followOnly'), key: 'vfollowing', icon: renderIcon(BodyOutline) }
             ]
         };
     } else {
        visitMenu = {
-            label: '关注可见',
+            label: t('post.followOnly'),
             key: 'vfollowing',
             icon: renderIcon(BodyOutline),
             children: [
-                { label: '公开', key: 'vpublic', icon: renderIcon(EyeOutline) },
-                { label: '私密', key: 'vprivate', icon: renderIcon(EyeOffOutline) }
+                { label: t('post.public'), key: 'vpublic', icon: renderIcon(EyeOutline) },
+                { label: t('post.private'), key: 'vprivate', icon: renderIcon(EyeOffOutline) }
             ]
         };
     }
     if (useFriendship && post.value.visibility !== VisibilityEnum.FRIEND) {
-        visitMenu.children?.push({ label: '好友可见', key: 'vfriend', icon: renderIcon(PersonOutline) })
+        visitMenu.children?.push({ label: t('post.friendOnly'), key: 'vfriend', icon: renderIcon(PersonOutline) })
     }
     options.push(visitMenu);
     return options;
@@ -478,17 +480,17 @@ const adminOptions = computed(() => {
 
 const onHandleFollowAction = (post: Item.PostProps) => {
     dialog.success({
-        title: '提示',
+        title: t('post.dialog'),
         content:
-            '确定' + (post.user.is_following ? '取消关注 @' : '关注 @') + props.post.user.username + ' 吗？',
-        positiveText: '确定',
-        negativeText: '取消',
+            t('post.confirm1') + (post.user.is_following ? t('post.unfollow') : t('post.follow')) + '@' + props.post.user.username + '？',
+        positiveText: t('post.confirm'),
+        negativeText: t('post.cancel'),
         onPositiveClick: () => {
             if (post.user.is_following) {
                 unfollowUser({
                     user_id: post.user.id,
                 }).then((_res) => {
-                    window.$message.success('操作成功');
+                    window.$message.success(t('operationSuccess'));
                     post.user.is_following = false;
                 })
                 .catch((_err) => {});
@@ -496,7 +498,7 @@ const onHandleFollowAction = (post: Item.PostProps) => {
                 followUser({
                     user_id: post.user.id,
                 }).then((_res) => {
-                    window.$message.success('操作成功');
+                    window.$message.success(t('operationSuccess'));
                     post.user.is_following = true;
                 })
                 .catch((_err) => {});
@@ -590,7 +592,7 @@ const execDelAction = () => {
         id: post.value.id,
     })
         .then((_res) => {
-            window.$message.success('删除成功');
+            window.$message.success(t('deleteSuccess'));
             router.replace('/');
 
             setTimeout(() => {
@@ -608,9 +610,9 @@ const execLockAction = () => {
         .then((res) => {
             emit('reload', post.value.id);
             if (res.lock_status === 1) {
-                window.$message.success('锁定成功');
+                window.$message.success(t('lockSuccess'));
             } else {
-                window.$message.success('解锁成功');
+                window.$message.success(t('unlockSuccess'));
             }
         })
         .catch((_err) => {
@@ -624,9 +626,9 @@ const execStickAction = () => {
         .then((res) => {
             emit('reload', post.value.id);
             if (res.top_status === 1) {
-                window.$message.success('置顶成功');
+                window.$message.success(t('stickSuccess'));
             } else {
-                window.$message.success('取消置顶成功');
+                window.$message.success(t('unstickSuccess'));
             }
         })
         .catch((_err) => {
@@ -643,9 +645,9 @@ const execHighlightAction = () => {
                     is_essence: res.highlight_status,
             };
             if (res.highlight_status === 1) {
-                window.$message.success('设为亮点成功');
+                window.$message.success(t('highlightSuccess'));
             } else {
-                window.$message.success('取消亮点成功');
+                window.$message.success(t('unhighlightSuccess'));
             }
         })
         .catch((_err) => {
@@ -659,7 +661,7 @@ const execVisibilityAction = () => {
     })
         .then((_res) => {
             emit('reload', post.value.id);
-            window.$message.success('修改可见性成功');
+            window.$message.success(t('visibilitySuccess'));
         })
         .catch((_err) => {
             loading.value = false;
@@ -711,7 +713,7 @@ const handlePostCollection = () => {
 };
 const handlePostShare = () => {
    copy(`${window.location.origin}/#/post?id=${post.value.id}&share=copy_link&t=${new Date().getTime()}`);
-   window.$message.success('链接已复制到剪贴板');
+   window.$message.success(t('linkCopied'));
 };
 
 onMounted(() => {

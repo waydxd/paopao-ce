@@ -1,6 +1,6 @@
 <template>
     <div>
-        <main-nav title="公告" />
+        <main-nav :title="$t('sidebar.announcement')" />
 
         <n-list class="main-content-wrap" bordered>
 
@@ -47,6 +47,7 @@ import { ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import { formatRelativeTime } from '@/utils/formatTime';
+import MainNav from "@/components/main-nav.vue";
 
 const store = useStore();
 const route = useRoute();
