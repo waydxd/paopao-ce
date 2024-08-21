@@ -226,18 +226,18 @@
             <div class="link-wrap" v-if="showLinkSet">
                 <n-dynamic-input
                     v-model:value="links"
-                    placeholder="请输入以http(s)://开头的链接"
+                    placeholder="http(s)://{host}/{path}"
                     :min="0"
                     :max="3"
                 >
-                    <template #create-button-default> 创建链接 </template>
+                    <template #create-button-default> {{t('compose.createLink')}} </template>
                 </n-dynamic-input>
             </div>
         </div>
 
         <div class="compose-wrap" v-else>
             <div class="login-wrap">
-                <span class="login-banner"> 登录后，精彩更多</span>
+                <span class="login-banner"> {{t('auth.loginPrompt')}}</span>
             </div>
             <div v-if="!store.state.profile.allowUserRegister" class="login-only-wrap">
                 <n-button
@@ -247,7 +247,7 @@
                     type="primary"
                     @click="triggerAuth('signin')"
                 >
-                    登录
+                    {{t('auth.login')}}
                 </n-button>
             </div>
             <div v-if="store.state.profile.allowUserRegister" class="login-wrap">
@@ -258,7 +258,7 @@
                     type="primary"
                     @click="triggerAuth('signin')"
                 >
-                    登录
+                    {{t('auth.login')}}
                 </n-button>
                 <n-button
                     strong
@@ -267,7 +267,7 @@
                     type="info"
                     @click="triggerAuth('signup')"
                 >
-                    注册
+                    {{t('auth.register')}}
                 </n-button>
             </div>
         </div>
@@ -294,6 +294,7 @@ import type { MentionOption, UploadFileInfo, UploadInst } from 'naive-ui';
 import { VisibilityEnum, PostItemTypeEnum } from '@/utils/IEnum';
 import { censoredWords } from '@/assets/censored-words';
 import { useI18n } from 'vue-i18n';
+import * as nsfwjs from 'nsfwjs';
 
 const { t } = useI18n();
 const emit = defineEmits<{
@@ -335,12 +336,12 @@ const uploadToken = computed(() => {
 
 const visibilities = computed(()=> {
     let res = [
-        {value: VisibilityEnum.PUBLIC, label: "公开"},
-        {value: VisibilityEnum.PRIVATE, label: "私密"},
-        {value: VisibilityEnum.Following, label: "关注可见"},
+        {value: VisibilityEnum.PUBLIC, label: t('post.public')},
+        {value: VisibilityEnum.PRIVATE, label: t('post.private')},
+        {value: VisibilityEnum.Following, label: t('post.followOnly')},
     ];
     if (store.state.profile.useFriendship) {
-        res.push({value: VisibilityEnum.FRIEND, label: "好友可见"});
+        res.push({value: VisibilityEnum.FRIEND, label: t('post.friendOnly')});
     }
     return res;
 });
@@ -479,9 +480,40 @@ const beforeUpload = async (data: any) => {
         window.$message.warning('附件大小不能超过100MB');
         return false;
     }
-
+        // NSFW check for images
+    if (uploadType.value === 'public/image') {
+        try {
+            
+            const model = await nsfwjs.load("public/model/model.json", { type: "graph" });
+            const imageElement = await createImageElement(data.file.file);
+            const predictions = await model.classify(imageElement);
+            
+            const nsfwScore = predictions.find(p => p.className === 'Porn' || p.className === 'Hentai')?.probability || 0;
+            console.log(nsfwScore);
+            if (nsfwScore > 0.7) { // Adjust this threshold as needed
+                window.$message.warning(t('compose.nsfw'));
+                return false;
+            }
+        } catch (error) {
+            console.error('NSFW check failed:', error);
+            // Optionally, you can decide to block the upload if the check fails
+            window.$message.warning(t('compose.nsfwCheckFailed'));
+            return false;
+        }
+    }
     return true;
 };
+
+// Helper function to create an image element from a file
+const createImageElement = (file: File): Promise<HTMLImageElement> => {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = URL.createObjectURL(file);
+    });
+};
+
 const finishUpload = ({ file, event }: any): any => {
     try {
         let data = JSON.parse(event.target?.response);
