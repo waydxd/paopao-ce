@@ -397,6 +397,7 @@ func (s *databaseConf) TableNames() (res TableNameMap) {
 		TableCommunity,
 		TableCommunityMember,
 		TableComnunityTag,
+		TableReport,
 	}
 	res = make(TableNameMap, len(tableNames))
 	for _, name := range tableNames {

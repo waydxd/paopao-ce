@@ -49,6 +49,7 @@ type dataSrv struct {
 	core.AttachmentCheckService
 	core.CommunityService
 	core.CommunityManageService
+	core.ReportDAO
 }
 
 type webDataSrvA struct {
@@ -88,6 +89,7 @@ func NewDataService() (core.DataService, core.VersionInfo) {
 		AttachmentCheckService: security.NewAttachmentCheckService(),
 		CommunityService:       newCommunityService(db, ths),
 		CommunityManageService: newCommunityManageService(db),
+		ReportDAO:              NewReportDAO(db),
 	}
 	return cache.NewCacheDataService(ds), ds
 }

@@ -47,6 +47,7 @@ const (
 	TableCommunity          = "community"
 	TableCommunityMember    = "community_members"
 	TableComnunityTag       = "community_tags"
+	TableReport             = "report"
 )
 
 type TableNameMap map[string]string

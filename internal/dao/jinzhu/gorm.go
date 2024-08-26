@@ -39,6 +39,7 @@ var (
 	_community_          string
 	_communityMember_    string
 	_community_tag_      string
+	_report_             string
 )
 
 func initTableName() {
@@ -72,4 +73,5 @@ func initTableName() {
 	_community_ = m[conf.TableCommunity]
 	_communityMember_ = m[conf.TableCommunityMember]
 	_community_tag_ = m[conf.TableComnunityTag]
+	_report_ = m[conf.TableReport]
 }

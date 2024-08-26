@@ -110,5 +110,9 @@ var (
 	ErrGetCommunity    = xerror.NewError(11020, "社群不存在")
 	ErrCreateCommunity = xerror.NewError(11030, "社群創建失敗")
 
+	ErrFetchReport  = xerror.NewError(12000, "Failed to fetch reports")
+	ErrDeleteReport = xerror.NewError(12001, "Failed to delete reports")
+	ErrSendReport   = xerror.NewError(12002, "Failed to send reports")
+
 	ErrNotImplemented = xerror.NewError(10501, "功能未实现")
 )

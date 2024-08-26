@@ -42,9 +42,11 @@ type DataService interface {
 	SecurityService
 	AttachmentCheckService
 
-	// 社区服务
+	// Community Service
 	CommunityService
 	CommunityManageService
+
+	ReportDAO
 }
 
 // WebDataServantA Web数据服务集成(版本A)

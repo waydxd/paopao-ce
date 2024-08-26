@@ -43,6 +43,7 @@ func RouteWeb(e *gin.Engine) {
 	api.RegisterFriendshipServant(e, newFriendshipSrv(ds))
 	api.RegisterSiteServant(e, newSiteSrv())
 	api.RegisterCommunityServant(e, newCommunitySrv(ds))
+	api.RegisterReportServant(e, NewReportSrv(ds))
 	// regster servants if needed by configure
 	cfg.Be("Alipay", func() {
 		client := conf.MustAlipayClient()
