@@ -309,3 +309,41 @@ export const unfollowTopic = (
     data,
   });
 };
+
+export const sendReport = (
+  data: NetParams.PostSendReport
+): Promise<NetReq.PostSendReport> => {
+  return request({
+    method: "post",
+    url: "/v1/report",
+    data,
+  });
+};
+
+export const sendReportComment = (
+  data: NetParams.CommentSendReport
+): Promise<NetReq.CommentSendReport> => {
+  return request({
+    method: "post",
+    url: "/v1/report",
+    data,
+  });
+};
+
+export const getReportList = (
+): Promise<NetReq.GetReportList> => {
+  return request({
+    method: "get",
+    url: "/v1/report/list",
+  });
+};
+
+export const deleteReport = (
+  data: NetParams.PostDeleteReport
+)=> {
+  return request({
+    method: "delete",
+    url: "/v1/report",
+    data,
+  });
+};

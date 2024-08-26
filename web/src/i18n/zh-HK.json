@@ -9,7 +9,7 @@
   "deleteSuccess": "刪除成功",
   "auth": {
     "login": "登入",
-    "Register": "登記",
+    "register": "註冊",
     "loginPrompt": "登入解鎖更多精彩內容！"
   },
   "sidebar": {
@@ -24,7 +24,8 @@
     "wallet": "錢包",
     "setting": "設置",
     "login": "登入",
-    "register": "註冊"
+    "register": "註冊",
+    "admin": "管理員"
   },
   "topic": {
     "hot": "熱門",
@@ -105,7 +106,12 @@
     "unhighlightSuccess": "取消突出顯示成功",
     "visibilitySuccess": "可見性更改成功",
     "delete": "刪除貼文",
-    "lock": "鎖定"
+    "lock": "鎖定",
+    "report": "檢舉",
+    "reportSent": "檢舉成功",
+    "reportFailed": "檢舉失敗",
+    "reportDialogTitle": "檢舉此用戶帖子",
+    "reportPlaceholder": "請輸入檢舉原因"
   },
   "rightbar": {
     "search": "搜尋...",

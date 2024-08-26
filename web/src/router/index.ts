@@ -129,6 +129,14 @@ const routes = [
     props: true,
     component: () => import("@/views/Community-Posts.vue"),
   },
+  {
+    path: '/admin',
+    name: 'admin',
+    meta: {
+      title: t('sidebar.admin'),
+    },
+    component: () => import("@/views/Admin.vue"),
+  },
 ];
 
 const router = createRouter({

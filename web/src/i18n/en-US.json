@@ -9,7 +9,7 @@
   "deleteSuccess": "Delete successful",
   "auth": {
     "login": "Login",
-    "Register": "Register",
+    "register": "Register",
     "loginPrompt": "Unlock more amazing content by logging in!"
   },
   "sidebar": {
@@ -24,7 +24,8 @@
     "wallet": "Wallet",
     "setting": "Setting",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "admin": "Admin"
   },
   "topic": {
     "hot": "Popular",
@@ -105,7 +106,12 @@
     "unhighlightSuccess": "Unhighlight successful",
     "visibilitySuccess": "Visibility changed successfully",
     "delete": "Delete post",
-    "lock": "Lock post"
+    "lock": "Lock post",
+    "report": "Report",
+    "reportSent": "Report sent",
+    "reportFailed": "Report failed",
+    "reportDialogTitle": "Reporting this user's post",
+    "reportPlaceholder": "Please enter the reason for the report"
   },
   "rightbar": {
     "search": "Search...",

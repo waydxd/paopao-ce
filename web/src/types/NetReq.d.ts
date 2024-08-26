@@ -257,4 +257,16 @@ declare module NetReq {
     copyright_right?: string;
     copyright_right_link?: string;
   }
+
+  interface PostSendReport {
+    report_id: number;
+  }
+
+  interface CommentSendReport {
+    report_id: number;
+  }
+
+  interface GetReportList {
+    reports: Item.ReportedPostProps[];
+  }
 }

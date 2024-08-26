@@ -62,7 +62,6 @@
                         </n-button>
                     </n-dropdown>
                 </div>
-
                 <!-- 删除确认 -->
                 <n-modal
                     v-model:show="showDelModal"
@@ -136,6 +135,8 @@
                 />
                   <!-- 私信组件 -->
                 <whisper :show="showWhisper" :user="whisperReceiver" @success="whisperSuccess" />
+                <!-- report component -->
+                <report :show="showReportModal" :post="post" :user="post.user" @success="reportSuccess" />
             </template>
             <div v-if="post.texts.length > 0">
                 <span
@@ -239,6 +240,7 @@ import {
     WalkOutline,
     PersonOutline,
     FlameOutline,
+    AlertOutline
 } from '@vicons/ionicons5';
 import { MoreHorizFilled } from '@vicons/material';
 import {
@@ -250,7 +252,8 @@ import {
     lockPost,
     stickPost,
     highlightPost,
-    visibilityPost
+    visibilityPost,
+    sendReport
 } from '@/api/post';
 import { followUser, unfollowUser } from '@/api/user';
 import type { DropdownOption } from 'naive-ui';
@@ -273,6 +276,7 @@ const props = withDefaults(
     }>(),
     {}
 );
+const showReportModal = ref(false);
 const showDelModal = ref(false);
 const showLockModal = ref(false);
 const showStickModal = ref(false);
@@ -302,6 +306,10 @@ const onSendWhisper =  (user: Item.UserInfo) => {
 
 const whisperSuccess = () => {
     showWhisper.value = false;
+};
+
+const reportSuccess = () => {
+    showReportModal.value = false;
 };
 
 const emit = defineEmits<{
@@ -361,6 +369,11 @@ const renderIcon = (icon: Component) => {
 
 const adminOptions = computed(() => {
     let options: DropdownOption[] = [];
+    options.push({
+            label: t('post.report'),
+            key: 'report',
+        icon: renderIcon(AlertOutline)
+    });
     if (!store.state.userInfo.is_admin && store.state.userInfo.id != props.post.user.id) {
        options.push({
             label: t('post.whisper') + ' @' + props.post.user.username,
@@ -477,7 +490,6 @@ const adminOptions = computed(() => {
     options.push(visitMenu);
     return options;
 });
-
 const onHandleFollowAction = (post: Item.PostProps) => {
     dialog.success({
         title: t('post.dialog'),
@@ -542,9 +554,12 @@ const doClickText = (e: MouseEvent, id: number) => {
     goPostDetail(id);
 };
 const handlePostAction = (
-    item: 'whisper' | 'follow' | 'unfollow' | 'delete' | 'lock' | 'unlock' | 'stick' | 'unstick' | 'highlight' | 'unhighlight' | 'vpublic' | 'vprivate' | 'vfriend' | 'vfollowing' 
+    item: 'whisper' | 'follow' | 'unfollow' | 'delete' | 'lock' | 'unlock' | 'stick' | 'unstick' | 'highlight' | 'unhighlight' | 'vpublic' | 'vprivate' | 'vfriend' | 'vfollowing' | 'report'
 ) => {
     switch (item) {
+        case 'report':
+            showReportModal.value = true;
+        break;
         case 'whisper':
             onSendWhisper(props.post.user);
             break;

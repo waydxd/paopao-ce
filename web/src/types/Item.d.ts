@@ -379,4 +379,15 @@ declare module Item {
     created_at: string,
     updated_at: string
   }
+
+  interface ReportedPostProps {
+    id: number;
+    post_id: number;
+    comment_id: number;
+    reason: string;
+    reporter_id: number;
+    status: string;
+    created_at: number;
+    updated_at: number;
+  }
 }

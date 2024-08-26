@@ -18,6 +18,7 @@
                 <n-space>
                     <tag-item
                         v-for="tag in tags"
+                        :key="tag.id"
                         :tag="tag"
                         :showAction="store.state.userLogined && tagsChecked"
                         :checkFollowing="inFollowTab"
@@ -34,6 +35,7 @@ import { ref, onMounted, computed, watch} from 'vue';
 import { getTags } from '@/api/post';
 import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
+import type { Item } from '@/types/Item';
 
 const { t } = useI18n();
 const store = useStore();

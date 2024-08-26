@@ -9,7 +9,7 @@
   "deleteSuccess": "删除成功",
   "auth": {
     "login": "登入",
-    "Register": "登记",
+    "register": "注册",
     "loginPrompt": "登入解锁更多精彩内容！"
   },
   "sidebar": {
@@ -24,7 +24,8 @@
     "wallet": "钱包",
     "setting": "设置",
     "login": "登入",
-    "register": "註册"
+    "register": "注册",
+    "admin": "管理员"
   },
   "topic": {
     "hot": "热门",
@@ -105,7 +106,12 @@
     "unhighlightSuccess": "取消突出显示成功",
     "visibilitySuccess": "可见性更改成功",
     "delete": "删除贴文",
-    "lock": "锁定"
+    "lock": "锁定",
+    "report": "举报",
+    "reportSent": "举报成功",
+    "reportFailed": "举报失败",
+    "reportDialogTitle": "举报此用户帖子",
+    "reportPlaceholder": "请输入举报原因"
   },
   "rightbar": {
     "search": "搜寻...",

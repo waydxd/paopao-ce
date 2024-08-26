@@ -293,4 +293,20 @@ declare module NetParams {
   interface PostUnfollowTopic {
     topic_id: number;
   }
+
+  interface PostSendReport {
+    post_id: number;
+    reason: string;
+    user_id: number;    
+  }
+
+  interface CommentSendReport {
+    comment_id: number;
+    reason: string;
+    user_id: number;
+  }
+
+  interface PostDeleteReport {
+    id: number;
+  }
 }

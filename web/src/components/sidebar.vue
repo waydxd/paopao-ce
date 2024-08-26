@@ -73,6 +73,7 @@ import {
     SettingsOutline,
     LogOutOutline,
     PeopleCircleOutline,
+    BuildOutline
 } from '@vicons/ionicons5';
 import { Hash } from '@vicons/tabler';
 import { getUnreadMsgCount } from '@/api/user';
@@ -218,7 +219,14 @@ const menuOptions = computed(() => {
         icon: () => h(SettingsOutline),
         href: '/setting',
     });
-
+    if (store.state.userInfo.is_admin) {
+        options.push({
+            label: t('sidebar.admin'),
+            key: 'admin',
+            icon: () => h(BuildOutline),
+            href: '/admin',
+        });
+    }
     return store.state.userInfo.id > 0
         ? options
         : [
