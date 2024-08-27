@@ -19,4 +19,6 @@ type Report struct {
 	DeleteReport func(Delete, web.DeleteReportReq) web.ReportResp `mir:"/report"`
 	// List reported posts 獲取被檢舉的帖子
 	ListReported func(Get) web.ListReportResp `mir:"/report/list"`
+	// 更新狀態 update report status
+	UpdateReportStatus func(Patch, web.PatchReportReq) `mir:"/report"`
 }

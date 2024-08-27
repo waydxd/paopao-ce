@@ -309,4 +309,9 @@ declare module NetParams {
   interface PostDeleteReport {
     id: number;
   }
+
+  interface PostChangeReportStatus {
+    report_id: number;
+    status: "pending" | "resolved" | "reviewed";
+  }
 }

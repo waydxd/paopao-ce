@@ -37,8 +37,13 @@ func (dao *ReportDAO) GetReportByID(id int64) (*dbr.Report, error) {
 	return report, nil
 }
 
-func (dao *ReportDAO) UpdateReport(report *dbr.Report) error {
-	return dao.r.Update(report)
+//
+//func (dao *ReportDAO) UpdateReport(report *dbr.Report) error {
+//	return dao.r.Update(report)
+//}
+
+func (dao *ReportDAO) UpdateReportStatus(id int64, status dbr.Status) error {
+	return dao.r.Update(id, status)
 }
 
 func (dao *ReportDAO) DeleteReport(id int64) error {

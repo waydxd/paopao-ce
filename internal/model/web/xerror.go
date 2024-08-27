@@ -113,6 +113,7 @@ var (
 	ErrFetchReport  = xerror.NewError(12000, "Failed to fetch reports")
 	ErrDeleteReport = xerror.NewError(12001, "Failed to delete reports")
 	ErrSendReport   = xerror.NewError(12002, "Failed to send reports")
+	ErrUpdateReport = xerror.NewError(12003, "Failed to update reports")
 
 	ErrNotImplemented = xerror.NewError(10501, "功能未实现")
 )

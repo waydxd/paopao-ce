@@ -1,6 +1,7 @@
 package web
 
 import (
+	"github.com/sirupsen/logrus"
 	"net/http"
 	"strconv"
 
@@ -58,4 +59,13 @@ func (s *ReportSrv) SendReport(req *web.ReportReq) (*web.ReportResp, mir.Error) 
 	}
 
 	return &web.ReportResp{ReportId: strconv.FormatInt(id, 10)}, nil
+}
+
+func (s *ReportSrv) UpdateReportStatus(req *web.PatchReportReq) mir.Error {
+	err := s.Ds.UpdateReportStatus(req.ReportId, req.Status)
+	if err != nil {
+		logrus.Error(err)
+		return mir.NewError(http.StatusInternalServerError, web.ErrUpdateReport)
+	}
+	return nil
 }

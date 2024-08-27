@@ -27,3 +27,7 @@ type ListReportResp struct {
 type DeleteReportReq struct {
 	ID int64 `json:"id" binding:"required"`
 }
+type PatchReportReq struct {
+	ReportId int64     `form:"report_id" binding:"required"`
+	Status   ms.Status `form:"status" binding:"required"`
+}

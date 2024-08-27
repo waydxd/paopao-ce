@@ -18,6 +18,7 @@ type Report interface {
 	// Chain provide handlers chain for gin
 	Chain() gin.HandlersChain
 
+	UpdateReportStatus(*web.PatchReportReq) mir.Error
 	ListReported() (*web.ListReportResp, mir.Error)
 	DeleteReport(*web.DeleteReportReq) (*web.ReportResp, mir.Error)
 	SendReport(*web.ReportReq) (*web.ReportResp, mir.Error)
@@ -33,6 +34,19 @@ func RegisterReportServant(e *gin.Engine, s Report) {
 	router.Use(middlewares...)
 
 	// register routes info to router
+	router.Handle("PATCH", "/report", func(c *gin.Context) {
+		select {
+		case <-c.Request.Context().Done():
+			return
+		default:
+		}
+		req := new(web.PatchReportReq)
+		if err := s.Bind(c, req); err != nil {
+			s.Render(c, nil, err)
+			return
+		}
+		s.Render(c, nil, s.UpdateReportStatus(req))
+	})
 	router.Handle("GET", "/report/list", func(c *gin.Context) {
 		select {
 		case <-c.Request.Context().Done():
@@ -78,6 +92,10 @@ type UnimplementedReportServant struct{}
 
 func (UnimplementedReportServant) Chain() gin.HandlersChain {
 	return nil
+}
+
+func (UnimplementedReportServant) UpdateReportStatus(req *web.PatchReportReq) mir.Error {
+	return mir.Errorln(http.StatusNotImplemented, http.StatusText(http.StatusNotImplemented))
 }
 
 func (UnimplementedReportServant) ListReported() (*web.ListReportResp, mir.Error) {
