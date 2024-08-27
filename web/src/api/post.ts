@@ -347,3 +347,13 @@ export const deleteReport = (
     data,
   });
 };
+
+export const changeReportStatus = (
+  params: NetParams.PostChangeReportStatus
+) => {
+  return request({
+    method: "patch",
+    url: "/v1/report",
+    params,
+  });
+};
