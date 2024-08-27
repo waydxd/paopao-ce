@@ -5,6 +5,8 @@ App: # APP基础设置项
   DefaultContextTimeout: 60
   DefaultPageSize: 10
   MaxPageSize: 100
+    VRpandaBackend: http://127.0.0.1:8000/api/user/user_info
+
 Server: # 服务设置
   RunMode: debug
   HttpIp: 0.0.0.0
@@ -12,7 +14,7 @@ Server: # 服务设置
   ReadTimeout: 60
   WriteTimeout: 60
 Features:
-  Default: ["Web", "Frontend:EmbedWeb", "Meili", "LocalOSS",  "MySQL", "BigCacheIndex", "LoggerFile"]
+  Default: ["Web", "Frontend:EmbedWeb", "Zinc", "LocalOSS",  "MySQL", "BigCacheIndex", "LoggerFile"]
   Develop: ["Base", "MySQL", "BigCacheIndex", "Meili", "Sms", "AliOSS", "LoggerMeili", "OSS:Retention"]
   Demo: ["Base", "MySQL", "Option", "Zinc", "Sms", "MinIO", "LoggerZinc", "Migration"]
   Slim: ["Base", "Sqlite3", "LocalOSS", "LoggerFile", "OSS:TempDir"]

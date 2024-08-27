@@ -96,6 +96,7 @@ type appConf struct {
 	DefaultContextTimeout time.Duration
 	DefaultPageSize       int
 	MaxPageSize           int
+	VRpandaBackend        string
 }
 
 type cacheConf struct {

@@ -7,6 +7,7 @@ App: # APP基础设置项
   DefaultContextTimeout: 60
   DefaultPageSize: 10
   MaxPageSize: 100
+  VRpandaBackend: http://127.0.0.1:8000/api/user/user_info
 Cache:
   KeyPoolSize: 256            # 键的池大小， 设置范围[128, ++], 默认256
   CientSideCacheExpire: 60    # 客户端缓存过期时间 默认60s

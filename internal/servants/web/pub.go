@@ -8,18 +8,18 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
-	"fmt"
 	"image/color"
 	"image/png"
-	"log"
-	"os"
+
+	"encoding/json"
 
 	"github.com/afocus/captcha"
 	"github.com/alimy/mir/v4"
+	"github.com/go-resty/resty/v2"
 	"github.com/gofrs/uuid/v5"
-	"github.com/golang-jwt/jwt/v5"
 	"github.com/sirupsen/logrus"
 	api "github.com/waydxd/paopao-ce/auto/api/v1"
+	"github.com/waydxd/paopao-ce/internal/conf"
 	"github.com/waydxd/paopao-ce/internal/core/ms"
 	"github.com/waydxd/paopao-ce/internal/model/web"
 	"github.com/waydxd/paopao-ce/internal/servants/base"
@@ -196,74 +196,61 @@ func newPubSrv(s *base.DaoServant) api.Pub {
 	}
 }
 
+type ServerResponse struct {
+	Code int    `json:"code"`
+	Msg  string `json:"msg"`
+	Data struct {
+		ID       int    `json:"id"`
+		Username string `json:"username"`
+		XP       int    `json:"xp_value"`
+		Avatar   string `json:"avatar"`
+	} `json:"data"`
+}
+
 func (s *pubSrv) CookieLogin(req *web.CheckCookieReq) (*web.LoginResp, mir.Error) {
 
-	KeyPath := "public.pem" // Path to the asymmetric key
+	client := resty.New()
+	backendURL := conf.AppSetting.VRpandaBackend
+	resp, err := client.R().
+		SetHeader("Authorization", "Bearer "+req.Token).
+		Get(backendURL)
 
-	fmt.Printf(req.Token)
-	// Decode the base64url encoded key
-	KeyData, err := os.ReadFile(KeyPath)
 	if err != nil {
-		log.Fatalf("Error reading private key: %v", err)
 		return nil, xerror.ServerError
 	}
-	fmt.Printf("Decoded secret key: %x\n", KeyData)
-	// Parse the private key
-	Key, err := jwt.ParseECPublicKeyFromPEM(KeyData)
-	if err != nil {
-		log.Fatalf("Error parsing private key: %v", err)
-	}
-	// Extract the JWT token from the request
-	tokenString := req.Token
-	fmt.Printf("Token string: %s\n", tokenString)
-	// Parse and verify the JWT token
-	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		// Validate the algorithm
-		if _, ok := token.Method.(*jwt.SigningMethodECDSA); !ok {
-			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
-		}
-		// Return the private key
-		return Key, nil
-	})
+	var serverResp ServerResponse
+	err = json.Unmarshal(resp.Body(), &serverResp)
 
 	if err != nil {
-		fmt.Printf("Error parsing token: %v\n", err)
-		return nil, xerror.BadCookie
+		return nil, xerror.ServerError
 	}
 
-	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		// Extract user information from claims
-		fmt.Printf("JWT: %v\n", claims)
-		username := claims["data"].(map[string]interface{})["username"].(string) // Create a LoginReq object
-		loginReq := &web.LoginReq{
-			Username: username,
+	loginReq := &web.LoginReq{
+		Username: serverResp.Data.Username,
+		Password: "password", // Password is not required for cookie login
+	}
+	// Attempt to login
+	loginResp, loginErr := s.Login(loginReq)
+	if loginErr != nil {
+		// If login fails, attempt to register the user
+		registerReq := &web.RegisterReq{
+			Username: serverResp.Data.Username,
 			Password: "password", // Password is not required for cookie login
 		}
-		// Attempt to login
+		registerResp, registerErr := s.Register(registerReq)
+		if registerErr != nil {
+			return nil, registerErr
+		}
+		loginReq := &web.LoginReq{
+			Username: registerResp.Username,
+			Password: "password", // Password is not required for cookie login
+		}
 		loginResp, loginErr := s.Login(loginReq)
 		if loginErr != nil {
-			// If login fails, attempt to register the user
-			registerReq := &web.RegisterReq{
-				Username: username,
-				Password: "password", // Password is not required for cookie login
-			}
-			registerResp, registerErr := s.Register(registerReq)
-			if registerErr != nil {
-				return nil, registerErr
-			}
-			loginReq := &web.LoginReq{
-				Username: registerResp.Username,
-				Password: "password", // Password is not required for cookie login
-			}
-			loginResp, loginErr := s.Login(loginReq)
-			if loginErr != nil {
-				// If registration is successful, return the registration response
-				return loginResp, nil
-			}
+			// If registration is successful, return the registration response
+			return loginResp, nil
 		}
-		// If login is successful, return the login response
-		return loginResp, nil
-	} else {
-		return nil, xerror.UnauthorizedAuthFailed
 	}
+	// If login is successful, return the login response
+	return loginResp, nil
 }
