@@ -8,22 +8,26 @@
       </div>
     </main-nav>
     <div class="community-posts">
-      <compose class="compose-box" :community-id=communityId v-if="compose" @post-success="onPostSuccess" />
-      <n-list v-if="communityPosts.length > 0">
+      <n-list >
+        <n-list-item>
+          <compose class="compose-box" :community-id=communityId v-if="compose" @post-success="onPostSuccess" />
+        </n-list-item>
         <n-list-item v-for="post in communityPosts" :key="communityId">
           <post-item :post="post" :is-owner="currentUserId !== null && post.user_id === currentUserId"
             :add-friend-action="false" :add-follow-action="false" @send-whisper="handleSendWhisper" />
         </n-list-item>
-        <!--      <InfiniteLoading class="load-more" :slots="{ complete: '没有更多泡泡了', error: '加载出错' }" @infinite="nextPage">-->
-        <!--        <template #spinner>-->
-        <!--          <div class="load-more-wrap">-->
-        <!--            <n-spin :size="14" />-->
-        <!--            <span class="load-more-spinner">加载更多</span>-->
-        <!--          </div>-->
-        <!--        </template>-->
-        <!--      </InfiniteLoading>-->
+        <n-space justify="center">
+            <InfiniteLoading class="load-more" :slots="{ complete: t('NoMoreThreads'), error: t('error.loading') }" @infinite="nextPage()">
+                <template #spinner>
+                    <div class="load-more-wrap">
+                        <n-spin :size="14" v-if="!noMore" />
+                        <span class="load-more-spinner">{{ noMore ? t('NoMoreThreads') : t('LoadMore') }}</span>
+                    </div>
+                </template>
+            </InfiniteLoading>
+        </n-space>
       </n-list>
-      <n-empty v-else description="No posts found" />
+      <n-empty v-if="communityPosts.length === 0" description="No posts found" />
       <n-space v-if="!noMore" justify="center">
         <InfiniteLoading class="load-more" :slots="{ complete: t('NoMorePosts'), error: t('LoadError') }"
           @infinite="nextPage()">
@@ -92,8 +96,8 @@ const onClickCompose = () => {
 
 const onPostSuccess = async (res: Item.PostProps) => {
   loading.value = false;
-  console.log(res);
   await loadPosts();
+  totalPosts.value = communityPosts.value.length;
 }
 onMounted(async () => {
   const communityId = Number(route.params.id);
@@ -127,9 +131,8 @@ const loadPosts = async () => {
 
     noMore.value = communityPosts.value.length >= totalPosts.value;
     page.value++;
-    // console.log("Rerun");
   } catch (error) {
-    console.error('Error fetching posts:', error);
+    window.$message.error('Error fetching posts: '+ error);
   } finally {
     noMore.value = true;
   }
@@ -151,6 +154,7 @@ const handleSendWhisper = (user: Item.UserInfo) => {
 <style scoped>
 .compose-box {
   position: sticky;
+  background-color: #fff;
 }
 
 .nav-icon {

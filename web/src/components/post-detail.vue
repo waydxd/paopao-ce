@@ -110,7 +110,7 @@
                     preset="dialog"
                     :title="t('post.dialog')"
                     :content="
-                        t('post.confirm1') +
+                        t('post.confirm1') + 
                         (post.is_essence ? t('post.unhighlight') : t('post.highlight')) +
                         t('post.confirm2')
                     "
