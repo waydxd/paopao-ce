@@ -83,7 +83,7 @@ Local environment: Darwin/Arm64
 ### 安装说明 Installation
 
 
-### 方式一. 手动安装（推荐） Manual Install
+### 方式一. 手动安装（推荐） Manual Installation (Suggested)
 
 克隆代码库
 Clone this repo
@@ -93,59 +93,51 @@ Clone this repo
 
 #### 后端 Backend
 
-1. 导入项目根目录下的 `scripts/paopao.sql` 文件至MySQL数据库 
-2. 拷贝项目根目录下 `config.yaml.sample` 文件至 `config.yaml`，按照注释完成配置编辑
-3. 编译后端
-  
-    编译api服务:
+1. Import the `scripts/paopao.sql` file into the MySQL database
+2. Copy the `config.yaml.sample` file to `config.yaml` and complete the configuration editing according to the comments.
+3. Compile the backend
+
+    Compile the api service with separate frontend (you can change how to bundle the frontend in the config.yaml):
     ```sh
     make build
-    ```
-    编译api服务、内嵌web前端ui:
-    ```sh
-    make build
-    ```
-    也可以使用精简模式编译，不内嵌web前端ui:
-    ```sh
-    make build TAGS='slim embed'
-    ```
-    编译后在`release`目录可以找到对应可执行文件。
-    ```sh
-    release/paopao
     ```
 
-5. 直接运行后端    
-    运行api服务:
+    This will generate a executable file in the release directory.
+    ```sh
+    release/paopao [command]
+    ```
+    Then you can run the backend using the following command:
+    ```sh
+    release/paopao serve
+    ```
+4. Directly run the backend
+    Run the api service:
     ```sh
     make run
     ```
-    运行api服务、web前端ui服务:
-    ```sh
-    make run TAGS='embed'
-    ```
-    提示: 如果需要内嵌web前端ui，请先构建web前端(建议设置web/.env为VITE_HOST="")。
+    Note: If you need to embed the web frontend ui, please first build the web frontend (set web/.env to VITE_HOST="").
 
-6. 使用内置的Migrate机制自动升级维护SQL DDL:
+5. Use the built-in Migrate mechanism to automatically upgrade and maintain the SQL DDL:
     ```sh
-    # 添加 Migration 功能到 Features 中 开启migrate功能
+    # Add Migration feature to Features to enable migrate function
     vim config.yaml
     # file: config.yaml
     # Features:
     #   Default: ["Base", "MySQL", "Zinc", "MinIO", "LoggerZinc", "Migration"]
    
-    # 编译时加入migration tag编译出支持migrate功能的可执行文件
+    # Compile with migration tag to generate executable file with migrate function
     make build TAGS='migration'
     release/paopao
 
-    # 或者 带上migration tag直接运行
+    # Or run with migration tag directly
     make run TAGS='migration'
     ```
-    > 注意：默认编译出来的可执行文件是不内置migrate功能，需要编译时带上migration tag才能内置支持migrage功能。
+    > Note: The default compiled executable file does not have migrate function, you need to compile with migration tag to support migrate function.
 
 
-#### 前端
+#### Frontend
 
-1. 进入前端目录 `web`，拷贝`.env` 到 `.env.local`，编辑 `.env.local ` 文件中后端服务地址及其他配置项，下载依赖包
+1. Enter the frontend directory `web`, copy `.env` to `.env.local`, edit the `.env.local` file to set the backend service address and other configuration items, and download the dependency package
 
     ```sh
     cd ./web && cp .env .env.local
@@ -153,15 +145,15 @@ Clone this repo
     yarn
     ```
 
-2. 编译前端
+2. Compile the frontend
 
     ```sh
     yarn build
     ```
 
-    build完成后，可以在dist目录获取编译产出，配置nginx指向至该目录即可
+    After build, you can get the compiled output in the dist directory, and configure nginx to point to that directory.
 
-#### 桌面端
+#### Desktop (Not maintained)
 
 1. 进入前端目录 `web`，拷贝`.env` 到 `.env.local`，编辑 `.env.local ` 文件中后端服务地址及其他配置项，下载依赖包
 
