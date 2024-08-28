@@ -2,20 +2,41 @@
   <div>
     <main-nav :title="t('sidebar.community')">
       <div class="nav-buttons">
-        <button class="nav-button">
+        <!-- <button class="nav-button">
           <search-outline class="nav-icon" />
-        </button>
-        <button @click="toggleDrawer" class="nav-button">
+        </button> -->
+        <button @click="toggleDrawer" v-if="userInfo.is_admin" class="nav-button">
           <person-add-outline class="nav-icon" />
         </button>
       </div>
     </main-nav>
-    <BottomDrawer v-if="isDrawerOpen" />
-
+    <n-modal
+    :mask-closable="false"
+                    preset="dialog"
+                    :title="t('community.create_community')"
+                    v-model:show="isDrawerOpen" closable>
+      <div class="modal-content">
+      <n-form :model="formModel" :rules="rules" ref="formRef">
+        <n-form-item :label="t('community.name')" path="name">
+          <n-input v-model:value="formModel.name" />
+        </n-form-item>
+        <n-form-item :label="t('community.description')" path="description">
+          <n-input v-model:value="formModel.description" type="textarea" />
+        </n-form-item>
+        <n-form-item :label="t('community.avatar_url')" path="avatar_url">
+          <n-input v-model:value="formModel.avatar_url" />
+        </n-form-item>
+        <n-form-item :label="t('community.banner_url')" path="banner_url">
+          <n-input v-model:value="formModel.banner_url" />
+        </n-form-item>
+        <n-button type="primary" @click="submitForm">{{ t('community.submit') }}</n-button>
+      </n-form>
+    </div>
+    </n-modal>
     <div class="forum">
       <n-list class="main-content-wrap" bordered>
         <ul class="grid">
-          <li v-for="forum in forums?.communities" :key="forum.id">
+          <li v-for="forum in forums" :key="forum.id">
             <router-link :to="{ name: 'CommunityPosts', params: { id: forum.id } }" class="card-link">
               <div class="card">
                 <img alt="" :src="forum.avatar_url" class="community_icon"/>
@@ -46,18 +67,70 @@
 
 <script lang="ts" setup>
 import { PersonAddOutline, SearchOutline } from '@vicons/ionicons5'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, reactive } from 'vue';
 import { getCommunityList } from "@/api/user";
 import { NetReq } from "@/types/NetReq";
 import MainNav from "@/components/main-nav.vue";
-import BottomDrawer from "@/components/drawer.vue";
+import { NForm, NFormItem, NInput, NButton } from 'naive-ui';
+import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
+import { createCommunity } from "@/api/user";
+import type { FormInst } from 'naive-ui';
+import type { Item } from "@/types/Item";
 
 const {t} = useI18n();
+const userStore = useStore();
 
-
+const userInfo = userStore.state.userInfo;
 const isDrawerOpen = ref<boolean>(false);
-const forums = ref<NetReq.CommunityListResp | null>(null);
+const forums = reactive<Item.Community[]>([]);
+
+const formRef = ref<FormInst | null>(null);
+const formModel = reactive<NetReq.createCommunityReq>({
+  name: '',
+  description: '',
+  avatar_url: '',
+  banner_url: '',
+});
+
+const rules = {
+  name: {
+    required: true,
+    message: t('community.name_required'),
+    trigger: 'blur',
+  },
+  description: {
+    required: false,
+    message: t('community.description_required'),
+    trigger: 'blur',
+  },
+  avatar_url: {
+    required: false,
+    message: t('community.avatar_url_required'),
+    trigger: 'blur',
+  },
+  banner_url: {
+    required: false,
+    message: t('community.banner_url_required'),
+    trigger: 'blur',
+  },
+};
+
+function submitForm() {
+  formRef.value?.validate(async (errors: any) => {
+    if (!errors) {
+      try {
+        const response = await createCommunity(formModel);
+        isDrawerOpen.value = false;
+        forums.push(response.community);
+      } catch (error) {
+        window.$message.error('Error creating community: '+ error);
+      }
+    } else {
+      window.$message.error('Form validation failed');
+    }
+  });
+}
 
 onMounted(async () => {
   try {
@@ -65,7 +138,7 @@ onMounted(async () => {
       offset: 0,
       limit: 20,
     });
-    forums.value = response;
+    forums.splice(0, forums.length, ...response.communities);
   } catch (error) {
     console.error('Error fetching community list:', error);
   }

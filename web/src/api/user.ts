@@ -479,3 +479,13 @@ export const getCommunityPosts = (
     params
   })
 }
+
+export const createCommunity = (
+    data: NetReq.createCommunityReq
+): Promise<NetReq.createCommunityResp> => {
+  return request({
+    method: "post",
+    url: "/v1/community/create",
+    data
+  })
+}

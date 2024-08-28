@@ -184,5 +184,14 @@
     "deleteSuccess": "Delete successful",
     "reply": "Reply",
     "replyPlaceholder": "Please enter reply content.."
+  },
+  "community": {
+    "create_community": "Create community",
+    "submit": "Submit",
+    "name": "Name",
+    "description": "Description",
+    "avatar_url": "Avatar URL",
+    "banner_url": "Banner URL",
+    "name_required": "Name is required"
   }
 }

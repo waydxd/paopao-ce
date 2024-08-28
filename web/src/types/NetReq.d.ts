@@ -25,11 +25,19 @@ declare module NetReq {
     Total: number;
     // pager: Item.PagerProps;
   }
-  
+  interface createCommunityReq{
+    name: string;
+    description: string;
+    avatar_url: string;
+    banner_url: string;
+  }
    interface getCommunityByIdReq{
     community_id: number;
   }
   interface getCommunityByIdResp{
+    community: Item.Community;
+  }
+  interface createCommunityResp{
     community: Item.Community;
   }
   interface CommunityListReq {

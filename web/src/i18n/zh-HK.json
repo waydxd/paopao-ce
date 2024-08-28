@@ -184,5 +184,14 @@
     "deleteSuccess": "刪除成功",
     "reply": "回覆",
     "replyPlaceholder": "請輸入回覆內容.."
+  },
+  "community": {
+    "create_community": "創建社群",
+    "submit": "提交",
+    "name": "名稱",
+    "description": "描述",
+    "avatar_url": "頭像URL",
+    "banner_url": "橫幅URL",
+    "name_required": "請填寫名稱"
   }
 }
