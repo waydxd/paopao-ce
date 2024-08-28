@@ -30,23 +30,23 @@
 
 ---
 
-## 预览
-Web端：  
+## 预览 Preview
+Web version：  
 [![明色主题][product-light-screenshot]](https://www.paopao.info)
 
 [![暗色主题][product-dark-screenshot]](https://www.paopao.info)
 
 更多演示请前往[官网](https://www.paopao.info)体验（谢绝灌水）  
 
-桌面端：  
+桌面端 Desktop version：  
 ![](docs/proposal/.assets/000-00.jpg)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## 🛠 技术栈
+## 🛠 技术栈 Tech Stacks
 
 PaoPao主要由以下优秀的开源项目/工具构建  
-#### 后端:
+#### 后端 backend:
 * [Go](https://go.dev/ 'go')
 * [Gin](https://gin-gonic.com/ 'gin')
 * [Mir](https://github.com/alimy/mir 'go-mir')
@@ -54,16 +54,16 @@ PaoPao主要由以下优秀的开源项目/工具构建
 * [gRPC](https://github.com/grpc/grpc-go 'grpc-go')
 * [Zinc](https://zinclabs.io/ 'zinc')
 
-#### 前端: 
+#### 前端 frontend: 
 * [Naive UI](https://www.naiveui.com/)
 * [Vue.js](https://vuejs.org/)
 * [Vite.js](https://vitejs.dev/)
 * [tauri](https://github.com/tauri-apps/tauri 'tauri')
 
 <!-- GETTING STARTED -->
-## 🏗 快速开始
+## 🏗 快速开始 Getting Started
 
-### 环境要求
+### 环境要求 Environment
 
 * Go (最低1.22+)
 * Node.js (最低14+) 
@@ -73,30 +73,30 @@ PaoPao主要由以下优秀的开源项目/工具构建
 
 > Zinc是一款轻量级全文搜索引擎，可以查阅 <https://zincsearch-docs.zinc.dev/installation/> 安装
 
-以下為本地開發环境
-Darwin/Arm64
+Local environment: Darwin/Arm64
 * Go v1.23.0
 * Node.js v22.4.1 
 * MariaDB v11.5.2
 * Redis v7.2.5
 * Zinc v0.4.10
 
-### 安装说明
+### 安装说明 Installation
 
 
-### 方式一. 手动安装（推荐）
+### 方式一. 手动安装（推荐） Manual Install
 
 克隆代码库
-
+Clone this repo
    ```sh
    git clone https://github.com/waydxd/paopao-ce.git
    ```
 
-#### 后端
+#### 后端 Backend
 
-1. 导入项目根目录下的 `scripts/paopao.sql` 文件至MySQL数据库
+1. 导入项目根目录下的 `scripts/paopao.sql` 文件至MySQL数据库 
 2. 拷贝项目根目录下 `config.yaml.sample` 文件至 `config.yaml`，按照注释完成配置编辑
-3. 编译后端    
+3. 编译后端
+  
     编译api服务:
     ```sh
     make build
@@ -114,7 +114,7 @@ Darwin/Arm64
     release/paopao
     ```
 
-4. 直接运行后端    
+5. 直接运行后端    
     运行api服务:
     ```sh
     make run
@@ -125,7 +125,7 @@ Darwin/Arm64
     ```
     提示: 如果需要内嵌web前端ui，请先构建web前端(建议设置web/.env为VITE_HOST="")。
 
-5. 使用内置的Migrate机制自动升级维护SQL DDL:
+6. 使用内置的Migrate机制自动升级维护SQL DDL:
     ```sh
     # 添加 Migration 功能到 Features 中 开启migrate功能
     vim config.yaml
