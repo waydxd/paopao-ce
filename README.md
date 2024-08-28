@@ -75,9 +75,9 @@ PaoPao主要由以下优秀的开源项目/工具构建
 
 以下為本地開發环境
 Darwin/Arm64
-* Go v1.22.5
+* Go v1.23.0
 * Node.js v22.4.1 
-* MySQL v9.0.1
+* MariaDB v11.5.2
 * Redis v7.2.5
 * Zinc v0.4.10
 
