@@ -122,7 +122,7 @@
     "admin": "管理員",
     "joined": "加入於",
     "following": "關注",
-    "followers": "粉絲",
+    "followers": "追蹤者",
     "posts": "帖子",
     "post": "帖子",
     "comment": "評論",
@@ -193,5 +193,16 @@
     "avatar_url": "頭像URL",
     "banner_url": "橫幅URL",
     "name_required": "請填寫名稱"
+  },
+  "user": {
+    "friend": "好友",
+    "following": "正在關注",
+    "follower": "追蹤者",
+    "join": "加入於",
+    "post": "帖子",
+    "comment": "評論",
+    "highlight": "精選",
+    "media": "媒體",
+    "star": "收藏"
   }
 }

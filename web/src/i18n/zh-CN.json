@@ -193,5 +193,16 @@
     "avatar_url": "头像URL",
     "banner_url": "横幅URL",
     "name_required": "名称必填"
+  },
+  "user": {
+    "friend": "好友",
+    "following": "正在关注",
+    "follower": "粉丝",
+    "join": "加入于",
+    "post": "帖子",
+    "comment": "评论",
+    "highlight": "精选",
+    "media": "媒体",
+    "star": "收藏"
   }
 }

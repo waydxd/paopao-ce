@@ -16,20 +16,20 @@
                             <n-tag
                                 v-if="store.state.profile.useFriendship && store.state.userInfo.id > 0 && store.state.userInfo.username != user.username && user.is_friend"
                                 class="top-tag" type="info" size="small" round>
-                                好友
+                                {{ t('user.friend') }}
                             </n-tag>
                             <n-tag
                                 v-if="store.state.userInfo.id > 0 && store.state.userInfo.username != user.username && user.is_following"
                                 class="top-tag" type="success" size="small" round>
-                                已关注
+                                {{ t('user.following') }}
                             </n-tag>
                             <n-tag v-if="user.is_admin" class="top-tag" type="error" size="small" round>
-                                管理员
+                                {{ t('user.admin') }}
                             </n-tag>
                         </div>
                         <div class="userinfo">
                             <span class="info-item">UID. {{ user.id }} </span>
-                            <span class="info-item">{{ formatDate(user.created_on) }}&nbsp;加入</span>
+                            <span class="info-item">{{ formatDate(user.created_on) }}&nbsp;{{ t('user.join') }}</span>
                         </div>
                         <div class="userinfo">
                             <span class="info-item">
@@ -45,7 +45,7 @@
                                         },
                                     }"
                                 >
-                                    关注&nbsp;&nbsp;{{ prettyQuoteNum(user.follows)}}
+                                    {{ t('user.following') }}&nbsp;&nbsp;{{ prettyQuoteNum(user.follows)}}
                                 </router-link>
                             </span>
                             <span class="info-item">
@@ -61,11 +61,11 @@
                                         },
                                     }"
                                 >
-                                    粉丝&nbsp;&nbsp;{{ prettyQuoteNum(user.followings) }}
+                                    {{ t('user.follower') }}&nbsp;&nbsp;{{ prettyQuoteNum(user.followings) }}
                                 </router-link>
                             </span>
                             <span class="info-item">
-                                泡泡&nbsp;&nbsp;{{ prettyQuoteNum(user.tweets_count || 0) }}
+                                {{ t('post.post') }}&nbsp;&nbsp;{{ prettyQuoteNum(user.tweets_count || 0) }}
                             </span>
                         </div>
                     </div>
@@ -90,18 +90,18 @@
                 <whisper-add-friend :show="showAddFriendWhisper" :user="user" @success="addFriendWhisperSuccess" />
             </n-spin>
             <n-tabs class="profile-tabs-wrap" type="line" animated :value="pageType" @update:value="changeTab">
-                <n-tab-pane name="post" tab="泡泡"></n-tab-pane>
-                <n-tab-pane name="comment" tab="评论"></n-tab-pane>
-                <n-tab-pane name="highlight" tab="亮点"></n-tab-pane>
-                <n-tab-pane name="media" tab="图文"></n-tab-pane>
-                <n-tab-pane name="star" tab="喜欢"></n-tab-pane>
+                <n-tab-pane name="post" tab="{{ t('post.post') }}"></n-tab-pane>
+                <n-tab-pane name="comment" tab="{{ t('post.comment') }}"></n-tab-pane>
+                <n-tab-pane name="highlight" tab="{{ t('post.highlight') }}"></n-tab-pane>
+                <n-tab-pane name="media" tab="{{ t('post.media') }}"></n-tab-pane>
+                <n-tab-pane name="star" tab="{{ t('post.star') }}"></n-tab-pane>
             </n-tabs>
             <div v-if="loading && list.length === 0" class="skeleton-wrap">
                 <post-skeleton :num="pageSize" />
             </div>
             <div v-else>
                 <div class="empty-wrap" v-if="list.length === 0">
-                    <n-empty size="large" description="暂无数据" />
+                    <n-empty size="large" :description="t('noData')" />
                 </div>
                 <div v-if="store.state.desktopModelShow">
                     <div v-if="pageType === 'post'">
@@ -201,11 +201,11 @@
         </n-list>
 
         <n-space v-if="totalPage > 0" justify="center">
-            <InfiniteLoading class="load-more" :slots="{ complete: '没有更多泡泡了', error: '加载出错' }" @infinite="nextPage()">
+            <InfiniteLoading class="load-more" :slots="{ complete: t('noMoreData'), error: t('error.loading') }" @infinite="nextPage()">
                 <template #spinner>
                     <div class="load-more-wrap">
                         <n-spin :size="14" v-if="!noMore" />
-                        <span class="load-more-spinner">{{ noMore ? '没有更多泡泡了' : '加载更多' }}</span>
+                        <span class="load-more-spinner">{{ noMore ? t('noMoreData') : t('LoadMore') }}</span>
                     </div>
                 </template>
             </InfiniteLoading>
@@ -235,6 +235,10 @@ import {
     WalkOutline
 } from '@vicons/ionicons5';
 import InfiniteLoading from "v3-infinite-loading";
+import type { Item } from '@/types/Item';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const dialog = useDialog();
 const store = useStore();

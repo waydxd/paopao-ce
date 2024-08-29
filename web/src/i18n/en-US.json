@@ -193,5 +193,16 @@
     "avatar_url": "Avatar URL",
     "banner_url": "Banner URL",
     "name_required": "Name is required"
+  },
+  "user": {
+    "friend": "Friend",
+    "following": "Following",
+    "follower": "Follower",
+    "join": "Joined",
+    "post": "Post",
+    "comment": "Comment",
+    "highlight": "Highlight",
+    "media": "Media",
+    "star": "Star"
   }
 }
