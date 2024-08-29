@@ -153,6 +153,10 @@ Clone this repo
 
     After build, you can get the compiled output in the dist directory, and configure nginx to point to that directory.
 
+3. You may also run a development build separately
+    ```sh
+    yarn run dev
+    ```
 #### Desktop (Not maintained)
 
 1. 进入前端目录 `web`，拷贝`.env` 到 `.env.local`，编辑 `.env.local ` 文件中后端服务地址及其他配置项，下载依赖包
